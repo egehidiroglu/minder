@@ -1,0 +1,7 @@
+require "test_helper"
+
+class SummariesControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
+end
