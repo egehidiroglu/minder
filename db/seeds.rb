@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 require 'rspotify'
 require 'open-uri'
 require 'json'
+require 'nokogiri'
 
 tmdb_api_key = "63759eccae824fa88e79218786680970"
 
@@ -14,6 +14,15 @@ tmdb_api_key = "63759eccae824fa88e79218786680970"
 #   p album.artists[0].name
 #   puts " "
 # end
+
+base_url = 'https://www.metacritic.com/browse/albums/release-date/coming-soon/date'
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
+
+# html = URI.parse(base_url).open("User-Agent" => user_agent)
+# doc = Nokogiri::HTML(html)
+doc = Nokogiri::HTML(File.open('date.html'))
+
+p doc
 
 today = Date.today
 today = today.strftime("%F")
