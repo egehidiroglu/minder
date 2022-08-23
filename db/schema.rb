@@ -10,9 +10,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_22_211442) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_23_154003) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.string "name"
+    t.date "release_date"
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_albums_on_creator_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.date "release_date"
+    t.string "description"
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_books_on_creator_id"
+  end
+
+  create_table "concerts", force: :cascade do |t|
+    t.string "name"
+    t.date "date"
+    t.string "venue"
+    t.string "address"
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_concerts_on_creator_id"
+  end
+
+  create_table "creators", force: :cascade do |t|
+    t.string "name"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "followed_creators", force: :cascade do |t|
+    t.bigint "creator_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_followed_creators_on_creator_id"
+    t.index ["user_id"], name: "index_followed_creators_on_user_id"
+  end
+
+  create_table "movies", force: :cascade do |t|
+    t.string "name"
+    t.date "release_date"
+    t.string "description"
+    t.bigint "creator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_movies_on_creator_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -26,4 +82,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_22_211442) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "albums", "creators"
+  add_foreign_key "books", "creators"
+  add_foreign_key "concerts", "creators"
+  add_foreign_key "followed_creators", "creators"
+  add_foreign_key "followed_creators", "users"
+  add_foreign_key "movies", "creators"
 end

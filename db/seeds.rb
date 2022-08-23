@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require 'rspotify'
 require 'open-uri'
 require 'json'
@@ -32,4 +33,3 @@ for i in 1..10
     puts " "
   end
 end
-
