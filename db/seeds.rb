@@ -94,32 +94,38 @@ require 'nokogiri'
 
 # ================================= Concerts Start ==========================================
 
-my_concert_artists = ["Stromae", "Twenty One Pilots", "My Chemical Romance", "RY X"]
-my_concerts = []
+# my_concert_artists = ["Stromae", "Twenty One Pilots", "My Chemical Romance", "RY X"]
+# my_concerts = []
 
-my_concert_artists.each do |artist|
-  buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=453PeGFeKAA4XhceoIbBOUhfFIs2SOln&city=Montreal&keyword=#{artist}").read
-  response = JSON.parse(buffer)["_embedded"]
-  event = response["events"].first
-  event_name = event["name"]
-  event_image = event["images"].first["url"]
-  event_date = event["dates"]["start"]["localDate"]
-  event_url = event["url"]
-  event_venue = event["_embedded"]["venues"].first["name"]
-  event_address = event["_embedded"]["venues"].first["address"]["line1"]
-  concert = Concert.new
-  concert.name = event_name
-  concert.date = event_date
-  concert.venue = event_venue
-  concert.address = event_address
-  concert.poster_url = event_image
-  concert.event_url = event_url
-  my_concerts.push(concert)
-end
+# my_concert_artists.each do |artist|
+#   buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=453PeGFeKAA4XhceoIbBOUhfFIs2SOln&city=Montreal&keyword=#{artist}").read
+#   response = JSON.parse(buffer)["_embedded"]
+#   event = response["events"].first
+#   event_name = event["name"]
+#   event_image = event["images"].first["url"]
+#   event_date = event["dates"]["start"]["localDate"]
+#   event_url = event["url"]
+#   event_venue = event["_embedded"]["venues"].first["name"]
+#   event_address = event["_embedded"]["venues"].first["address"]["line1"]
+#   concert = Concert.new
+#   concert.name = event_name
+#   concert.date = event_date
+#   concert.venue = event_venue
+#   concert.address = event_address
+#   concert.poster_url = event_image
+#   concert.event_url = event_url
+#   my_concerts.push(concert)
+# end
 
-my_concerts.each do |concert|
-  p concert
-  puts ""
-end
+# my_concerts.each do |concert|
+#   p concert
+#   puts ""
+# end
 
 # ================================= Concerts End ==========================================
+
+# ================================= Books Start ==========================================
+
+
+
+# ================================= Books End ==========================================
