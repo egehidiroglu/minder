@@ -124,67 +124,52 @@
 # end
 
 
-# ================================= Concerts End ==========================================
+# ================================= Creators Start (NOT WORKING YET...) ==========================================
+
+# RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
+
+# me = RSpotify::User.find('crackincastleofglass')
+# followed_artists = me.following(type: "artist", limit: 50, after: nil)
+
+# followed_artists.each do |artist|
+#   p artist
+#   puts ""
+# end
+
+# ================================= Creators End ==========================================
 
 # ================================= Books Start ==========================================
-# Get the results as an array, iterate through, if it is released greater than equal to this year add it to list
 require 'rest-client'
 require "json"
 
 year = Time.now.year
-my_authors = ["Malcolm Gladwell", "Stephen King", "Jamie Oliver", "J.K. Rowling"]
+my_authors = ["Bill Bryson", "Malcolm Gladwell", "stephen king", "Jamie Oliver", "J.K. Rowling", "John Green"]
 
 my_authors.each do |author|
-    author.gsub!(" ", "%20")
-    results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
-    "Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"
-    })
-    if JSON.parse(results)["books"].first["date_published"].to_i >= year
-      Book.new(
-        name: JSON.parse(results)["books"].first["title"],
-        image: JSON.parse(results)["books"].first["image"],
-        description: JSON.parse(results)["books"].first["date_published"]
+  author.gsub!(" ", "%20")
+  results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
+  "Authorization" => "48319_4e34c087665fdc89f0b3213205531ec7"
+  })
+  JSON.parse(results)["books"].each do |book|
+    #  -------------Converting all formats to date format------------------------
+    # begin
+      # publishing_date = Date.parse(book["date_published"])
+      # This just works for
+    # rescue
+      # Use Regex to get the year from: book["date_published"] and store in publishing_date
+      # Date.new and just set it to jan. 1 of that year
+    # end
+
+    if book["date_published"].to_i >= year - 10
+      Book.create(
+        name: book["title"],
+        release_date: book["date_published"],
+        description: book["synopsys"],
+        poster_url: book["image"],
+        creator_id: 1
       )
-      # p JSON.parse(results)["books"].first["title"]
-      # p JSON.parse(results)["books"].first["image"]
-      # p JSON.parse(results)["books"].first["date_published"]
-      p "Added a book!"
+      p "Added -------->   .#{book['title']} Year: #{book['date_published']}"
     end
   end
-
-
-
-# my_authors.each do |author|
-#   # author.gsub!(" ", "%20")
-#   url = "https://api2.isbndb.com/author/#{author}?page=1&pageSize=20"
-#   response = URI.open(url).read
-#   p response
-#   results = JSON.parse(response)
-#   p results
-#   books = results["books"]
-#   p books
-# end
-
-
-# ================================= Concerts End ==========================================
-
-# ================================= Books Start ==========================================
-
-
-
-# ================================= Books End ==========================================
-
-# ================================= Creators Start ==========================================
-
-RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
-
-me = RSpotify::User.find('crackincastleofglass')
-followed_artists = me.following(type: "artist", limit: 50, after: nil)
-
-followed_artists.each do |artist|
-  p artist
-  puts ""
 end
-
-# ================================= Creators End ==========================================
-
+# ================================= Books End ==========================================
