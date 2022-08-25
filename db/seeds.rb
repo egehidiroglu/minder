@@ -3,7 +3,6 @@ require 'open-uri'
 require 'json'
 require 'nokogiri'
 
-
 # ================================= Movies Start ==========================================
 # today = Date.today
 # today = today.strftime("%F")
@@ -57,9 +56,6 @@ require 'nokogiri'
 #   puts " "
 # end
 
-# my_artists = ["Rina Sawayama", "DJ Khaled", "Flamingo", "Tekkno", "Unleash", "Now Is", "Brian Eno", "Lou Reed"]
-# my_albums = []
-
 # for page in 1..11
 #   i = 1
 #   doc = Nokogiri::HTML(URI.open("https://www.albumoftheyear.org/upcoming/#{page}/"))
@@ -86,13 +82,6 @@ require 'nokogiri'
 #   end
 # end
 
-# my_albums.each do |album|
-#   p album
-#   puts ""
-# end
-
-# ================================= Albums End ==========================================\
-
 # ================================= Concerts Start ==========================================
 
 # my_concert_artists = ["Stromae", "Twenty One Pilots", "My Chemical Romance", "RY X"]
@@ -101,21 +90,25 @@ require 'nokogiri'
 # my_concert_artists.each do |artist|
 #   buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=453PeGFeKAA4XhceoIbBOUhfFIs2SOln&city=Montreal&keyword=#{artist}").read
 #   response = JSON.parse(buffer)["_embedded"]
-#   event = response["events"].first
-#   event_name = event["name"]
-#   event_image = event["images"].first["url"]
-#   event_date = event["dates"]["start"]["localDate"]
-#   event_url = event["url"]
-#   event_venue = event["_embedded"]["venues"].first["name"]
-#   event_address = event["_embedded"]["venues"].first["address"]["line1"]
-#   concert = Concert.new
-#   concert.name = event_name
-#   concert.date = event_date
-#   concert.venue = event_venue
-#   concert.address = event_address
-#   concert.poster_url = event_image
-#   concert.event_url = event_url
-#   my_concerts.push(concert)
+#   unless response.nil?
+#     event = response["events"].first
+#     event_name = event["name"]
+#     event_image = event["images"].first["url"]
+#     event_date = event["dates"]["start"]["localDate"]
+#     event_url = event["url"]
+#     event_venue = event["_embedded"]["venues"].first["name"]
+#     event_address = event["_embedded"]["venues"].first["address"]["line1"]
+#   end
+#   unless event.nil?
+#     concert = Concert.new
+#     concert.name = event_name
+#     concert.date = event_date
+#     concert.venue = event_venue
+#     concert.address = event_address
+#     concert.poster_url = event_image
+#     concert.event_url = event_url
+#     my_concerts.push(concert) unless concert.name.nil?
+#   end
 # end
 
 # my_concerts.each do |concert|
@@ -124,6 +117,13 @@ require 'nokogiri'
 # end
 
 # ================================= Concerts End ==========================================
+# my_albums.each do |album|
+#   p album
+#   puts ""
+# end
+
+# ================================= Albums End ==========================================\
+
 
 # ================================= Books Start ==========================================
 
@@ -133,14 +133,107 @@ require 'nokogiri'
 
 # ================================= Creators Start ==========================================
 
-RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
+# RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
 
-me = RSpotify::User.find('crackincastleofglass')
-followed_artists = me.following(type: "artist", limit: 50, after: nil)
+# me = RSpotify::User.find('crackincastleofglass')
+# followed_artists = me.following(type: "artist", limit: 50, after: nil)
 
-followed_artists.each do |artist|
-  p artist
-  puts ""
+# followed_artists.each do |artist|
+#   p artist
+#   puts ""
+# end
+
+p "Destroying users..."
+User.destroy_all
+p "Destroying creators..."
+Creator.destroy_all
+p "Destroying followed creators..."
+FollowedCreator.destroy_all
+
+p "Creating a user..."
+user = User.new
+user.email = "egehdrgl@gmail.com"
+user.password = "123456"
+user.save
+
+artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace",
+"Fargo Q Money", "Death Scythe", "Kim Areum", "Megadeth", "Gaspar Claus", "Ozzy Osbourne",
+"Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Björk", "Slipknot",
+"Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+"Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+"Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal", "Ryan Castro",
+"Porcupine Tree", "Lewis Ofman", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+"Ibrahim Maalouf", "The Killers", "RY X", "Ringo Starr", "Matt Lang", "Spencer Brown",
+"Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Fouki",
+"Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+"Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+
+p "Creating creators..."
+artists.each do |artist|
+  creator = Creator.new
+  creator.name = artist
+  creator.content_type = "music"
+  creator.save
 end
 
+p "Assigning creators to user's followed creators..."
+Creator.all.each do |creator|
+  followed_creator = FollowedCreator.new
+  followed_creator.user = User.all.first
+  followed_creator.creator = creator
+  followed_creator.save
+end
+
+p "Finding upcoming albums for creators..."
+for page in 1..11
+  i = 1
+  doc = Nokogiri::HTML(URI.open("https://www.albumoftheyear.org/upcoming/#{page}/"))
+  doc.search('.albumBlock').each do |link|
+    img = link.search('img').attr('data-srcset').value unless link.search('img').attr('data-srcset').nil?
+    img = img.split[0] unless img.nil?
+    date = link.search('.date').text.strip
+    date = Date.parse(date).strftime("%F") unless date.length.zero?
+    artist_title = link.search('.artistTitle').text.strip
+    album_title = link.search('.albumTitle').text.strip
+
+    unless date.nil? && artist_title.nil?
+      if Creator.where(name: artist_title)
+        album = Album.new
+        album.poster_url = img.nil? ? "" : img
+        album.release_date = date
+        album.name = album_title
+        album.creator = Creator.where(name: artist_title).first
+        album.save
+      end
+    end
+    break if i == 60
+
+    i += 1
+  end
+end
+
+p "Finding concerts for creators..."
+Creator.all.each do |artist|
+  buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=453PeGFeKAA4XhceoIbBOUhfFIs2SOln&city=Montreal&keyword=#{artist.name}").read
+  response = JSON.parse(buffer)["_embedded"]
+  unless response.nil?
+    event = response["events"].first
+    event_name = event["name"]
+    event_image = event["images"].first["url"]
+    event_date = event["dates"]["start"]["localDate"]
+    event_url = event["url"]
+    event_venue = event["_embedded"]["venues"].first["name"]
+    event_address = event["_embedded"]["venues"].first["address"]["line1"]
+  end
+  unless event.nil?
+    concert = Concert.new
+    concert.name = event_name
+    concert.date = event_date
+    concert.venue = event_venue
+    concert.address = event_address
+    concert.poster_url = event_image
+    concert.event_url = event_url
+    concert.save unless concert.name.nil?
+  end
+end
 # ================================= Creators End ==========================================
