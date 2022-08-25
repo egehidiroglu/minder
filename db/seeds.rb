@@ -3,6 +3,7 @@
 # require 'json'
 # require 'nokogiri'
 
+
 # ================================= Movies Start ==========================================
 # today = Date.today
 # today = today.strftime("%F")
@@ -122,6 +123,7 @@
 #   puts ""
 # end
 
+
 # ================================= Concerts End ==========================================
 
 # ================================= Books Start ==========================================
@@ -162,3 +164,27 @@ my_authors.each do |author|
 #   books = results["books"]
 #   p books
 # end
+
+
+# ================================= Concerts End ==========================================
+
+# ================================= Books Start ==========================================
+
+
+
+# ================================= Books End ==========================================
+
+# ================================= Creators Start ==========================================
+
+RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
+
+me = RSpotify::User.find('crackincastleofglass')
+followed_artists = me.following(type: "artist", limit: 50, after: nil)
+
+followed_artists.each do |artist|
+  p artist
+  puts ""
+end
+
+# ================================= Creators End ==========================================
+
