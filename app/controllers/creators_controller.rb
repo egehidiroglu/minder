@@ -43,7 +43,6 @@ class CreatorsController < ApplicationController
 
   def destroy
     @creator = Creator.find(params[:id])
-    raise
     @creator.destroy
     redirect_to my_creators_path, status: :see_other
   end
