@@ -47,14 +47,14 @@ directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Mille
 year = Time.now.year
 p "Creating authors..."
 authors.each do |author|
-  Creator.create(name: author, content_type: "book")
+  Creator.create(name: author, content_type: "Book")
 end
 
 p "Creating music creators..."
 artists.each do |artist|
   creator = Creator.new
   creator.name = artist
-  creator.content_type = "music"
+  creator.content_type = "Music"
   creator.save
 end
 
@@ -62,7 +62,7 @@ p "Creating movie creators..."
 directors.each do |director|
   creator = Creator.new
   creator.name = director
-  creator.content_type = "movie"
+  creator.content_type = "Movie"
   creator.save
 end
 
