@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get '/my_creators', to: 'creators#my_creators', as: :my_creators
   get '/my_creators/new', to: 'creators#new'
   post '/my_creators', to: 'creators#create', as: :create_creator
-  delete '/my_creators/:id', to: 'creators#destroy'
+  delete '/my_creators/:id', to: 'creators#destroy', as: :delete_creator
 
   get '/auth/spotify/callback', to: 'users#spotify'
   # ^Going to get it through current_user and get creators using through user_creators- current_user.creators
