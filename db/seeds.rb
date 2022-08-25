@@ -124,7 +124,19 @@
 # end
 
 
-# ================================= Concerts End ==========================================
+# ================================= Creators Start (NOT WORKING YET...) ==========================================
+
+# RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
+
+# me = RSpotify::User.find('crackincastleofglass')
+# followed_artists = me.following(type: "artist", limit: 50, after: nil)
+
+# followed_artists.each do |artist|
+#   p artist
+#   puts ""
+# end
+
+# ================================= Creators End ==========================================
 
 # ================================= Books Start ==========================================
 # Get the results as an array, iterate through, if it is released greater than equal to this year add it to list
@@ -135,11 +147,13 @@ year = Time.now.year
 my_authors = ["Malcolm Gladwell", "Stephen King", "Jamie Oliver", "J.K. Rowling"]
 
 my_authors.each do |author|
+  p author
     author.gsub!(" ", "%20")
     results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
     "Authorization" => "48319_4e34c087665fdc89f0b3213205531ec7"
     })
-    if JSON.parse(results)["books"]["date_published"].to_i >= year
+    p results
+    if JSON.parse(results)["books"].first["date_published"].to_i >= year
       book = Book.new(
         name: JSON.parse(results)["books"].first["title"],
         release_date: JSON.parse(results)["books"].first["image"],
@@ -150,7 +164,6 @@ my_authors.each do |author|
       p "Added a book!"
     end
   end
-
 
 
 # my_authors.each do |author|
@@ -165,25 +178,4 @@ my_authors.each do |author|
 # end
 
 
-# ================================= Concerts End ==========================================
-
-# ================================= Books Start ==========================================
-
-
-
 # ================================= Books End ==========================================
-
-# ================================= Creators Start ==========================================
-
-RSpotify.authenticate("9c4f0907d3714790a061805fc1301430", "318e8535fa704c37a62573152d9c4152")
-
-me = RSpotify::User.find('crackincastleofglass')
-followed_artists = me.following(type: "artist", limit: 50, after: nil)
-
-followed_artists.each do |artist|
-  p artist
-  puts ""
-end
-
-# ================================= Creators End ==========================================
-
