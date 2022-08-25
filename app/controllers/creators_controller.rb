@@ -1,26 +1,26 @@
 class CreatorsController < ApplicationController
   def my_creators
-    followed_creators = current_user.followed_creators
+    followed_creators = current_user.creators
     if params[:query].present?
       case params[:query]
       when "Music"
         @creators = []
         followed_creators.each do |followed|
-          @creators.push(followed) if followed.creator.content_type == "Music"
+          @creators.push(followed) if followed.content_type == "Music"
         end
       when "Movie"
         @creators = []
         followed_creators.each do |followed|
-          @creators.push(followed) if followed.creator.content_type == "Movie"
+          @creators.push(followed) if followed.content_type == "Movie"
         end
       when "Book"
         @creators = []
         followed_creators.each do |followed|
-          @creators.push(followed) if followed.creator.content_type == "Book"
+          @creators.push(followed) if followed.content_type == "Book"
         end
       end
     else
-      @creators = current_user.followed_creators
+      @creators = current_user.creators
     end
   end
 
@@ -42,6 +42,9 @@ class CreatorsController < ApplicationController
   end
 
   def destroy
+    @creator = Creator.find(params[:id])
+    @creator.destroy
+    redirect_to my_creators_path, status: :see_other
   end
 
   private
