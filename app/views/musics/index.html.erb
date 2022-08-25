@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>My Albums 🎸🪕🎹</h1>
+
+  <% @albums.each do |album| %>
+    <% if current_user.creators.ids.include? album.creator_id %>
+      <ul>
+        <li> <strong>Title: </strong><%= album.name %></li>
+        <div><strong>Release Date: </strong><%= album.release_date %></div>
+        <div> <strong>Artist: </strong> <%= album.creator.name %> </div>
+        <div><img src= "<%= album.poster_url %>", alt="Book poster"></div>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
+
+  <h1>My Conerts 🤪</h1>
+  <% @concerts.each do |concert| %>
+    <% if current_user.creators.ids.include? concert.creator_id %>
+      <ul>
+        <li> <strong>Title: </strong><%= concert.name %></li>
+        <div><strong>Date: </strong><%= concert.date %></div>
+        <div> <strong>Artist: </strong> <%= concert.creator.name %> </div>
+        <div> <strong>Venue: </strong> <%= concert.venue %> </div>
+        <div> <strong>Address: </strong> <%= concert.address %> </div>
+        <div> <strong>Event URL: </strong> <%= concert.event_url %> </div>
+        <div><img src= "<%= concert.poster_url %>", alt="Book poster"></div>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
