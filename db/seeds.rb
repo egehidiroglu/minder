@@ -135,17 +135,16 @@ my_authors = ["Malcolm Gladwell", "Stephen King", "Jamie Oliver", "J.K. Rowling"
 my_authors.each do |author|
     author.gsub!(" ", "%20")
     results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
-    "Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"
+    "Authorization" => "48319_4e34c087665fdc89f0b3213205531ec7"
     })
-    if JSON.parse(results)["books"].first["date_published"].to_i >= year
-      Book.new(
+    if JSON.parse(results)["books"]["date_published"].to_i >= year
+      book = Book.new(
         name: JSON.parse(results)["books"].first["title"],
-        image: JSON.parse(results)["books"].first["image"],
-        description: JSON.parse(results)["books"].first["date_published"]
+        release_date: JSON.parse(results)["books"].first["image"],
+        description: JSON.parse(results)["books"].first["synopsys"],
+        creator_id: 1
       )
-      # p JSON.parse(results)["books"].first["title"]
-      # p JSON.parse(results)["books"].first["image"]
-      # p JSON.parse(results)["books"].first["date_published"]
+      p book
       p "Added a book!"
     end
   end
