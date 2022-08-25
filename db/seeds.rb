@@ -1,7 +1,7 @@
-require 'rspotify'
-require 'open-uri'
-require 'json'
-require 'nokogiri'
+# require 'rspotify'
+# require 'open-uri'
+# require 'json'
+# require 'nokogiri'
 
 
 # ================================= Movies Start ==========================================
@@ -87,13 +87,13 @@ require 'nokogiri'
 # end
 
 # my_albums.each do |album|
-#   p album
-#   puts ""
-# end
+# #   p album
+# #   puts ""
+# # end
 
-# ================================= Albums End ==========================================\
+# # ================================= Albums End ==========================================\
 
-# ================================= Concerts Start ==========================================
+# # ================================= Concerts Start ==========================================
 
 # my_concert_artists = ["Stromae", "Twenty One Pilots", "My Chemical Romance", "RY X"]
 # my_concerts = []
@@ -123,6 +123,49 @@ require 'nokogiri'
 #   puts ""
 # end
 
+
+# ================================= Concerts End ==========================================
+
+# ================================= Books Start ==========================================
+# Get the results as an array, iterate through, if it is released greater than equal to this year add it to list
+require 'rest-client'
+require "json"
+
+year = Time.now.year
+my_authors = ["Malcolm Gladwell", "Stephen King", "Jamie Oliver", "J.K. Rowling"]
+
+my_authors.each do |author|
+    author.gsub!(" ", "%20")
+    results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
+    "Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"
+    })
+    if JSON.parse(results)["books"].first["date_published"].to_i >= year
+      Book.new(
+        name: JSON.parse(results)["books"].first["title"],
+        image: JSON.parse(results)["books"].first["image"],
+        description: JSON.parse(results)["books"].first["date_published"]
+      )
+      # p JSON.parse(results)["books"].first["title"]
+      # p JSON.parse(results)["books"].first["image"]
+      # p JSON.parse(results)["books"].first["date_published"]
+      p "Added a book!"
+    end
+  end
+
+
+
+# my_authors.each do |author|
+#   # author.gsub!(" ", "%20")
+#   url = "https://api2.isbndb.com/author/#{author}?page=1&pageSize=20"
+#   response = URI.open(url).read
+#   p response
+#   results = JSON.parse(response)
+#   p results
+#   books = results["books"]
+#   p books
+# end
+
+
 # ================================= Concerts End ==========================================
 
 # ================================= Books Start ==========================================
@@ -144,3 +187,4 @@ followed_artists.each do |artist|
 end
 
 # ================================= Creators End ==========================================
+
