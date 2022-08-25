@@ -35,7 +35,7 @@ my_authors.each do |author|
       p "Added -------->   .#{book['title']} Year: #{book['date_published']}"
     end
   end
-
+end
 # my_authors.each do |author|
 #   # author.gsub!(" ", "%20")
 #   url = "https://api2.isbndb.com/author/#{author}?page=1&pageSize=20"

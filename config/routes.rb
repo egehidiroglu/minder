@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   # -------Content info----------
-  resources :books, only: %i[index, show]
-  resources :movies, only: %i[index, show]
-  resources :musics, only: %i[index, show]
+  resources :books, only: %i[index show]
+  resources :movies, only: %i[index show]
+  resources :musics, only: %i[index show]
   resources :summaries, only: %i[index]
 
   # -------Creator info----------
