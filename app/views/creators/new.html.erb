@@ -1,0 +1,5 @@
+<%= simple_form_for @creator, url: :create_creator do |f| %>
+  <%= f.input :name %>
+  <%= f.input :content_type, collection: ["Book", "Movie", "Music"] %>
+  <%= f.button :submit %>
+<% end %>
