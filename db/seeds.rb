@@ -74,6 +74,12 @@ Creator.all.each do |creator|
   followed_creator.save
 end
 
+# --------Adding in a few followed artists for casey profile-----
+casey = FollowedCreator.new
+casey.user = User.third
+casey.creator = Creator.first
+casey.save
+
 authors.each do |author|
   author.gsub!(" ", "%20")
   results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
