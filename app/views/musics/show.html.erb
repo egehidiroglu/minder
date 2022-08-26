@@ -36,6 +36,7 @@
       <p class="card-text">Upcoming release on <%= @concert_music.date %></p>
       <p class="card-text">Venue: <%= @concert_music.venue %></p>
       <p class="card-text">Address: <%= @concert_music.address %></p>
+      <%= link_to "Book a Ticket", @concert_music.event_url %>
     </div>
   </div>
 <% end %>
