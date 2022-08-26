@@ -1,0 +1,11 @@
+<div class="show-container">
+  <div class="movie-img">
+    <%= image_tag @movie.poster_url %>
+  </div>
+  <div class="card content-details">
+    <p class="card-text"><%= @movie.creator.name %></p>
+    <p class="card-title"><%= @movie.name %></p>
+    <p class="card-text">Upcoming release on <%= @movie.release_date %></p>
+    <p class="card-text"><%= @movie.description %></p>
+  </div>
+</div>
