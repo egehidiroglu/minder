@@ -13,7 +13,7 @@
   <% end %>
 </div>
 
-  <h1>My Conerts 🤪</h1>
+  <h1>My Concerts 🤪</h1>
   <% @concerts.each do |concert| %>
     <% if current_user.creators.ids.include? concert.creator_id %>
       <ul>
