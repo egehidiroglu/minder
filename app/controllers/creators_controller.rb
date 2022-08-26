@@ -25,18 +25,25 @@ class CreatorsController < ApplicationController
   end
 
   def new
-    @creator = Creator.new
+    @followed_creator = FollowedCreator.new
+    creators = Creator.all
+    @unfollowed_creators = []
+    creators.each do |creator|
+      @unfollowed_creators.push creator if creator.users.where(id: current_user).empty?
+    end
   end
 
   def create
-    @creator = Creator.new(creator_params)
-    @creator.save
-    followed_creator = FollowedCreator.new
-    followed_creator.creator = @creator
-    followed_creator.user = current_user
-    if followed_creator.save
-      redirect_to my_creators_path
+    creator = Creator.where(name: creator_params["creator"])
+    search = FollowedCreator.where(creator_id: creator.first.id, user_id: current_user.id)
+    @followed_creator = FollowedCreator.new
+    if search.empty?
+      @followed_creator.creator = creator.first
+      @followed_creator.user = current_user
+      @followed_creator.save
+      redirect_to my_creators_path, status: :see_other
     else
+      @creators = Creator.all
       render :new, status: :unprocessable_entity
     end
   end
@@ -50,6 +57,6 @@ class CreatorsController < ApplicationController
   private
 
   def creator_params
-    params.require(:creator).permit(:name, :content_type)
+    params.require(:followed_creator).permit(:creator)
   end
 end
