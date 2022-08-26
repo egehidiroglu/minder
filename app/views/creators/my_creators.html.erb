@@ -1,5 +1,5 @@
-<h1>Here are all your creators🍿</h1>
-<%= link_to "Add Creator", my_creators_new_path %>
+<h1>Here are all your followed creators🍿</h1>
+<%= link_to "Follow someone new!", my_creators_new_path %>
 <%= form_with url: my_creators_path, method: :get, class: "d-flex" do |f| %>
   <%= f.select :query, ["Music", "Movie", "Book"],
     class: "form-control",

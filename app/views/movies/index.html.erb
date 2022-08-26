@@ -1,10 +1,10 @@
-<div class="container">
+<div class="contain">
   <h1>My Movies 🎬</h1>
 
   <% @movies.each do |movie| %>
     <% if current_user.creators.ids.include? movie.creator_id %>
       <ul>
-        <li> <strong>Title: </strong><%= movie.name %></li>
+        <li> <strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></li>
         <div><strong>Release Date: </strong><%= movie.release_date %></div>
         <div> <strong>Director: </strong> <%= movie.creator.name %> </div>
         <div><%= movie.description %></div>

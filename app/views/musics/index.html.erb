@@ -17,7 +17,7 @@
   <% @concerts.each do |concert| %>
     <% if current_user.creators.ids.include? concert.creator_id %>
       <ul>
-        <li> <strong>Title: </strong><%= link_to concert.name, music_path(album) %></li>
+        <li> <strong>Title: </strong><%= link_to concert.name, music_path(concert) %></li>
         <div><strong>Date: </strong><%= concert.date %></div>
         <div> <strong>Artist: </strong> <%= concert.creator.name %> </div>
         <div> <strong>Venue: </strong> <%= concert.venue %> </div>
