@@ -11,14 +11,17 @@
   margin: 0;
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
+  font-size: 64px;
   font-weight: bold;
   display: flex;
   justify-content: center;
   line-height: 80px;
+  font-family: 'Comfortaa', cursive;
+  padding-bottom: 20px;
 }
 
 .banner p {
+  font-family: 'Comfortaa', cursive;
   font-size: 20px;
   color: white;
   opacity: .7;
