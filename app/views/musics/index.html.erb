@@ -4,20 +4,19 @@
   <% @albums.each do |album| %>
     <% if current_user.creators.ids.include? album.creator_id %>
       <ul>
-        <li> <strong>Title: </strong><%= album.name %></li>
+        <li> <strong>Title: </strong><%= link_to album.name, music_path(album) %></li>
         <div><strong>Release Date: </strong><%= album.release_date %></div>
         <div> <strong>Artist: </strong> <%= album.creator.name %> </div>
         <div><img src= "<%= album.poster_url %>", alt="Book poster"></div>
       </ul>
     <% end %>
   <% end %>
-</div>
 
-  <h1>My Conerts 🤪</h1>
+  <h1>My Concerts 🤪</h1>
   <% @concerts.each do |concert| %>
     <% if current_user.creators.ids.include? concert.creator_id %>
       <ul>
-        <li> <strong>Title: </strong><%= concert.name %></li>
+        <li> <strong>Title: </strong><%= link_to concert.name, music_path(concert) %></li>
         <div><strong>Date: </strong><%= concert.date %></div>
         <div> <strong>Artist: </strong> <%= concert.creator.name %> </div>
         <div> <strong>Venue: </strong> <%= concert.venue %> </div>

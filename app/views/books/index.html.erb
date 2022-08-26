@@ -1,10 +1,10 @@
-<div class="container">
+<div class="contain">
   <h1>My Books 📚</h1>
 
   <% @books.each do |book| %>
     <% if current_user.creators.ids.include? book.creator_id %>
       <ul>
-        <li> <strong>Title: </strong><%= book.name %></li>
+        <li> <strong>Title: </strong><%= link_to book.name, book_path(book) %></li>
         <div><strong>Year: </strong><%= book.release_date %></div>
         <div> <strong>Author: </strong> <%= book.creator.name %> </div>
         <div><%= book.description %></div>

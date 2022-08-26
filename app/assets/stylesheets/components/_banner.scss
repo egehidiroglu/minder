@@ -1,0 +1,36 @@
+.banner {
+  background-size: cover;
+  background-position: center;
+  min-height: 88vh;
+  min-width: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner h1 {
+  margin: 5px;
+  color: #0DCDAA;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 64px;
+  font-weight: bold;
+  font-family: 'Comfortaa', cursive;
+  padding-bottom: 20px;
+}
+
+.banner p {
+  font-family: 'Comfortaa', cursive;
+  font-size: 20px;
+  color: white;
+  opacity: .7;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  padding-bottom: 25px;
+}
+
+.contain {
+  text-align: center;
+}
+
+.buttoner {
+  margin: 50px;
+}
