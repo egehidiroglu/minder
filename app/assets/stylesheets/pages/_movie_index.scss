@@ -1,0 +1,12 @@
+.gridder {
+flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100vh;
+  position: sticky;
+  top: 65px;
+  flex-grow: 1;
+  width: 80%;
+  gap: 5px;
+}
