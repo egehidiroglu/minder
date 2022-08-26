@@ -5,7 +5,10 @@ class MusicsController < ApplicationController
   end
 
   def show
-    @album_music = Album.find(params[:id])
-    @concert_music = Concert.find(params[:id])
+    begin
+      @album_music = Album.find(params[:id])
+    rescue => exception
+      @concert_music = Concert.find(params[:id])
+    end
   end
 end
