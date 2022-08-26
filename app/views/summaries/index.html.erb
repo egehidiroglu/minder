@@ -1,9 +1,20 @@
-
-
-<div class="contain">
+<div class="flex-container">
   <h1>Discover Page 🚵‍♀️</h1>
+  <div>
+    <div><img src= "<%= @album.poster_url %>", alt="Book poster"></div>
+    <div><%= @album.name %></div>
+    <div><%= @album.creator.name %></div>
+  </div>
 
-  <%# <div><img src= "<%= @album.poster_url %>", alt="Book poster"></div> %>
-  <div><img src= "<%= @book.poster_url %>", alt="Book poster"></div>
-  <%# <div><img src= "<%= @movie.poster_url %>", alt="Book poster"></div> %>
+  <div>
+    <div><img src= "<%= @book.poster_url %>", alt="Book poster"></div>
+    <div><%= @book.name %></div>
+    <div><%= @book.creator.name %></div>
+  </div>
+
+  <div>
+    <div><img src= "<%= @movie.poster_url %>", alt="Book poster"></div>
+    <div><%= @movie.name %></div>
+    <div><%= @movie.creator.name %></div>
+  </div>
 </div>

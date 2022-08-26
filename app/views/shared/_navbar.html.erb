@@ -10,7 +10,7 @@
       </div>
 
       <% if user_signed_in? %>
-        <%= link_to "Discover", "#", class: "nav-link" %>
+        <%= link_to "Discover", summaries_path, class: "nav-link" %>
         <%= link_to "Music", "/musics", class: "nav-link" %>
         <%= link_to "Books", "/books", class: "nav-link" %>
         <%= link_to "Movies", "/movies", class: "nav-link" %>
