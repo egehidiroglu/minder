@@ -196,3 +196,9 @@ for i in 1..10
     end
   end
 end
+
+album = Album.first
+creator = album.creator
+concert = Concert.new(name: "Kim Concert", date: "2022-09-22", venue: "Centre Bell", address: "Centre Bell")
+concert.creator = creator
+concert.save
