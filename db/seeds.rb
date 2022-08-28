@@ -76,9 +76,8 @@ end
 # ================================= Books Start ==========================================
 
 authors.each do |author|
-  search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=AIzaSyBVAhKIqj9SaJNdNyN1oPSnLb5AUnb6KXE").read
+  search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
-  p response["items"][0]["volumeInfo"]["imageLinks"]
   Book.create!(
     name: response["items"][0]["volumeInfo"]["title"],
     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
@@ -135,67 +134,67 @@ for page in 1..11
 end
 
 # =======================Getting upcoming concerts for creators===============================
-# p "Finding concerts for creators..."
-# Creator.all.each do |artist|
-#   buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=453PeGFeKAA4XhceoIbBOUhfFIs2SOln&city=Montreal&keyword=#{artist.name}").read
-#   response = JSON.parse(buffer)["_embedded"]
-#   unless response.nil?
-#     event = response["events"].first
-#     event_name = event["name"]
-#     event_image = event["images"].first["url"]
-#     event_date = event["dates"]["start"]["localDate"]
-#     event_url = event["url"]
-#     event_venue = event["_embedded"]["venues"].first["name"]
-#     event_address = event["_embedded"]["venues"].first["address"]["line1"]
-#   end
-#   unless event.nil?
-#     concert = Concert.new
-#     concert.name = event_name
-#     concert.date = event_date
-#     concert.venue = event_venue
-#     concert.address = event_address
-#     concert.poster_url = event_image
-#     concert.event_url = event_url
-#     concert.creator = artist
-#     concert.save
-#   end
-#   sleep(0.5)
-# end
+p "Finding concerts for creators..."
+Creator.all.each do |artist|
+  buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=#{ENV["TICKETMASTER_KEY"]}&city=Montreal&keyword=#{artist.name}").read
+  response = JSON.parse(buffer)["_embedded"]
+  unless response.nil?
+    event = response["events"].first
+    event_name = event["name"]
+    event_image = event["images"].first["url"]
+    event_date = event["dates"]["start"]["localDate"]
+    event_url = event["url"]
+    event_venue = event["_embedded"]["venues"].first["name"]
+    event_address = event["_embedded"]["venues"].first["address"]["line1"]
+  end
+  unless event.nil?
+    concert = Concert.new
+    concert.name = event_name
+    concert.date = event_date
+    concert.venue = event_venue
+    concert.address = event_address
+    concert.poster_url = event_image
+    concert.event_url = event_url
+    concert.creator = artist
+    concert.save
+  end
+  sleep(0.5)
+end
 
-# today = Date.today
-# today = today.strftime("%F")
-# six_months = Date.today + 180
-# six_months = six_months.strftime("%F")
+today = Date.today
+today = today.strftime("%F")
+six_months = Date.today + 180
+six_months = six_months.strftime("%F")
 
-# TMDB_API_KEY = "63759eccae824fa88e79218786680970"
+
 
 # # =======================Getting upcoming movies for creators===============================
-# p "Finding upcoming movies from creators..."
-# for i in 1..10
-#   tmdb_api_upcoming_call = "https://api.themoviedb.org/3/discover/movie?api_key=#{TMDB_API_KEY}&language=en-US&primary_release_date.gte=#{today}&primary_release_date.lte=#{six_months}&page=#{i}"
-#   response = URI.open(tmdb_api_upcoming_call).read
-#   results = JSON.parse(response)
-#   movies = results["results"]
-#   movies.each do |movie|
-#     movie_id = movie["id"]
-#     tmdb_api_credits_call = "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{TMDB_API_KEY}&language=en-US"
-#     credits_response = URI.open(tmdb_api_credits_call).read
-#     credits_results = JSON.parse(credits_response)
-#     movie_cast = credits_results["crew"]
-#     movie_cast.each do |crew|
-#       director = crew["name"] if crew["job"] == "Director"
-#       if Creator.where(name: director)
-#         mov = Movie.new
-#         mov.name = movie["original_title"]
-#         mov.release_date = movie["release_date"]
-#         mov.description = movie["overview"]
-#         mov.poster_url = "https://image.tmdb.org/t/p/w500#{movie['poster_path']}"
-#         mov.creator = Creator.where(name: director).first
-#         mov.save
-#       end
-#     end
-#   end
-# end
+p "Finding upcoming movies from creators..."
+for i in 1..10
+  tmdb_api_upcoming_call = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV["TMDB_API_KEY"]}&language=en-US&primary_release_date.gte=#{today}&primary_release_date.lte=#{six_months}&page=#{i}"
+  response = URI.open(tmdb_api_upcoming_call).read
+  results = JSON.parse(response)
+  movies = results["results"]
+  movies.each do |movie|
+    movie_id = movie["id"]
+    tmdb_api_credits_call = "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{ENV["TMDB_API_KEY"]}&language=en-US"
+    credits_response = URI.open(tmdb_api_credits_call).read
+    credits_results = JSON.parse(credits_response)
+    movie_cast = credits_results["crew"]
+    movie_cast.each do |crew|
+      director = crew["name"] if crew["job"] == "Director"
+      if Creator.where(name: director)
+        mov = Movie.new
+        mov.name = movie["original_title"]
+        mov.release_date = movie["release_date"]
+        mov.description = movie["overview"]
+        mov.poster_url = "https://image.tmdb.org/t/p/w500#{movie['poster_path']}"
+        mov.creator = Creator.where(name: director).first
+        mov.save
+      end
+    end
+  end
+end
 
 album = Album.first
 creator = album.creator
