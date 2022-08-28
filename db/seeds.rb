@@ -40,17 +40,11 @@ directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Mille
     "Paul Fisher", "David Gordon Green", "Parker Finn", "Ol Parker", "Adamma Ebo", "Nicholas Stoller", "Carlota Pereda",
     "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
 
-authors = []
-# url = "https://www.theguardian.com/books/list/authorsaz"
-# html_file = URI.open(url).read
-# html_doc = Nokogiri::HTML(html_file)
-
-# html_doc.search("#index-wrapper li").each do |author|
-#   authors << (author.text.strip)
-# end
-
-authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King",
-  "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Yung Pueblo", "Jonathan Cahn", "Ryan Holiday"]
+authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King", "Robert Galbraith", "Taylor Jenkins Reid", "Ryan Holiday",
+  "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Yung Pueblo", "Jonathan Cahn", "Ryan Holiday", "Tom Bower", "Yung Pueblo",
+  "Jonathan Cahn", "Mandy Wolfe", "Rupi Kaur", "Robert Bailey", "Roz Weston", "Matthew Perry", "Randall Munroe", "David Molnar",
+  "Kate Reid", "Tova Friedman", "Gabor Mate", "Bonnie Stern", "Michelle Obama", "Jamie Oliver",
+  "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
 
 authors.each do |author|
   Creator.create(name: author, content_type: "Book")
@@ -84,6 +78,7 @@ end
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=AIzaSyBVAhKIqj9SaJNdNyN1oPSnLb5AUnb6KXE").read
   response = JSON.parse(search)
+  p response["items"][0]["volumeInfo"]["imageLinks"]
   Book.create!(
     name: response["items"][0]["volumeInfo"]["title"],
     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
@@ -109,39 +104,6 @@ end
 # #       # Use Regex to get the year from: book["date_published"] and store in publishing_date
 # #       # Date.new and just set it to jan. 1 of that year
 # #     # end
-
-#     if book["date_published"].to_i >= year - 1
-#       p "Creating #{book["title"]}"
-#       Book.create!(
-#         name: book["title"],
-#         release_date: book["date_published"],
-#         description: book["synopsys"],
-#         poster_url: book["image"],
-#         creator_id: Creator.where(name: author).first.id
-#       )
-#     end
-#   end
-# end
-
-# =======================Testing getting books by year=====================================
-# p "Grabbing books..."
-# results = RestClient.get("https://api2.isbndb.com/books/2022?page=1&pageSize=500&column=date_published", headers={
-# "Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"
-# })
-# JSON.parse(results)["books"].each do |book|
-#   # p book["authors"][13]
-#   # p Creator.where(name: book["authors"][13])
-#   # if it finds the author in the list of creators do something
-#   if Creator.where(name: book["authors"][0])[0] != nil
-#     Book.create!(
-#       name: book["title"],
-#       release_date: book["date_published"],
-#       description: book["synopsis"],
-#       poster_url: book["image"],
-#       creator_id: Creator.where(name: book["authors"][0]).first.id
-#     )
-#   end
-# end
 
 # =======================Getting upcoming albums for creators===============================
 p "Finding upcoming albums for creators..."

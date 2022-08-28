@@ -5,9 +5,8 @@
     <% if current_user.creators.ids.include? book.creator_id %>
       <ul>
         <li> <strong>Title: </strong><%= link_to book.name, book_path(book) %></li>
-        <div><strong>Year: </strong><%= book.release_date %></div>
         <div> <strong>Author: </strong> <%= book.creator.name %> </div>
-        <div><%= book.description %></div>
+        <div> <strong>Author: </strong> <%= book.release_date %> </div>
         <div><img src= "<%= book.poster_url %>", alt="Book poster"></div>
       </ul>
     <% end %>

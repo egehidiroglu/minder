@@ -55,16 +55,3 @@ require 'rest-client'
 # html_doc.search("h3 a").each do |author|
 #    good_reads_links << author.attribute("href").value
 # end
-
-authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King",
-  "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Yung Pueblo", "Jonathan Cahn", "Ryan Holiday", "Bill Bryson"]
-
-authors.each do |author|
-  buffer = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=AIzaSyBVAhKIqj9SaJNdNyN1oPSnLb5AUnb6KXE").read
-  response = JSON.parse(buffer)
-  p response["items"][0]["volumeInfo"]["title"]
-  p response["items"][0]["volumeInfo"]["publishedDate"]
-  p response["items"][0]["volumeInfo"]["authors"][0]
-  p response["items"][0]["volumeInfo"]["description"]
-  p response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
-end
