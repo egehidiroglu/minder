@@ -31,7 +31,7 @@ artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "
   "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
   "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal", "Ryan Castro",
   "Porcupine Tree", "Lewis Ofman", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-  "Ibrahim Maalouf", "The Killers", "RY X", "Ringo Starr", "Matt Lang", "Spencer Brown",
+  "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Fouki",
   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
   "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
@@ -40,14 +40,28 @@ directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Mille
     "Paul Fisher", "David Gordon Green", "Parker Finn", "Ol Parker", "Adamma Ebo", "Nicholas Stoller", "Carlota Pereda",
     "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
 
-authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King", "Robert Galbraith", "Taylor Jenkins Reid", "Ryan Holiday",
-  "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Yung Pueblo", "Jonathan Cahn", "Ryan Holiday", "Tom Bower", "Yung Pueblo",
-  "Jonathan Cahn", "Mandy Wolfe", "Rupi Kaur", "Robert Bailey", "Roz Weston", "Matthew Perry", "Randall Munroe", "David Molnar",
-  "Kate Reid", "Tova Friedman", "Gabor Mate", "Bonnie Stern", "Michelle Obama", "Jamie Oliver",
+authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King", "Taylor Jenkins Reid",
+  "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Ryan Holiday", "Tom Bower",
+  "Jonathan Cahn", "Rupi Kaur", "Robert Bailey", "Roz Weston", "Matthew Perry", "Randall Munroe",
+  "Kate Reid", "Gabor Mate", "Michelle Obama",
   "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
 
+p "Creating authors..."
 authors.each do |author|
-  Creator.create(name: author, content_type: "Book")
+  creator = Creator.new
+  creator.content_type = "Book"
+  author.gsub!(" ", "_")
+  url = "https://en.wikipedia.org/wiki/#{author}"
+  html_file = URI.open(url).read
+  html_doc = Nokogiri::HTML(html_file)
+  image = ""
+  html_doc.search(".infobox-image img").each do |element|
+    image = element.attributes["src"].value
+  end
+  creator.poster_url = image
+  author.gsub!("_", " ")
+  creator.name = author
+  creator.save!
 end
 
 p "Creating music creators..."
@@ -55,7 +69,7 @@ artists.each do |artist|
   creator = Creator.new
   creator.name = artist
   creator.content_type = "Music"
-  creator.save
+  creator.save!
 end
 
 p "Creating movie creators..."
@@ -75,9 +89,12 @@ Creator.all.each do |creator|
 end
 # ================================= Books Start ==========================================
 
+authors = ["malcolm gladwell"]
+p "Creating books"
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
+  p response["items"][0]["volumeInfo"]["title"]
   Book.create!(
     name: response["items"][0]["volumeInfo"]["title"],
     release_date: response["items"][0]["volumeInfo"]["publishedDate"],

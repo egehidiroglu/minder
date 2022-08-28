@@ -55,3 +55,32 @@ require 'rest-client'
 # html_doc.search("h3 a").each do |author|
 #    good_reads_links << author.attribute("href").value
 # end
+
+directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller",
+  "Paul Fisher", "David Gordon Green", "Ol Parker", "Nicholas Stoller", "Carlota Pereda",
+  "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
+
+authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King", "Robert Galbraith", "Taylor Jenkins Reid", "Ryan Holiday",
+    "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Jonathan Cahn", "Ryan Holiday", "Tom Bower",
+    "Jonathan Cahn", "Rupi Kaur", "Robert Bailey", "Roz Weston", "Matthew Perry", "Randall Munroe",
+    "Kate Reid", "Gabor Mate", "Michelle Obama", "Jamie Oliver",
+    "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
+
+authors.each do |director|
+  begin
+    director.gsub!(" ", "_")
+    url = "https://en.wikipedia.org/wiki/#{director}"
+    html_file = URI.open(url).read
+    html_doc = Nokogiri::HTML(html_file)
+  rescue
+    director.gsub!(" ", "_")
+    url = "https://en.wikipedia.org/wiki/#{director}_(author)"
+    p director
+    html_file = URI.open(url).read
+    html_doc = Nokogiri::HTML(html_file)
+  end
+
+  html_doc.search(".infobox-image img").each do |element|
+    element.attributes["src"].value
+  end
+end
