@@ -13,39 +13,39 @@ FollowedCreator.destroy_all
 p "Destroying books..."
 Book.destroy_all
 
-p "Creating a users..."
+# =================================User Start=============================================
+
+p "Creating some users..."
 emails = %w[egehdrgl@gmail.com ege@minder.quest casey@minder.quest hugo@minder.quest adou@minder.quest]
 password = "123456"
-user = User.new
-user.email = "egehdrgl@gmail.com"
-user.password = "123456"
-user.save
 emails.each do |email|
   User.create(email: email, password: password)
 end
 
-# ================================= Books Start ==========================================
-
-authors = ["Bill Bryson", "Malcolm Gladwell", "stephen king", "Jamie Oliver", "J.K. Rowling", "John Green"]
-
+# ================================= Creators Start ==========================================
+p "Creating creators..."
 artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace",
-           "Fargo Q Money", "Death Scythe", "Kim Areum", "Megadeth", "Gaspar Claus", "Ozzy Osbourne",
-           "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-           "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
-           "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
-           "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal", "Ryan Castro",
-           "Porcupine Tree", "Lewis Ofman", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-           "Ibrahim Maalouf", "The Killers", "RY X", "Ringo Starr", "Matt Lang", "Spencer Brown",
-           "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Fouki",
-           "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-           "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+  "Fargo Q Money", "Death Scythe", "Kim Areum", "Megadeth", "Gaspar Claus", "Ozzy Osbourne",
+  "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+  "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+  "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+  "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal", "Ryan Castro",
+  "Porcupine Tree", "Lewis Ofman", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+  "Ibrahim Maalouf", "The Killers", "RY X", "Ringo Starr", "Matt Lang", "Spencer Brown",
+  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Fouki",
+  "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+  "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
 
 directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
-             "Paul Fisher", "David Gordon Green", "Parker Finn", "Ol Parker", "Adamma Ebo", "Nicholas Stoller", "Carlota Pereda",
-             "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
+    "Paul Fisher", "David Gordon Green", "Parker Finn", "Ol Parker", "Adamma Ebo", "Nicholas Stoller", "Carlota Pereda",
+    "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
 
-year = Time.now.year
-p "Creating authors..."
+authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King", "Robert Galbraith", "Taylor Jenkins Reid", "Ryan Holiday",
+  "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Yung Pueblo", "Jonathan Cahn", "Ryan Holiday", "Tom Bower", "Yung Pueblo",
+  "Jonathan Cahn", "Mandy Wolfe", "Rupi Kaur", "Robert Bailey", "Roz Weston", "Matthew Perry", "Randall Munroe", "David Molnar",
+  "Kate Reid", "Tova Friedman", "Gabor Mate", "Bonnie Stern", "Michelle Obama", "Jamie Oliver",
+  "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
+
 authors.each do |author|
   Creator.create(name: author, content_type: "Book")
 end
@@ -73,41 +73,38 @@ Creator.all.each do |creator|
   followed_creator.creator = creator
   followed_creator.save
 end
-
-# --------Adding in a few followed artists for casey profile-----
-casey = FollowedCreator.new
-casey.user = User.third
-casey.creator = Creator.first
-casey.save
+# ================================= Books Start ==========================================
 
 authors.each do |author|
-  author.gsub!(" ", "%20")
-  results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10", headers={
-  "Authorization" => "48319_4e34c087665fdc89f0b3213205531ec7"
-  })
-  author.gsub!("%20", " ")
-  JSON.parse(results)["books"].each do |book|
-    #  -------------Converting all formats to date format------------------------
-    # begin
-      # publishing_date = Date.parse(book["date_published"])
-      # This just works for
-    # rescue
-      # Use Regex to get the year from: book["date_published"] and store in publishing_date
-      # Date.new and just set it to jan. 1 of that year
-    # end
-
-    if book["date_published"].to_i >= year - 10
-      Book.create!(
-        name: book["title"],
-        release_date: book["date_published"],
-        description: book["synopsys"],
-        poster_url: book["image"],
-        creator_id: Creator.where(name: author).first.id
-      )
-    end
-  end
+  search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
+  response = JSON.parse(search)
+  Book.create!(
+    name: response["items"][0]["volumeInfo"]["title"],
+    release_date: response["items"][0]["volumeInfo"]["publishedDate"],
+    description: response["items"][0]["volumeInfo"]["description"],
+    poster_url:   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"],
+    creator_id: Creator.where(name: author).first.id
+  )
 end
 
+# authors.each do |author|
+#   author.gsub!(" ", "%20")
+#   p author
+#   results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=10&pageSize=30", headers={
+#   "Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"
+#   })
+#   author.gsub!("%20", " ")
+#   JSON.parse(results)["books"].each do |book|
+# #     #  -------------Converting all formats to date format------------------------
+# #     # begin
+# #       # publishing_date = Date.parse(book["date_published"])
+# #       # This just works for
+# #     # rescue
+# #       # Use Regex to get the year from: book["date_published"] and store in publishing_date
+# #       # Date.new and just set it to jan. 1 of that year
+# #     # end
+
+# =======================Getting upcoming albums for creators===============================
 p "Finding upcoming albums for creators..."
 for page in 1..11
   i = 1
@@ -136,9 +133,10 @@ for page in 1..11
   end
 end
 
+# =======================Getting upcoming concerts for creators===============================
 p "Finding concerts for creators..."
 Creator.all.each do |artist|
-  buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=453PeGFeKAA4XhceoIbBOUhfFIs2SOln&city=Montreal&keyword=#{artist.name}").read
+  buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=#{ENV["TICKETMASTER_KEY"]}&city=Montreal&keyword=#{artist.name}").read
   response = JSON.parse(buffer)["_embedded"]
   unless response.nil?
     event = response["events"].first
@@ -168,17 +166,18 @@ today = today.strftime("%F")
 six_months = Date.today + 180
 six_months = six_months.strftime("%F")
 
-TMDB_API_KEY = "63759eccae824fa88e79218786680970"
 
+
+# # =======================Getting upcoming movies for creators===============================
 p "Finding upcoming movies from creators..."
 for i in 1..10
-  tmdb_api_upcoming_call = "https://api.themoviedb.org/3/discover/movie?api_key=#{TMDB_API_KEY}&language=en-US&primary_release_date.gte=#{today}&primary_release_date.lte=#{six_months}&page=#{i}"
+  tmdb_api_upcoming_call = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV["TMDB_API_KEY"]}&language=en-US&primary_release_date.gte=#{today}&primary_release_date.lte=#{six_months}&page=#{i}"
   response = URI.open(tmdb_api_upcoming_call).read
   results = JSON.parse(response)
   movies = results["results"]
   movies.each do |movie|
     movie_id = movie["id"]
-    tmdb_api_credits_call = "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{TMDB_API_KEY}&language=en-US"
+    tmdb_api_credits_call = "https://api.themoviedb.org/3/movie/#{movie_id}/credits?api_key=#{ENV["TMDB_API_KEY"]}&language=en-US"
     credits_response = URI.open(tmdb_api_credits_call).read
     credits_results = JSON.parse(credits_response)
     movie_cast = credits_results["crew"]
