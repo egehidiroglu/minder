@@ -18,7 +18,7 @@
     <div class="card-trip">
       <img src= "<%= creator.poster_url %>", alt="Book poster">
       <div class="card-trip-infos">
-        <%= creator.content_type %>
+        <strong><%= creator.content_type %></strong> <br>
         <%= creator.name %>
         <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
         <i class="fa-solid fa-trash"></i>
