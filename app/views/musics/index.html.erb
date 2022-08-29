@@ -17,6 +17,9 @@
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
+          <%= link_to favorite_music_path(album) do %>
+            <i class="fa-solid fa-heart"></i>
+          <% end %>
         </div>
       <% end %>
     <% end %>
@@ -30,14 +33,17 @@
       <% if current_user.creators.ids.include? concert.creator_id %>
         <div class="card-trip">
           <img src= "<%= concert.poster_url %>", alt="Book poster">
-        <div class="card-trip-infos">
-          <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
-          <strong>Date: </strong><%= concert.date %>
-          <strong>Artist: </strong> <%= concert.creator.name %> <br>
-          <strong>Venue: </strong> <%= concert.venue %> <br>
-          <strong>Address: </strong> <%= concert.address %> <br>
-          <strong>Event URL: </strong> <%= concert.event_url %>
+          <div class="card-trip-infos">
+            <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
+            <strong>Date: </strong><%= concert.date %>
+            <strong>Artist: </strong> <%= concert.creator.name %> <br>
+            <strong>Venue: </strong> <%= concert.venue %> <br>
+            <strong>Address: </strong> <%= concert.address %> <br>
+            <strong>Event URL: </strong> <%= concert.event_url %>
           </div>
+          <%= link_to favorite_music_path(concert) do %>
+            <i class="fa-solid fa-heart"></i>
+          <% end %>
         </div>
       <% end %>
     <% end %>

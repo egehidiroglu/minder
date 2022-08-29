@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :musics, only: %i[index show]
   resources :summaries, only: %i[index]
   resources :creators, only: %i[index]
-  
+
   # -------Creator info----------
   get '/my_creators', to: 'creators#my_creators', as: :my_creators
   get '/my_creators/new', to: 'creators#new'
@@ -26,9 +26,8 @@ Rails.application.routes.draw do
   # -------Favorite Content -----
 
   get '/favorite_movies/:id', to: 'movies#favorite_movie', as: :favorite_movie
-  get '/music', to: 'albums#favorite_album', as: :favorite_album
-  get '/music', to: 'concerts#favorite_concert', as: :favorite_concert
-  get '/books', to: 'books#favorite_book', as: :favorite_book
+  get '/favorite_music/:id', to: 'musics#favorite_music', as: :favorite_music
+  get '/favorite_books/:id', to: 'books#favorite_book', as: :favorite_book
   get '/my_favorites', to: 'users#my_favorites', as: :user_favorites
 
 end
