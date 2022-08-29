@@ -25,7 +25,6 @@
 
 .card-trip .card-trip-infos {
   padding: 16px;
-
 }
 
 a {
@@ -43,7 +42,6 @@ a:hover {
 .cards {
   display: grid;
   grid-template-columns: repeat(1fr, 4);
-  grid-gap: 32px;
 }
 
 /*card-category*/
@@ -97,4 +95,10 @@ a:hover {
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 
+}
+
+.card-content-details {
+  margin-left: 35px;
+  align-items: center;
+  margin-top: 45px;
 }
