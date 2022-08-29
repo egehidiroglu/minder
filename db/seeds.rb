@@ -13,7 +13,7 @@ FollowedCreator.destroy_all
 p "Destroying books..."
 Book.destroy_all
 
-# =================================User Start=============================================
+# # =================================User Start=============================================
 
 p "Creating some users..."
 emails = %w[egehdrgl@gmail.com ege@minder.quest casey@minder.quest hugo@minder.quest adou@minder.quest]
@@ -22,7 +22,7 @@ emails.each do |email|
   User.create(email: email, password: password)
 end
 
-# ================================= Creators Start ==========================================
+# # ================================= Creators Start ==========================================
 p "Creating creators..."
 artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
   "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
@@ -108,7 +108,7 @@ Creator.all.each do |creator|
   followed_creator.creator = creator
   followed_creator.save
 end
-# ================================= Books Start ==========================================
+# # ================================= Books Start ==========================================
 
 p "Creating books"
 authors.each do |author|
@@ -123,23 +123,6 @@ authors.each do |author|
     creator_id: Creator.where(name: author).first.id
   )
 end
-
-# authors.each do |author|
-#   author.gsub!(" ", "%20")
-#   p author
-#   results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=10&pageSize=30", headers={
-#   "Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"
-#   })
-#   author.gsub!("%20", " ")
-#   JSON.parse(results)["books"].each do |book|
-# #     #  -------------Converting all formats to date format------------------------
-# #     # begin
-# #       # publishing_date = Date.parse(book["date_published"])
-# #       # This just works for
-# #     # rescue
-# #       # Use Regex to get the year from: book["date_published"] and store in publishing_date
-# #       # Date.new and just set it to jan. 1 of that year
-# #     # end
 
 # =======================Getting upcoming albums for creators===============================
 p "Finding upcoming albums for creators..."
@@ -170,7 +153,7 @@ for page in 1..11
   end
 end
 
-# =======================Getting upcoming concerts for creators===============================
+# # =======================Getting upcoming concerts for creators===============================
 p "Finding concerts for creators..."
 Creator.all.each do |artist|
 
@@ -205,7 +188,7 @@ today = today.strftime("%F")
 six_months = Date.today + 180
 six_months = six_months.strftime("%F")
 
-# # =======================Getting upcoming movies for creators===============================
+# # # =======================Getting upcoming movies for creators===============================
 
 p "Finding upcoming movies from creators..."
 for i in 1..10
