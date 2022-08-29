@@ -1,29 +1,39 @@
 <div class="contain">
-  <h1>My Albums 🎸🪕🎹</h1>
-
-  <% @albums.each do |album| %>
-    <% if current_user.creators.ids.include? album.creator_id %>
-      <ul>
-        <li> <strong>Title: </strong><%= link_to album.name, music_path(album) %></li>
-        <div><strong>Release Date: </strong><%= album.release_date %></div>
-        <div> <strong>Artist: </strong> <%= album.creator.name %> </div>
-        <div><img src= "<%= album.poster_url %>", alt="Book poster"></div>
-      </ul>
+  <div class="titler">
+    <h1>My Albums 🎸🪕🎹</h1>
+  </div>
+  <div class="cards ">
+    <% @albums.each do |album| %>
+      <% if current_user.creators.ids.include? album.creator_id %>
+        <div class="card-trip">
+          <img src= "<%= album.poster_url %>", alt="Book poster">
+          <div class="card-trip-infos">
+            <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
+            <strong>Release Date: </strong><%= album.release_date %> <br>
+            <strong>Artist: </strong> <%= album.creator.name %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 
-  <h1>My Concerts 🤪</h1>
-  <% @concerts.each do |concert| %>
-    <% if current_user.creators.ids.include? concert.creator_id %>
-      <ul>
-        <li> <strong>Title: </strong><%= link_to concert.name, music_path(concert) %></li>
-        <div><strong>Date: </strong><%= concert.date %></div>
-        <div> <strong>Artist: </strong> <%= concert.creator.name %> </div>
-        <div> <strong>Venue: </strong> <%= concert.venue %> </div>
-        <div> <strong>Address: </strong> <%= concert.address %> </div>
-        <div> <strong>Event URL: </strong> <%= concert.event_url %> </div>
-        <div><img src= "<%= concert.poster_url %>", alt="Book poster"></div>
-      </ul>
+  <div class="titler">
+    <h1>My Concerts 🤪</h1>
+  </div>
+  <div class="cards ">
+    <% @concerts.each do |concert| %>
+      <% if current_user.creators.ids.include? concert.creator_id %>
+        <div class="card-trip">
+          <img src= "<%= concert.poster_url %>", alt="Book poster">
+        <div class="card-trip-infos">
+          <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
+          <strong>Date: </strong><%= concert.date %>
+          <strong>Artist: </strong> <%= concert.creator.name %> <br>
+          <strong>Venue: </strong> <%= concert.venue %> <br>
+          <strong>Address: </strong> <%= concert.address %> <br>
+          <strong>Event URL: </strong> <%= concert.event_url %>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>

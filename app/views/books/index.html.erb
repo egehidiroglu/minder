@@ -1,14 +1,19 @@
 <div class="contain">
-  <h1>My Books 📚</h1>
-
-  <% @books.each do |book| %>
-    <% if current_user.creators.ids.include? book.creator_id %>
-      <ul>
-        <li> <strong>Title: </strong><%= link_to book.name, book_path(book) %></li>
-        <div> <strong>Author: </strong> <%= book.creator.name %> </div>
-        <div> <strong>Author: </strong> <%= book.release_date %> </div>
-        <div><img src= "<%= book.poster_url %>", alt="Book poster"></div>
-      </ul>
-    <% end %>
-  <% end %>
+  <div class="titler">
+    <h1>My Books 📚</h1>
+  </div>
+    <div class="cards">
+      <% @books.each do |book| %>
+        <% if current_user.creators.ids.include? book.creator_id %>
+          <div class="card-trip">
+            <img src= "<%= book.poster_url %>", alt="Book poster">
+            <div class="card-trip-infos">
+              <h2><strong>Title: </strong><%= link_to book.name, book_path(book) %></h2> <br>
+              <strong>Author: </strong> <%= book.creator.name %>
+              <strong>Author: </strong> <%= book.release_date %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+  </div>
 </div>
