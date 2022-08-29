@@ -5,14 +5,16 @@
     <div class="cards">
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
-          <div class="card-trip">
-            <img src= "<%= book.poster_url %>", alt="Book poster">
-            <div class="card-trip-infos">
-              <h2><strong>Title: </strong><%= link_to book.name, book_path(book) %></h2> <br>
-              <strong>Author: </strong> <%= book.creator.name %>
-              <strong>Author: </strong> <%= book.release_date %>
+          <%= link_to book_path(book) do %>
+            <div class="card-trip">
+              <img src= "<%= book.poster_url %>", alt="Book poster">
+              <div class="card-trip-infos">
+                <h2><strong>Title: </strong><%= book.name %></h2> <br>
+                <strong>Author: </strong> <%= book.creator.name %>
+                <strong>Author: </strong> <%= book.release_date %>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
   </div>
