@@ -37,11 +37,10 @@
           <img src= "<%= concert.poster_url %>", alt="Book poster">
         <div class="card-trip-infos">
           <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
-          <strong>Date: </strong><%= concert.date %>
+          <strong>Date: </strong><%= concert.date %> <br>
           <strong>Artist: </strong> <%= concert.creator.name %> <br>
           <strong>Venue: </strong> <%= concert.venue %> <br>
           <strong>Address: </strong> <%= concert.address %> <br>
-          <strong>Event URL: </strong> <%= concert.event_url %>
           </div>
         </div>
       <% end %>
