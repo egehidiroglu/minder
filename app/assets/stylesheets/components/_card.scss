@@ -6,7 +6,6 @@
 }
 
 .card-trip > img {
-
   width: 100%;
   object-fit: cover;
 }
@@ -38,17 +37,9 @@ a:hover {
   color: #0dcdaa;
 }
 
-.card-trip-infos .card-trip-user {
-  position: absolute;
-  right: 16px;
-  top: -20px;
-  width: 40px;
-  text-decoration: none;
-}
-
 .cards {
-  display: flex;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: repeat(1fr, 4);
   grid-gap: 32px;
 }
 
@@ -100,4 +91,26 @@ a:hover {
   background: #76d5c4;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   color: rgb(74, 74, 74);
+}
+
+.img_contain {
+  height: 0;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 75%;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+}
+
+.centered {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  margin: auto;
+
 }
