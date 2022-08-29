@@ -29,5 +29,4 @@ Rails.application.routes.draw do
   get '/favorite_music/:id', to: 'musics#favorite_music', as: :favorite_music
   get '/favorite_books/:id', to: 'books#favorite_book', as: :favorite_book
   get '/my_favorites', to: 'users#my_favorites', as: :user_favorites
-
 end

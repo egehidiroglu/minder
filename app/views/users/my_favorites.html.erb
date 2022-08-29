@@ -1,7 +1,12 @@
 <h1>Your Favorites</h1>
-
+<%= form_with url: user_favorites_path, method: :get, class: "d-flex" do |f| %>
+  <%= f.select :query, ["Music", "Movie", "Book"],
+    class: "form-control",
+    placeholder: "Sort"
+  %>
+  <%= submit_tag "Sort", class: "btn btn-primary" %>
+<% end %>
 <% @favorites.each do |favorite| %>
-  <p><%= favorite.class %></p>
   <div class="card">
     <p><%= favorite.name %></p>
   </div>
