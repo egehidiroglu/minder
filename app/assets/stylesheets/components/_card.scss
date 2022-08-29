@@ -28,9 +28,10 @@
 
 a {
   text-decoration: none;
-  color: black;
+  color: rgb(0, 0, 0);
   transition: width 2s;
 }
+
 
 a:hover {
   text-decoration: none;
@@ -79,38 +80,21 @@ a:hover {
   padding: 16px;
 }
 
-.btn-flat {
-  color: rgb(74, 74, 74);
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: #0DCDAA;
-  transition: background 0.3s ease;
-}
 
-.btn-flat:hover {
-  background: #76d5c4;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  color: rgb(74, 74, 74);
-}
 
-.img_contain {
-  height: 0;
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 75%;
-}
 
-.img {
+.card-category {
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
   width: 100%;
-  height: 100%;
-}
-
-.centered {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  right: -50%;
-  bottom: -50%;
-  margin: auto;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
