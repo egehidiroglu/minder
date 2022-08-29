@@ -1,0 +1,18 @@
+.center-carousel {
+  position: relative;
+  max-height: 500px;
+  overflow: hidden;
+}
+.carousel-item {
+  overflow: hidden;
+}
+
+.carousel-item active {
+  overflow: hidden;
+}
+
+.carousel-img {
+  width: 75%  ;
+  object-fit:cover;
+  object-position: center;
+}

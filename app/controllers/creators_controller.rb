@@ -54,17 +54,38 @@ class CreatorsController < ApplicationController
     redirect_to my_creators_path, status: :see_other
   end
 
-  # Three views (one for add_artists, add_directors, add_authors)
+  # ----------------First time user signs in - choose artists--------------------WORKING
   def artist_setup
-    @artists = Creator.where(content_type: "Music")
+    artists = Creator.where(content_type: "Music")
+    @unfollowed_artists = []
+    artists.each do |creator|
+      @unfollowed_artists.push creator if creator.users.where(id: current_user).empty?
+    end
   end
+
+  # ----------------First time user signs in - choose authors-------------------- WORKING
 
   def author_setup
-    @authors = Creator.where(content_type: "Book")
+    authors = Creator.where(content_type: "Book")
+    @unfollowed_authors = []
+    authors.each do |creator|
+      @unfollowed_authors.push creator if creator.users.where(id: current_user).empty?
+    end
   end
 
+  # ----------------First time user signs in - choose directors-------------------- WORKING
   def director_setup
-    @directors = Creator.where(content_type: "Movie")
+    directors = Creator.where(content_type: "Movie")
+    @unfollowed_directors = []
+    directors.each do |creator|
+      @unfollowed_directors.push creator if creator.users.where(id: current_user).empty?
+    end
+  end
+
+  # -------------Create followed creator (any category)-----------------
+  def create_followed_creator
+    FollowedCreator.create(creator_id: params[:creator_id], user_id: current_user.id)
+    redirect_back(fallback_location: root_path)
   end
 
   private
@@ -72,5 +93,4 @@ class CreatorsController < ApplicationController
   def creator_params
     params.require(:followed_creator).permit(:creator)
   end
-
 end
