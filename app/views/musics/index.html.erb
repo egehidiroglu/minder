@@ -1,8 +1,13 @@
 <div class="contain">
   <div class="titler">
-    <h1>My Albums 🎸🪕🎹</h1>
+    <h1>Discover the latest <span class="green-text">music</span> from you favorite creators</h1>
   </div>
-  <div class="cards ">
+  <div class="center-carousel w-100">
+    <div class="carousel-img w-50 h-50 mb-5">
+      <%= render "shared/carousel-music" %>
+    </div>
+  </div>
+  <div class="cards">
     <% @albums.each do |album| %>
       <% if current_user.creators.ids.include? album.creator_id %>
         <div class="card-trip">
@@ -18,7 +23,7 @@
   </div>
 
   <div class="titler">
-    <h1>My Concerts 🤪</h1>
+    <h1>Discover the upcoming <span class="green-text">concerts</span> from you favorite creators</h1>
   </div>
   <div class="cards ">
     <% @concerts.each do |concert| %>
