@@ -3,6 +3,7 @@
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 30px;
+  align-items: center;
 }
 
 .card-trip > img {
@@ -13,6 +14,7 @@
 .card-trip h2 {
   font-size: 16px;
   margin: 0;
+
 }
 
 .card-trip p {
@@ -80,9 +82,6 @@ a:hover {
   padding: 16px;
 }
 
-
-
-
 .card-category {
   background-size: cover;
   background-position: center;
@@ -97,4 +96,5 @@ a:hover {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
 }
