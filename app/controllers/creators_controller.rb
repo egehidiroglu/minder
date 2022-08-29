@@ -59,4 +59,9 @@ class CreatorsController < ApplicationController
   def creator_params
     params.require(:followed_creator).permit(:creator)
   end
+
+  # Three views (one for add_artists, add_directors, add_authors)
+  def artist_setup
+    @artists = Creator.where(content_type: "music")
+  end
 end
