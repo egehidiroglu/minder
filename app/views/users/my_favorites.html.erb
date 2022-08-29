@@ -9,7 +9,7 @@
 <% @favorites.each do |favorite| %>
   <div class="card">
     <p><%= favorite.name %></p>
-    <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+    <%= link_to unfavorite_path(favorite), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
       <i class="fa-solid fa-trash"></i>
     <% end %>
   </div>

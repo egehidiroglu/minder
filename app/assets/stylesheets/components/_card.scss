@@ -42,6 +42,7 @@ a:hover {
 .cards {
   display: grid;
   grid-template-columns: repeat(1fr, 4);
+  grid-gap: 0;
 }
 
 /*card-category*/
@@ -83,7 +84,7 @@ a:hover {
 .card-category {
   background-size: cover;
   background-position: center;
-  height: 80vh;
+  height: 85vh;
   width: 100%;
   display: flex;
   justify-content: center;
