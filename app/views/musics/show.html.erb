@@ -1,25 +1,43 @@
 <% if @concert_music.nil? %>
+ <div class="content-details">
+
   <div class="show-container">
+
     <div class="music-img">
       <%= image_tag @album_music.poster_url %>
     </div>
-    <div class="card content-details">
+    <div class="card-content-details">
       <p class="card-text"><%= @album_music.creator.name %></p>
-      <p class="card-title"><%= @album_music.name %></p>
+      <h1 class="card-title">
+       <%= @album_music.name %>
+      </h1>
       <p class="card-text">Upcoming release on <%= @album_music.release_date %></p>
+      </div>
+
+
     </div>
   </div>
   <% concerts = Concert.where(creator: @album_music.creator) %>
   <% unless concerts.empty? %>
-    <h1>Upcoming Concerts From the Artist</h1>
+<br>
+
+    <h3>Upcoming Concerts From the Artist</h3>
+
+    <div class="text-center">
+    <div class="cards">
     <div class="concerts">
+    <div class="card-trip">
       <% concerts.each do |concert| %>
         <div class="content-details">
           <p class="card-text"><%= link_to concert.creator.name, music_path(concert) %></p>
           <p class="card-text"><%= concert.date %></p>
-          <p class="card-title"><%= concert.name %></p>
+
           <p class="card-text"><%= concert.venue %></p>
           <p class="card-text"><%= concert.address %></p>
+
+          </div>
+          </div>
+          </div>
         </div>
       <% end %>
     </div>
@@ -38,5 +56,6 @@
       <p class="card-text">Address: <%= @concert_music.address %></p>
       <%= link_to "Book a Ticket", @concert_music.event_url %>
     </div>
+  </div>
   </div>
 <% end %>
