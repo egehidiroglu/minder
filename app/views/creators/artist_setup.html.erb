@@ -2,14 +2,15 @@
 
 <div class="cards">
   <% @unfollowed_artists.each do |artist| %>
-    <div>
-      <div><%= artist.name %></div>
+    <div class="card-trip">
       <img src="<%= artist.poster_url %>" alt="Book poster"/>
-      <%# Button to start following a artist %>
-      <%= form_with url:create_followed_creator_path, method: :post do |f| %>
+      <div class="card-trip-infos">
+        <%= artist.name %>
+        <%= form_with url:create_followed_creator_path, method: :post do |f| %>
         <%= f.text_field :creator_id, type: :hidden, value: artist.id %>
         <%= f.submit %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
