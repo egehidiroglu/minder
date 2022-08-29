@@ -31,5 +31,14 @@ class UsersController < ApplicationController
     end
   end
 
-  
+  def unfavorite
+    favorited = current_user.all_favorited
+    to_unfav = 0
+    favorited.each do |fav|
+      to_unfav = fav if fav.id == params[:id].to_i
+    end
+    current_user.unfavorite(to_unfav)
+    redirect_to user_favorites_path
+  end
+
 end
