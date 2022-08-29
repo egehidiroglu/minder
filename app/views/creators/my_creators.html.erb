@@ -1,5 +1,8 @@
-<h1>Here are all your followed creators🍿</h1>
-<%= link_to "Follow someone new!", my_creators_new_path %>
+<div class="titler d-flex justify-content-center">
+  <h1>Your followed <span class="green-text">creators</span></h1>
+</div>
+
+<div class="d-flex justify-content-end"></div>
 <%= form_with url: my_creators_path, method: :get, class: "d-flex" do |f| %>
   <%= f.select :query, ["Music", "Movie", "Book"],
     class: "form-control",
@@ -7,13 +10,20 @@
   %>
   <%= submit_tag "Sort", class: "btn btn-primary" %>
 <% end %>
-<% @creators.each do |creator| %>
-  <div class="card" data-controller="test">
-    <p class="card-title"><%= creator.name %></p>
-    <div><img src= "<%= creator.poster_url %>", alt="Book poster"></div>
-    <p class="card-text"><%= creator.content_type %></p>
-    <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-      <i class="fa-solid fa-trash"></i>
-    <% end %>
-  </div>
-<% end %>
+
+<%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost" %>
+
+<div class="cards" data-controller="test">
+  <% @creators.each do |creator| %>
+    <div class="card-trip">
+      <img src= "<%= creator.poster_url %>", alt="Book poster">
+      <div class="card-trip-infos">
+        <strong><%= creator.content_type %></strong> <br>
+        <%= creator.name %>
+        <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+        <i class="fa-solid fa-trash"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
