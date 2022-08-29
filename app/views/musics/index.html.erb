@@ -24,7 +24,11 @@
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
           <%= link_to favorite_music_path(album) do %>
-            <i class="fa-solid fa-heart"></i>
+            <% if current_user.favorited?(album) %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+                <% else %>
+                  <i class="fa-solid fa-heart"></i>
+                <% end %>
           <% end %>
         </div>
       <% end %>
@@ -47,7 +51,11 @@
             <strong>Event URL: </strong> <%= concert.event_url %>
           </div>
           <%= link_to favorite_music_path(concert) do %>
-            <i class="fa-solid fa-heart"></i>
+            <% if current_user.favorited?(concert) %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+                <% else %>
+                  <i class="fa-solid fa-heart"></i>
+                <% end %>
           <% end %>
         </div>
       <% end %>

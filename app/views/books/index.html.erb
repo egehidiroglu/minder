@@ -24,7 +24,11 @@
               <strong>Author: </strong> <%= book.release_date %>
             </div>
             <%= link_to favorite_book_path(book) do %>
-              <i class="fa-solid fa-heart"></i>
+              <% if current_user.favorited?(book) %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+                <% else %>
+                  <i class="fa-solid fa-heart"></i>
+                <% end %>
             <% end %>
           </div>
         <% end %>

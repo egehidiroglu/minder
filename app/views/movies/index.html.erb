@@ -23,7 +23,11 @@
                 <strong>Director: </strong> <%= movie.creator.name %>
               </div>
               <%= link_to favorite_movie_path(movie) do %>
-                <i class="fa-solid fa-heart"></i>
+                <% if current_user.favorited?(movie) %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+                <% else %>
+                  <i class="fa-solid fa-heart"></i>
+                <% end %>
               <% end %>
             </div>
           <% end %>
