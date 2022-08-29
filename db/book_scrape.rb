@@ -56,31 +56,66 @@ require 'rest-client'
 #    good_reads_links << author.attribute("href").value
 # end
 
-directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller",
-  "Paul Fisher", "David Gordon Green", "Ol Parker", "Nicholas Stoller", "Carlota Pereda",
-  "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
+# authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday",
+#     "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Jonathan Cahn", "Ryan Holiday",
+#     "Jonathan Cahn", "Rupi Kaur", "Matthew Perry", "Randall Munroe",
+#     "Kate Reid", "Gabor Mate", "Michelle Obama", "Jamie Oliver",
+#     "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
 
-authors = ["Malcolm Gladwell", "Colleen Hoover", "Stephen King", "Robert Galbraith", "Taylor Jenkins Reid", "Ryan Holiday",
-    "J.K. Rowling", "Robert Galbraith", "Jamie Oliver", "Jonathan Cahn", "Ryan Holiday", "Tom Bower",
-    "Jonathan Cahn", "Rupi Kaur", "Robert Bailey", "Roz Weston", "Matthew Perry", "Randall Munroe",
-    "Kate Reid", "Gabor Mate", "Michelle Obama", "Jamie Oliver",
-    "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
+# authors = ["Colleen Hoover"]
 
-authors.each do |director|
+# authors.each do |author|
+#   author.gsub!(" ", "_")
+#   url = "https://en.wikipedia.org/wiki/#{author}"
+#   p url
+#   html_file = URI.open(url).read
+#   html_doc = Nokogiri::HTML(html_file)
+
+#   html_doc.search(".infobox-image img").each do |element|
+#     p element.attributes["src"].value
+#   end
+# end
+
+artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
+  "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+  "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+  "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+  "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
+  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+  "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
+  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
+  "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+  "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+
+
+  artists.each do |artist|
   begin
-    director.gsub!(" ", "_")
-    url = "https://en.wikipedia.org/wiki/#{director}"
+    artist.gsub!(" ", "_")
+    url = "https://en.wikipedia.org/wiki/#{artist}"
+    p url
     html_file = URI.open(url).read
     html_doc = Nokogiri::HTML(html_file)
+    photo = ""
+    html_doc.search(".infobox-image img").each do |element|
+      photo = element.attributes["src"].value
+    end
   rescue
-    director.gsub!(" ", "_")
-    url = "https://en.wikipedia.org/wiki/#{director}_(author)"
-    p director
-    html_file = URI.open(url).read
-    html_doc = Nokogiri::HTML(html_file)
-  end
-
-  html_doc.search(".infobox-image img").each do |element|
-    element.attributes["src"].value
+    p "=================================nothing"
   end
 end
+
+# directors.each do |director|
+#   tmdb_api_upcoming_call = "https://api.tmdb.org/3/search/person?api_key=63759eccae824fa88e79218786680970&query=#{director}"
+#   begin
+#     response = URI.open(tmdb_api_upcoming_call).read
+#     results = JSON.parse(response)
+#     actor_id = results["results"][0]["id"]
+
+#     tmdb_api_actor_photo = "https://api.themoviedb.org/3/person/#{actor_id}/images?api_key=63759eccae824fa88e79218786680970"
+#     response = URI.open(tmdb_api_actor_photo).read
+#     results = JSON.parse(response)
+#     path = "https://image.tmdb.org/t/p/w220_and_h330_face/#{results["profiles"][0]["file_path"]}"
+#   rescue
+#     p director
+#   end
+# end
