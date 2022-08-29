@@ -2,13 +2,15 @@
   <div class="titler">
     <h1>My Movies 🎬</h1>
   </div>
-    <div class="gridder">
+    <div class="cards ">
       <% @movies.each do |movie| %>
         <% if current_user.creators.ids.include? movie.creator_id %>
           <div class="card-trip">
             <img src= "<%= movie.poster_url %>", alt="Book poster">
             <div class="card-trip-infos">
-              <strong>Title: </strong><%=link_to movie.name, movie_path(movie) %>
+              <h2><strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></h2> <br>
+              <strong>Release Date: </strong><%= movie.release_date %> <br>
+              <strong>Director: </strong> <%= movie.creator.name %>
             </div>
           </div>
         <% end %>

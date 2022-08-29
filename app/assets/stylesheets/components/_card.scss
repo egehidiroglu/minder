@@ -2,20 +2,17 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  height: 400px;
-  width: 25%;
   border-radius: 30px;
 }
 
 .card-trip > img {
-  height: 65%;
+
   width: 100%;
   object-fit: cover;
 }
 
 .card-trip h2 {
   font-size: 16px;
-  font-weight: bold;
   margin: 0;
 }
 
@@ -27,10 +24,7 @@
 
 .card-trip .card-trip-infos {
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: relative;
+
 }
 
 a {
@@ -41,7 +35,7 @@ a {
 
 a:hover {
   text-decoration: none;
-  color: rgb(179, 127, 144);
+  color: #0dcdaa;
 }
 
 .card-trip-infos .card-trip-user {

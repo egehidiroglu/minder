@@ -1,20 +1,36 @@
-<div class="flex-container">
-  <h1>Discover Page 🚵‍♀️</h1>
-  <div>
-    <div><img src= "<%= @album.poster_url %>", alt="Book poster"></div>
-    <div><%= @album.name %></div>
-    <div><%= @album.creator.name %></div>
+<div class="contain">
+  <div class="titler">
+    <h1>Discover Page 🚵‍♀️</h1>
   </div>
+  <div class="cards">
+    <div class="card-trip">
+      <img src= "<%= @album.poster_url %>", alt="Book poster">
+      <div class="card-trip-infos">
+        <div>
+          <%= @album.name %>
+          <%= @album.creator.name %>
+        </div>
+      </div>
+    </div>
 
-  <div>
-    <div><img src= "<%= @book.poster_url %>", alt="Book poster"></div>
-    <div><%= @book.name %></div>
-    <div><%= @book.creator.name %></div>
-  </div>
+    <div class="card-trip">
+      <img src= "<%= @book.poster_url %>", alt="Book poster">
+      <div class="card-trip-infos">
+        <div>
+          <%= @book.name %>
+          <%= @book.creator.name %>
+        </div>
+      </div>
+    </div>
 
-  <div>
-    <div><img src= "<%= @movie.poster_url %>", alt="Book poster"></div>
-    <div><%= @movie.name %></div>
-    <div><%= @movie.creator.name %></div>
+    <div class="card-trip">
+      <img src= "<%= @movie.poster_url %>", alt="Book poster">
+      <div class="card-trip-infos">
+        <div>
+          <%= @movie.name %>
+          <%= @movie.creator.name %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
