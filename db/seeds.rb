@@ -172,7 +172,9 @@ end
 # =======================Getting upcoming concerts for creators===============================
 p "Finding concerts for creators..."
 Creator.all.each do |artist|
+
   buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=#{ENV["TICKETMASTER_API_KEY"]}&city=Montreal&keyword=#{artist.name}").read
+
   response = JSON.parse(buffer)["_embedded"]
   unless response.nil?
     event = response["events"].first
@@ -202,7 +204,8 @@ today = today.strftime("%F")
 six_months = Date.today + 180
 six_months = six_months.strftime("%F")
 
-# =======================Getting upcoming movies for creators===============================
+# # =======================Getting upcoming movies for creators===============================
+
 p "Finding upcoming movies from creators..."
 for i in 1..10
   tmdb_api_upcoming_call = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV["TMDB_API_KEY"]}&language=en-US&primary_release_date.gte=#{today}&primary_release_date.lte=#{six_months}&page=#{i}"
