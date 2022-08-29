@@ -30,4 +30,6 @@ class UsersController < ApplicationController
       @favorites = current_user.all_favorited
     end
   end
+
+  
 end
