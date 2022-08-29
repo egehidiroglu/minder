@@ -10,6 +10,7 @@
 <% @creators.each do |creator| %>
   <div class="card" data-controller="test">
     <p class="card-title"><%= creator.name %></p>
+    <div><img src= "<%= creator.poster_url %>", alt="Book poster"></div>
     <p class="card-text"><%= creator.content_type %></p>
     <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
       <i class="fa-solid fa-trash"></i>
