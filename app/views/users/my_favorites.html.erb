@@ -1,0 +1,8 @@
+<h1>Your Favorites</h1>
+
+<% @favorites.each do |favorite| %>
+  <p><%= favorite.class %></p>
+  <div class="card">
+    <p><%= favorite.name %></p>
+  </div>
+<% end %>
