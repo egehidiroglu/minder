@@ -13,11 +13,11 @@ authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
   p response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
-  Book.create!(
-    name: response["items"][0]["volumeInfo"]["title"],
-    release_date: response["items"][0]["volumeInfo"]["publishedDate"],
-    description: response["items"][0]["volumeInfo"]["description"],
-    poster_url:   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"],
-    creator_id: Creator.where(name: author).first.id
-  )
+  # Book.create!(
+  #   name: response["items"][0]["volumeInfo"]["title"],
+  #   release_date: response["items"][0]["volumeInfo"]["publishedDate"],
+  #   description: response["items"][0]["volumeInfo"]["description"],
+  #   poster_url:   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"],
+  #   creator_id: Creator.where(name: author).first.id
+  # )
 end
