@@ -1,18 +1,27 @@
 <div class="contain">
   <div class="titler">
-    <h1>My Books 📚</h1>
+    <h1>Discover the latest <span class="green-text">books</span> from you favorite authors</h1>
+  </div>
+  <div class="center-carousel w-100">
+    <div class="carousel-img w-50 h-50 mb-5">
+      <%= render "shared/carousel-book" %>
+    </div>
   </div>
     <div class="cards">
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
-          <div class="card-trip">
-            <img src= "<%= book.poster_url %>", alt="Book poster">
-            <div class="card-trip-infos">
-              <h2><strong>Title: </strong><%= link_to book.name, book_path(book) %></h2> <br>
-              <strong>Author: </strong> <%= book.creator.name %>
-              <strong>Author: </strong> <%= book.release_date %>
+          <%= link_to book_path(book) do %>
+            <div class="card-trip">
+              <div class="img_contain">
+                <img class="img centered" src= "<%= book.poster_url %>", alt="Book poster">
+              </div>
+              <div class="card-trip-infos">
+                <h2><strong>Title: </strong><%= book.name %></h2> <br>
+                <strong>Author: </strong> <%= book.creator.name %>
+                <strong>Author: </strong> <%= book.release_date %>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
   </div>

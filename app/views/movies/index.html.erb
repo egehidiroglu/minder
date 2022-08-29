@@ -1,6 +1,11 @@
 <div class="contain">
   <div class="titler">
-    <h1>My Movies 🎬</h1>
+    <h1>Discover the latest <span class="green-text">movies</span> from you favorite creators</h1>
+  </div>
+  <div class="center-carousel w-100">
+    <div class="carousel-img w-50 h-50 mb-5">
+      <%= render "shared/carousel-movie" %>
+    </div>
   </div>
     <div class="cards ">
       <% @movies.each do |movie| %>

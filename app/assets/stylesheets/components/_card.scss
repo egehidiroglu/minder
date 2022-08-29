@@ -7,7 +7,6 @@
 }
 
 .card-trip > img {
-
   width: 100%;
   object-fit: cover;
 }
@@ -40,17 +39,9 @@ a:hover {
   color: #0dcdaa;
 }
 
-.card-trip-infos .card-trip-user {
-  position: absolute;
-  right: 16px;
-  top: -20px;
-  width: 40px;
-  text-decoration: none;
-}
-
 .cards {
-  display: flex;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: repeat(1fr, 4);
   grid-gap: 32px;
 }
 
@@ -108,5 +99,4 @@ a:hover {
   margin-left: 35px;
   align-items: center;
   margin-top: 45px;
-
 }

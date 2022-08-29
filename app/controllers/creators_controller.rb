@@ -54,9 +54,23 @@ class CreatorsController < ApplicationController
     redirect_to my_creators_path, status: :see_other
   end
 
+  # Three views (one for add_artists, add_directors, add_authors)
+  def artist_setup
+    @artists = Creator.where(content_type: "Music")
+  end
+
+  def author_setup
+    @authors = Creator.where(content_type: "Book")
+  end
+
+  def director_setup
+    @directors = Creator.where(content_type: "Movie")
+  end
+
   private
 
   def creator_params
     params.require(:followed_creator).permit(:creator)
   end
+
 end
