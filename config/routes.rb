@@ -17,8 +17,13 @@ Rails.application.routes.draw do
 
   # ------Profile setup - add Creators----------
   get '/artist_setup', to: 'creators#artist_setup', as: :artist_setup
+
   get '/director_setup', to: 'creators#director_setup', as: :director_setup
+
   get '/author_setup', to: 'creators#author_setup', as: :author_setup
+
+  # -----------For the add button (works for all three)--------------
+  post '/artist_setup', to: 'creators#create_followed_creator', as: :create_followed_creator
 
   get '/auth/spotify/callback', to: 'users#spotify'
 end
