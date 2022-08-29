@@ -23,12 +23,14 @@
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
-          <%= link_to favorite_music_path(album) do %>
-            <% if current_user.favorited?(album) %>
-                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
-                <% else %>
-                  <i class="fa-solid fa-heart"></i>
-                <% end %>
+          <% if current_user.favorited?(album) %>
+            <%= link_to custom_unfav_path(album) do %>
+              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+            <% end %>
+          <% else %>
+            <%= link_to favorite_music_path(album) do %>
+              <i class="fa-solid fa-heart"></i>
+            <% end %>
           <% end %>
         </div>
       <% end %>
@@ -50,12 +52,14 @@
             <strong>Address: </strong> <%= concert.address %> <br>
             <strong>Event URL: </strong> <%= concert.event_url %>
           </div>
-          <%= link_to favorite_music_path(concert) do %>
-            <% if current_user.favorited?(concert) %>
-                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
-                <% else %>
-                  <i class="fa-solid fa-heart"></i>
-                <% end %>
+          <% if current_user.favorited?(concert) %>
+            <%= link_to custom_unfav_path(concert) do %>
+              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+            <% end %>
+          <% else %>
+            <%= link_to favorite_music_path(concert) do %>
+              <i class="fa-solid fa-heart"></i>
+            <% end %>
           <% end %>
         </div>
       <% end %>

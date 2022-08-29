@@ -23,12 +23,14 @@
               <strong>Author: </strong> <%= book.creator.name %>
               <strong>Author: </strong> <%= book.release_date %>
             </div>
-            <%= link_to favorite_book_path(book) do %>
-              <% if current_user.favorited?(book) %>
-                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
-                <% else %>
-                  <i class="fa-solid fa-heart"></i>
-                <% end %>
+            <% if current_user.favorited?(book) %>
+              <%= link_to custom_unfav_path(book) do %>
+                <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+              <% end %>
+            <% else %>
+              <%= link_to favorite_book_path(book) do %>
+                <i class="fa-solid fa-heart"></i>
+              <% end %>
             <% end %>
           </div>
         <% end %>
