@@ -14,14 +14,25 @@
     <div class="cards ">
       <% @movies.each do |movie| %>
         <% if current_user.creators.ids.include? movie.creator_id %>
-          <div class="card-trip">
-            <img src= "<%= movie.poster_url %>", alt="Book poster">
-            <div class="card-trip-infos">
-              <h2><strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></h2> <br>
-              <strong>Release Date: </strong><%= movie.release_date %> <br>
-              <strong>Director: </strong> <%= movie.creator.name %>
+          <%= content_tag :div, id: dom_id(movie) do %>
+            <div class="card-trip">
+              <img src= "<%= movie.poster_url %>", alt="Book poster">
+              <div class="card-trip-infos">
+                <h2><strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></h2> <br>
+                <strong>Release Date: </strong><%= movie.release_date %> <br>
+                <strong>Director: </strong> <%= movie.creator.name %>
+              </div>
+              <% if current_user.favorited?(movie) %>
+                <%= link_to custom_unfav_path(movie) do %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+                <% end %>
+              <% else %>
+                <%= link_to favorite_movie_path(movie) do %>
+                  <i class="fa-solid fa-heart"></i>
+                <% end %>
+              <% end %>
             </div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
