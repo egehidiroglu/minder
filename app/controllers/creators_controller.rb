@@ -49,12 +49,12 @@ class CreatorsController < ApplicationController
   end
 
   def destroy
-    @creator = Creator.find(params[:id])
+    @creator = FollowedCreator.where(creator_id: params[:id], user_id: current_user.id).first
     @creator.destroy
     redirect_to my_creators_path, status: :see_other
   end
 
-  # ----------------First time user signs in - choose artists--------------------WORKING
+  # ----------------First time user signs in - choose artists-------------------
   def artist_setup
     artists = Creator.where(content_type: "Music")
     @unfollowed_artists = []
@@ -63,7 +63,7 @@ class CreatorsController < ApplicationController
     end
   end
 
-  # ----------------First time user signs in - choose authors-------------------- WORKING
+  # ----------------First time user signs in - choose authors------------------
 
   def author_setup
     authors = Creator.where(content_type: "Book")
@@ -73,7 +73,7 @@ class CreatorsController < ApplicationController
     end
   end
 
-  # ----------------First time user signs in - choose directors-------------------- WORKING
+  # ----------------First time user signs in - choose directors-------------------
   def director_setup
     directors = Creator.where(content_type: "Movie")
     @unfollowed_directors = []
@@ -82,7 +82,7 @@ class CreatorsController < ApplicationController
     end
   end
 
-  # -------------Create followed creator (any category)-----------------
+  # -------------Create followed creator (any category)-------------------------
   def create_followed_creator
     FollowedCreator.create(creator_id: params[:creator_id], user_id: current_user.id)
     redirect_back(fallback_location: root_path)
