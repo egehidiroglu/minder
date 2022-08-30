@@ -23,9 +23,11 @@
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
           <div class="card-trip">
-            <div class="img_contain">
-              <img class="img centered" src= "<%= book.poster_url %>", alt="Book poster">
-            </div>
+            <%= link_to book_path(book) do %>
+              <div class="img_contain">
+                <img class="img centered" src= "<%= book.poster_url %>", alt="Book poster">
+              </div>
+            <% end %>
             <div class="card-trip-infos">
               <h2><strong>Title: </strong><%= link_to book.name, book_path(book) %></h2> <br>
               <strong>Author: </strong> <%= book.creator.name %>
