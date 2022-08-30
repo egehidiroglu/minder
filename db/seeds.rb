@@ -127,15 +127,16 @@ end
 
 p "Creating books"
 authors.each do |author|
-  p author
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+  poster = response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"] unless response["items"][0]["volumeInfo"]["imageLinks"].nil?
+  poster = "https://cdn.elearningindustry.com/wp-content/uploads/2016/05/top-10-books-every-college-student-read-1024x640.jpeg" if poster.nil?
   Book.create!(
     name: response["items"][0]["volumeInfo"]["title"],
     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
     description: response["items"][0]["volumeInfo"]["description"],
-    poster_url:   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"],
+    poster_url:   poster,
     creator_id: Creator.where(name: author).first.id
   )
 end
