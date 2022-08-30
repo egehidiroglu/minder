@@ -6,7 +6,7 @@
     <% @unfollowed_artists.each_with_index do |artist, index| %>
       <div class="card-trip">
         <img src="<%= artist.poster_url %>" alt="Album poster"/>
-        <div class="card-trip-infos">
+        <div class="card-trip-infos text-center">
           <%= artist.name %>
           <%= form_with url:create_followed_creator_path, method: :post do |f| %>
             <%= f.text_field :creator_id, type: :hidden, value: artist.id %>
@@ -19,5 +19,14 @@
   </div>
 </div>
 
-<div class="btn-ghost"> <%= link_to "Back", director_setup_path %> </div>
-<div class="btn-ghost"> <%= link_to "Finish", summaries_path %> </div>
+<div class="my-5">
+  <div class="bis">
+    <%= link_to "Back", director_setup_path, class:"btn-ghost" %>
+  </div>
+</div>
+
+<div class="my-5">
+  <div class="bis">
+    <%= link_to "Finish", summaries_path, class:"btn-ghost" %>
+  </div>
+</div>

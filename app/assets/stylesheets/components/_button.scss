@@ -22,7 +22,27 @@
   text-decoration: none;
   position: absolute;
   top: 4px;
-  left: 4px
+  left: 4px;
+}
+
+.btn-heart-unchecked {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  color: white;
+  font-size: 24px;
+}
+
+.btn-heart-checked {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  color: #FE0970;
+  font-size: 24px;
+}
+
+.btn-heart-unchecked:hover {
+  color: #FE0970;
 }
 
 .btn-ghost:hover {

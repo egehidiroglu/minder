@@ -3,7 +3,7 @@
     <h1>Your followed <span class="green-text">creators</span></h1>
   </div>
   <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
-    <%= form_with url: musics_path, method: :get, class: "d-flex w-50 px-3" do %>
+    <%= form_with url: my_creators_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
@@ -21,19 +21,16 @@
   <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost mx-5" %>
   </div>
 
-  <div class="cards" data-controller="test">
+  <div class="cards">
     <% @creators.each do |creator| %>
       <div class="card-trip">
+        <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+        <i class="fa-solid fa-trash"></i>
         <img src= "<%= creator.poster_url %>", alt="Book poster">
         <div class="card-trip-infos">
           <strong><%= creator.content_type %></strong> <br>
-
-          <div class="infos d-flex justify-content-between">
-            <%= creator.name %>
-            <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-            <i class="fa-solid fa-trash"></i>
-            <% end %>
-          </div>
+          <%= creator.name %>
+          <% end %>
         </div>
       </div>
     <% end %>
