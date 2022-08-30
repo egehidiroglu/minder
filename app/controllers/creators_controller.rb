@@ -43,6 +43,37 @@ class CreatorsController < ApplicationController
     creators.each do |creator|
       @unfollowed_creators.push creator if creator.users.where(id: current_user).empty?
     end
+    filter_params = ["Music", "Book", "Movie"]
+    if params[:query].present?
+      if filter_params.include?(params[:query])
+        case params[:query]
+        when "Music"
+          @creators = []
+          @unfollowed_creators.each do |unfollowed|
+            @creators.push(unfollowed) if unfollowed.content_type == "Music"
+          end
+        when "Movie"
+          @creators = []
+          @unfollowed_creators.each do |unfollowed|
+            @creators.push(unfollowed) if unfollowed.content_type == "Movie"
+          end
+        when "Book"
+          @creators = []
+          @unfollowed_creators.each do |unfollowed|
+            @creators.push(unfollowed) if unfollowed.content_type == "Book"
+          end
+        end
+      end
+    else
+        sql_query = <<~SQL
+        creators.name ILIKE :query
+      SQL
+      to_compare = Creator.where(sql_query, query: "%#{params[:query]}%")
+      @creators = []
+      to_compare.each do |creator|
+        @creators.push(creator) if current_user.creators.include?(creator)
+      end
+    end
   end
 
   def create
@@ -95,6 +126,12 @@ class CreatorsController < ApplicationController
   end
 
   # -------------Create followed creator (any category)-------------------------
+  def create_followed_creator
+    FollowedCreator.create(creator_id: params[:creator_id], user_id: current_user.id)
+    redirect_back(fallback_location: root_path)
+  end
+
+  # -------------Follow someone new, filters based on selection---------------
   def create_followed_creator
     FollowedCreator.create(creator_id: params[:creator_id], user_id: current_user.id)
     redirect_back(fallback_location: root_path)
