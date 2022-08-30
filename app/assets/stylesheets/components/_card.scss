@@ -135,7 +135,7 @@ a:hover {
   width: 700px;
   height: 400px;;
   margin: 2px;
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid rgb#212125;
   position: relative;
   overflow: hidden;
 }
@@ -151,9 +151,9 @@ a:hover {
   margin: auto;
 }
 
-.fa-solid {
-  color: #0dcdaa;
-}
+// .fa-solid {
+//   color: #0dcdaa;
+// }
 
 
 .cardies {
