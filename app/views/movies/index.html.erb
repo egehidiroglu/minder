@@ -19,11 +19,11 @@
       <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
   </div>
-    <div class="cards ">
+    <div class="cardies ">
       <% @movies.each do |movie| %>
         <% if current_user.creators.ids.include? movie.creator_id %>
           <%= content_tag :div, id: dom_id(movie) do %>
-            <div class="card-trip">
+            <div class="cardie-trip">
               <img src= "<%= movie.poster_url %>", alt="Book poster">
               <div class="card-trip-infos">
                 <h2><strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></h2> <br>
