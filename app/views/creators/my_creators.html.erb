@@ -7,7 +7,7 @@
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
-        placeholder: "Find a music"
+        placeholder: "Search a creator"
       %>
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
@@ -18,8 +18,8 @@
     %>
     <%= submit_tag "Filter", class: "btn-search" %>
   <% end %>
+  <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost mx-5" %>
   </div>
-  <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost" %>
 
   <div class="cards" data-controller="test">
     <% @creators.each do |creator| %>
@@ -27,10 +27,13 @@
         <img src= "<%= creator.poster_url %>", alt="Book poster">
         <div class="card-trip-infos">
           <strong><%= creator.content_type %></strong> <br>
-          <%= creator.name %>
-          <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-          <i class="fa-solid fa-trash"></i>
-          <% end %>
+
+          <div class="infos d-flex justify-content-between">
+            <%= creator.name %>
+            <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
         </div>
       </div>
     <% end %>
