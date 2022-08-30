@@ -7,16 +7,14 @@
       <%= render "shared/carousel-book" %>
     </div>
   </div>
-  <div class="green-div w-100 h-20 mb-5">
-    <h1>search</h1>
-    <h2>genre</h2>
-    <%= form_with url: books_path, method: :get, class: "d-flex" do %>
+  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
+    <%= form_with url: books_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
         placeholder: "Find a book"
       %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
+      <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
   </div>
     <div class="cards">
@@ -33,15 +31,17 @@
               <strong>Author: </strong> <%= book.creator.name %>
               <strong>Author: </strong> <%= book.release_date %>
             </div>
-            <% if current_user.favorited?(book) %>
-              <%= link_to custom_unfav_path(book) do %>
-                <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+            <div data-controller="book-index">
+              <% if current_user.favorited?(book) %>
+                <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
+                <% end %>
+              <% else %>
+                <%= link_to favorite_book_path(book), data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-heart" data-action="click->book-index#favorite"></i>
+                <% end %>
               <% end %>
-            <% else %>
-              <%= link_to favorite_book_path(book) do %>
-                <i class="fa-solid fa-heart"></i>
-              <% end %>
-            <% end %>
+            </div>
           </div>
         <% end %>
       <% end %>

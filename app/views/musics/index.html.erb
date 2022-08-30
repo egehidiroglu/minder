@@ -8,16 +8,14 @@
       <%= render "shared/carousel-music" %>
     </div>
   </div>
-  <div class="green-div w-100 h-20 mb-5">
-    <h1>search</h1>
-    <h2>genre</h2>
-    <%= form_with url: musics_path, method: :get, class: "d-flex" do %>
+  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
+    <%= form_with url: musics_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
         placeholder: "Find a music"
       %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
+      <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
   </div>
 
@@ -31,15 +29,17 @@
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
-          <% if current_user.favorited?(album) %>
-            <%= link_to custom_unfav_path(album) do %>
-              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+          <div data-controller="music-index">
+            <% if current_user.favorited?(album) %>
+              <%= link_to custom_unfav_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->music-index#favorite"></i>
+              <% end %>
+            <% else %>
+              <%= link_to favorite_music_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart" data-action="click->music-index#favorite"></i>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to favorite_music_path(album) do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>
