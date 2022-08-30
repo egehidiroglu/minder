@@ -1,16 +1,22 @@
-<h1>Your Favorites</h1>
-<%= form_with url: user_favorites_path, method: :get, class: "d-flex" do |f| %>
-  <%= f.select :query, ["Music", "Movie", "Book"],
-    class: "form-control",
-    placeholder: "Filter"
-  %>
-  <%= submit_tag "Filter", class: "btn btn-primary" %>
-<% end %>
-<% @favorites.each do |favorite| %>
-  <div class="card">
-    <p><%= favorite.name %></p>
-    <%= link_to unfavorite_path(favorite) do %>
-      <i class="fa-solid fa-trash"></i>
+<div class="contain">
+  <div class="titler">
+    <h1>Your Favorites</h1>
+  </div>
+  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
+    <%= form_with url: user_favorites_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.select :query, ["Music", "Movie", "Book"],
+        class: "form-control",
+        placeholder: "Filter"
+      %>
+      <%= submit_tag "Filter", class: "btn-search" %>
     <% end %>
   </div>
-<% end %>
+  <% @favorites.each do |favorite| %>
+    <div class="card">
+      <p><%= favorite.name %></p>
+      <%= link_to unfavorite_path(favorite) do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </div>
+  <% end %>
+</div>
