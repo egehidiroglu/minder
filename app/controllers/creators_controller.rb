@@ -38,41 +38,41 @@ class CreatorsController < ApplicationController
 
   def new
     @followed_creator = FollowedCreator.new
-    creators = Creator.all
-    @unfollowed_creators = []
-    creators.each do |creator|
-      @unfollowed_creators.push creator if creator.users.where(id: current_user).empty?
-    end
+    all_creators = Creator.all
+    my_creators = current_user.creators
+    unfollowed_creators = all_creators - my_creators
     filter_params = ["Music", "Book", "Movie"]
     if params[:query].present?
       if filter_params.include?(params[:query])
         case params[:query]
         when "Music"
           @creators = []
-          @unfollowed_creators.each do |unfollowed|
-            @creators.push(unfollowed) if unfollowed.content_type == "Music"
-          end
-        when "Movie"
-          @creators = []
-          @unfollowed_creators.each do |unfollowed|
-            @creators.push(unfollowed) if unfollowed.content_type == "Movie"
+          unfollowed_creators.each do |creator|
+            @creators.push(creator) if creator.content_type == "Music"
           end
         when "Book"
           @creators = []
-          @unfollowed_creators.each do |unfollowed|
-            @creators.push(unfollowed) if unfollowed.content_type == "Book"
+          unfollowed_creators.each do |creator|
+            @creators.push(creator) if creator.content_type == "Book"
           end
+        when "Movie"
+          @creators = []
+          unfollowed_creators.each do |creator|
+            @creators.push(creator) if creator.content_type == "Movie"
+          end
+        end
+      else
+        sql_query = <<~SQL
+          creators.name ILIKE :query
+        SQL
+        to_compare = Creator.where(sql_query, query: "%#{params[:query]}%")
+        @creators = []
+        to_compare.each do |creator|
+          @creators.push(creator) unless current_user.creators.include?(creator)
         end
       end
     else
-        sql_query = <<~SQL
-        creators.name ILIKE :query
-      SQL
-      to_compare = Creator.where(sql_query, query: "%#{params[:query]}%")
-      @creators = []
-      to_compare.each do |creator|
-        @creators.push(creator) if current_user.creators.include?(creator)
-      end
+      @creators = unfollowed_creators
     end
   end
 
