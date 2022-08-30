@@ -57,13 +57,19 @@
 }
 
 .btn-search {
-  color: #F4F4F4;
+  color: black;
   background-color: #0DCDAA;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-weight: lighter;
+  transition: color 0.3s ease;
   border: none;
-  transition: color 0.5s ease;
+  text-decoration: none;
 }
 
 .btn-search:hover {
-  background-color: #F4F4F4;
-  color: #0DCDAA;
+  background-color: #0DCDAA;
+  color: white;
+  border: none;
+
 }

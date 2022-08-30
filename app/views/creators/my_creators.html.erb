@@ -1,4 +1,4 @@
-<div class="container-creator-selection">+
+<div class="container-creator-selection mx-0">
   <div class="titler d-flex justify-content-center">
     <h1>Your followed <span class="green-text">creators</span></h1>
   </div>
@@ -7,7 +7,7 @@
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
-        placeholder: "Find a music"
+        placeholder: "Search a creator"
       %>
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
@@ -18,10 +18,10 @@
     %>
     <%= submit_tag "Filter", class: "btn-search" %>
   <% end %>
+  <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost mx-5" %>
   </div>
-  <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost" %>
 
-  <div class="cards" data-controller="test">
+  <div class="cards">
     <% @creators.each do |creator| %>
       <div class="card-trip">
         <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>

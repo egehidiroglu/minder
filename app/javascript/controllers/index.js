@@ -16,5 +16,8 @@ application.register("movie-index", MovieIndexController)
 import MusicIndexController from "./music_index_controller"
 application.register("music-index", MusicIndexController)
 
+import MyCreatorIndexController from "./my_creator_index_controller"
+application.register("my-creator-index", MyCreatorIndexController)
+
 import TestController from "./test_controller"
 application.register("test", TestController)
