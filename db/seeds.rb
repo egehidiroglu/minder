@@ -38,8 +38,7 @@ p "Creating creators..."
 # Shortened list with only artist with Wikipedia
 
 artists = ["Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
-  "Ringo Starr", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-  "Young the Giant", "The Snuts", "Loyle Carner", "Kailee Morgue",
+  "Ringo Starr", "Codeine", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
   "Twenty One Pilots","ODESZA", "My Chemical Romance", "Backstreet Boys",
   "The White Buffalo", "Knocked Loose",
   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero",

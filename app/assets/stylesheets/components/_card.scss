@@ -4,6 +4,7 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 16px;
   align-items: center;
+  position: relative;
 }
 
 .card-trip > img {
@@ -25,6 +26,7 @@
 
 .card-trip .card-trip-infos {
   padding: 16px;
+  text-align: left;
 }
 
 .creator-image {
@@ -189,4 +191,5 @@ a:hover {
 
 .cardie-trip .card-trip-infos {
   padding: 16px;
+  text-align: left;
 }

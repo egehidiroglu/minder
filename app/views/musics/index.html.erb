@@ -2,7 +2,7 @@
   <div class="titler">
     <h1>Discover the latest <span class="green-text">music</span> from you favorite artists</h1>
   </div>
-
+<%# --------------------CAROUSEL------------------------------------------------------ %>
   <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-music" %>
@@ -19,31 +19,31 @@
     <% end %>
   </div>
 
+<%# ----------------------------Album Cards------------------------------------ %>
     <div class="titler">
     <h1> Upcoming <span class="green-text">albums</span> from you favorite artists</h1>
   </div>
-
   <div class="cards">
     <% @albums.each do |album| %>
       <% if current_user.creators.ids.include? album.creator_id %>
         <div class="card-trip">
+          <div data-controller="music-index">
+            <% if current_user.favorited?(album) %>
+              <%= link_to custom_unfav_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart btn-heart-checked" data-action="click->music-index#favorite"></i>
+              <% end %>
+            <% else %>
+              <%= link_to favorite_music_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->music-index#favorite"></i>
+              <% end %>
+            <% end %>
+          </div>
+
           <img src= "<%= album.poster_url %>", alt="Book poster">
           <div class="card-trip-infos">
             <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
-          </div>
-          <div data-controller="music-index">
-            <% if current_user.favorited?(album) %>
-              <%= link_to custom_unfav_path(album), data: { turbo_method: :post } do %>
-                <i class="fa-solid fa-heart" style="color:rgb(14, 205, 171);" data-action="click->music-index#favorite"></i>
-              <% end %>
-            <% else %>
-              <%= link_to favorite_music_path(album), data: { turbo_method: :post } do %>
-                <i class="fa-solid fa-heart" data-action="click->music-index#favorite"></i>
-              <% end %>
-            <% end %>
-          </div>
         </div>
       <% end %>
     <% end %>
@@ -64,17 +64,7 @@
           <strong>Artist: </strong> <%= concert.creator.name %> <br>
           <strong>Venue: </strong> <%= concert.venue %> <br>
           <strong>Address: </strong> <%= concert.address %> <br>
-
           </div>
-          <% if current_user.favorited?(concert) %>
-            <%= link_to custom_unfav_path(concert) do %>
-              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
-            <% end %>
-          <% else %>
-            <%= link_to favorite_music_path(concert) do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
         </div>
       <% end %>
     <% end %>
