@@ -1,22 +1,34 @@
 class CreatorsController < ApplicationController
   def my_creators
     followed_creators = current_user.creators
+    filter_params = ["Music", "Book", "Movie"]
     if params[:query].present?
-      case params[:query]
-      when "Music"
-        @creators = []
-        followed_creators.each do |followed|
-          @creators.push(followed) if followed.content_type == "Music"
+      if filter_params.include?(params[:query])
+        case params[:query]
+        when "Music"
+          @creators = []
+          followed_creators.each do |followed|
+            @creators.push(followed) if followed.content_type == "Music"
+          end
+        when "Movie"
+          @creators = []
+          followed_creators.each do |followed|
+            @creators.push(followed) if followed.content_type == "Movie"
+          end
+        when "Book"
+          @creators = []
+          followed_creators.each do |followed|
+            @creators.push(followed) if followed.content_type == "Book"
+          end
         end
-      when "Movie"
+      else
+        sql_query = <<~SQL
+          creators.name ILIKE :query
+        SQL
+        to_compare = Creator.where(sql_query, query: "%#{params[:query]}%")
         @creators = []
-        followed_creators.each do |followed|
-          @creators.push(followed) if followed.content_type == "Movie"
-        end
-      when "Book"
-        @creators = []
-        followed_creators.each do |followed|
-          @creators.push(followed) if followed.content_type == "Book"
+        to_compare.each do |creator|
+          @creators.push(creator) if current_user.creators.include?(creator)
         end
       end
     else

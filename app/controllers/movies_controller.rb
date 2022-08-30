@@ -1,6 +1,15 @@
 class MoviesController < ApplicationController
   def index
-    @movies = Movie.all
+    if params[:query].present?
+      sql_query = <<~SQL
+        movies.name ILIKE :query
+        OR movies.description ILIKE :query
+        OR creators.name ILIKE :query
+      SQL
+      @movies = Movie.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+    else
+      @movies = Movie.all
+    end
   end
 
   def show

@@ -10,6 +10,14 @@
   %>
   <%= submit_tag "Filter", class: "btn btn-primary" %>
 <% end %>
+<%= form_with url: my_creators_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a music"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
 
 <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost" %>
 
