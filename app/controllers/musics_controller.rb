@@ -37,6 +37,5 @@ class MusicsController < ApplicationController
     else
       current_user.favorite(concert_music)
     end
-    redirect_to musics_path
   end
 end

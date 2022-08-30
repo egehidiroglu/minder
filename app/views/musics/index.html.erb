@@ -23,15 +23,17 @@
     <% @albums.each do |album| %>
       <% if current_user.creators.ids.include? album.creator_id %>
         <div class="card-trip">
-          <% if current_user.favorited?(album) %>
-            <%= link_to(custom_unfav_path(album), class:"btn-heart-checked") do %>
-              <i class="fa-solid fa-heart" style="color:#FE0970;"></i>
+          <div data-controller="music-index">
+            <% if current_user.favorited?(album) %>
+              <%= link_to(custom_unfav_path(album), class:"btn-heart-checked") do %>
+                <i class="fa-solid fa-heart" style="color:#FE0970;"></i>
+              <% end %>
+            <% else %>
+              <%= link_to(favorite_music_path(album), class:"btn-heart-unchecked") do %>
+                <i class="fa-solid fa-heart" style="color:white;"></i>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to(favorite_music_path(album), class:"btn-heart-unchecked") do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
+          </div>
           <img src= "<%= album.poster_url %>", alt="Book poster">
           <div class="card-trip-infos">
             <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
@@ -51,6 +53,15 @@
     <% @concerts.each do |concert| %>
       <% if current_user.creators.ids.include? concert.creator_id %>
         <div class="card-trip">
+          <% if current_user.favorited?(concert) %>
+            <%= link_to custom_unfav_path(concert) do %>
+              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+            <% end %>
+          <% else %>
+            <%= link_to favorite_music_path(concert) do %>
+              <i class="fa-solid fa-heart"></i>
+            <% end %>
+          <% end %>
           <img src= "<%= concert.poster_url %>", alt="Book poster">
 
         <div class="card-trip-infos">
@@ -61,15 +72,6 @@
           <strong>Address: </strong> <%= concert.address %> <br>
 
           </div>
-          <% if current_user.favorited?(concert) %>
-            <%= link_to custom_unfav_path(concert) do %>
-              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
-            <% end %>
-          <% else %>
-            <%= link_to favorite_music_path(concert) do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
         </div>
       <% end %>
     <% end %>

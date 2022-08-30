@@ -13,5 +13,8 @@ application.register("hello", HelloController)
 import MovieIndexController from "./movie_index_controller"
 application.register("movie-index", MovieIndexController)
 
+import MusicIndexController from "./music_index_controller"
+application.register("music-index", MusicIndexController)
+
 import TestController from "./test_controller"
 application.register("test", TestController)
