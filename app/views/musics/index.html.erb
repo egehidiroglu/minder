@@ -11,6 +11,14 @@
   <div class="green-div w-100 h-20 mb-5">
     <h1>search</h1>
     <h2>genre</h2>
+    <%= form_with url: musics_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a music"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
   </div>
 
   <div class="cards">
