@@ -16,18 +16,26 @@
 
 <% concerts = Concert.where(creator: @album_music.creator) %> <% unless concerts.empty? %>
 <div class="titler">
-    <h3>Don’t miss out the upcoming <span class="green-text">concerts</span> from the artist</h3>
+    <h3>Don’t miss out the upcoming <span class="green-text">concerts</span> by <span class="green-text"><%= @album_music.creator.name %></span></h3>
     <div class="text-center">
         <div class="cards">
             <div class="concerts">
-                <div class="card-trip">
-                    <div class="card-trip-infos">
+                <div class="card-product">
+                    <div class="card-product-infos d-flex align-items-center justify-content-between">
+                  <i class="fa-solid fa-bookmark"></i>
                         <% concerts.each do |concert| %>
-                        <p class="green-text"><%= link_to concert.creator.name, music_path(concert) %></p>
+                        <div>
+                        <h2>
+                        <strong> <%= link_to concert.creator.name, music_path(concert) %></strong></h2>
                         <p class="black-text"><%= concert.date %></p>
                         <p class="black-text"><%= concert.venue %></p>
                         <p class="black-text"><%= concert.address %></p>
+
+                        </div>
                     </div>
+                    <div class="music-img">
+                    <%= image_tag @album_music.poster_url %>
+                   </div>
                     <% end %>
                 </div>
             </div>
