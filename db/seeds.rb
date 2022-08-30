@@ -53,11 +53,12 @@ directors = ["Steven Spielberg", "Jon Watts", "Gina Prince-Bythewood", "Zach Cre
     "Guillaume Lambert", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
 
 authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "Jamie Oliver",
-  "Jonathan Cahn", "Rupi Kaur", "Matthew Perry", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
-  "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
+  "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
+  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Zadie Smith"]
 
 p "Creating authors..."
 authors.each do |author|
+  p author
   creator = Creator.new
   creator.content_type = "Book"
   author.gsub!(" ", "_")
@@ -126,6 +127,7 @@ end
 
 p "Creating books"
 authors.each do |author|
+  p author
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
