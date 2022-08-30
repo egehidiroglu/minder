@@ -2,7 +2,7 @@
   <div class="titler">
     <h1>Discover the latest <span class="green-text">music</span> from you favorite creators</h1>
   </div>
-
+<%# --------------------CAROUSEL------------------------------------------------------ %>
   <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-music" %>
@@ -20,31 +20,32 @@
       <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
   </div>
-
+<%# ----------------------------Album Cards------------------------------------ %>
   <div class="cards">
     <% @albums.each do |album| %>
       <% if current_user.creators.ids.include? album.creator_id %>
         <div class="card-trip">
+          <% if current_user.favorited?(album) %>
+            <%= link_to(custom_unfav_path(album), class:"btn-heart-checked") do %>
+              <i class="fa-solid fa-heart" style="color:#FE0970;"></i>
+            <% end %>
+          <% else %>
+            <%= link_to(favorite_music_path(album), class:"btn-heart-unchecked") do %>
+              <i class="fa-solid fa-heart"></i>
+            <% end %>
+          <% end %>
           <img src= "<%= album.poster_url %>", alt="Book poster">
           <div class="card-trip-infos">
             <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
-          <% if current_user.favorited?(album) %>
-            <%= link_to custom_unfav_path(album) do %>
-              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
-            <% end %>
-          <% else %>
-            <%= link_to favorite_music_path(album) do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
         </div>
       <% end %>
     <% end %>
   </div>
 
+<%# ------------------------------Concert Cards----------------------------- %>
   <div class="titler">
     <h1>Discover the upcoming <span class="green-text">concerts</span> from you favorite creators</h1>
   </div>
