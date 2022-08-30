@@ -1,35 +1,44 @@
-<div class="d-flex justify-content-end"></div>
-<%= form_with url: my_creators_new_path, method: :get, class: "d-flex" do |f| %>
-  <%= f.select :query, ["Music", "Movie", "Book"],
-    class: "form-control",
-    placeholder: "Filter"
-  %>
-  <%= submit_tag "Filter", class: "btn btn-primary" %>
-<% end %>
-<%= form_with url: my_creators_new_path, method: :get, class: "d-flex w-50 px-3" do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Find a movie"
-      %>
-      <%= submit_tag "Search", class: "btn-search" %>
+<div class="container-creator-selection mx-0">
+  <div class="titler d-flex justify-content-center">
+    <h1>Choose any <span class="green-text">creators</span> you would like to start following</h1>
+  </div>
+  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
+
+    <%= form_with url: my_creators_new_path, method: :get, class: "d-flex w-50 px-3" do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control",
+            placeholder: "Find a movie"
+          %>
+          <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
-<%# New card version test %>
-<div class="container-creator-selection">
-  <h1>Choose any creators you'd like to start following</h1>
-  <div class="cards">
-    <% @creators.each do |author| %>
-      <div class="card-trip">
-        <img src="<%= author.poster_url %>" alt="Album poster"/>
-        <div class="card-trip-infos">
-          <%= author.name %>
-          <%= form_with url:create_followed_creator_path, method: :post do |f| %>
-          <%= f.text_field :creator_id, type: :hidden, value: author.id %>
-          <%= f.submit %>
-          <% end %>
-        </div>
-      </div>
+
+    <%= form_with url: my_creators_new_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.select :query, ["Music", "Movie", "Book"],
+        class: "form-control",
+        placeholder: "Filter"
+      %>
+      <%= submit_tag "Filter", class: "btn-search" %>
     <% end %>
   </div>
+
+  <%= link_to "Back to your creators", my_creators_path, class:"btn-ghost my-3 mx-4" %>
+
+  <%# New card version test %>
+  <div class="container-creator-selection">
+    <div class="cards">
+      <% @creators.each do |author| %>
+        <div class="card-trip">
+          <img src="<%= author.poster_url %>" alt="Album poster"/>
+          <div class="card-trip-infos">
+            <%= author.name %>
+            <%= form_with url:create_followed_creator_path, method: :post do |f| %>
+            <%= f.text_field :creator_id, type: :hidden, value: author.id %>
+            <%= f.submit %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div class="btn-ghost"> <%= link_to "My Creators", my_creators_path %> </div>
