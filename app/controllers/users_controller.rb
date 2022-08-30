@@ -48,12 +48,5 @@ class UsersController < ApplicationController
       to_unfav = fav if fav.id == params[:id].to_i
     end
     current_user.unfavorite(to_unfav)
-    if to_unfav.instance_of?(Movie)
-      redirect_to movies_path
-    elsif to_unfav.instance_of?(Book)
-      redirect_to books_path
-    elsif to_unfav.instance_of?(Album) || to_unfav.instance_of?(Concert)
-      redirect_to musics_path
-    end
   end
 end

@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 // Smallest device
@@ -39,6 +41,51 @@
   }
 }
 
+
+
+.cardies {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
+
+}
+
+// Smallest device
+@media (min-width: 100px) and (max-width: 575px) {
+  .cardies {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .cardies {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .cardies {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .cardies {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cardies {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
 .titler {
   font-family: 'Comfortaa', cursive;
   margin: 32px;
