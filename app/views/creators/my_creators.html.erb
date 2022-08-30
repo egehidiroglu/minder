@@ -21,9 +21,9 @@
   <%= link_to "Follow someone new!", my_creators_new_path, class:"btn-ghost mx-5" %>
   </div>
 
-  <div class="cards" data-controller="test">
+  <div class="cards" data-controller="my-creator-index">
     <% @creators.each do |creator| %>
-      <div class="card-trip">
+      <div class="card-trip" >
         <img src= "<%= creator.poster_url %>", alt="Book poster">
         <div class="card-trip-infos">
           <strong><%= creator.content_type %></strong> <br>
@@ -31,7 +31,7 @@
           <div class="infos d-flex justify-content-between">
             <%= creator.name %>
             <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-            <i class="fa-solid fa-trash"></i>
+            <i class="fa-solid fa-trash" data-action="click->my-creator-index#delete"></i>
             <% end %>
           </div>
         </div>
