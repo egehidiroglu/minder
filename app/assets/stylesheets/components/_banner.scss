@@ -34,8 +34,3 @@
 .buttoner {
   margin: 50px;
 }
-
-// style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path 'backy-img.jpeg' %>');"
-#home-banner {
-  background-image: asset-url("backy-img.jpeg");
-}
