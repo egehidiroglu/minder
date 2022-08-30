@@ -1,6 +1,6 @@
 <div class="contain">
   <div class="titler">
-    <h1>Discover the latest <span class="green-text">music</span> from you favorite creators</h1>
+    <h1>Discover the latest <span class="green-text">music</span> from you favorite artists</h1>
   </div>
 
   <div class="center-carousel mh-25 w-100 mb-5" >
@@ -17,6 +17,10 @@
       %>
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
+  </div>
+
+    <div class="titler">
+    <h1> Upcoming <span class="green-text">albums</span> from you favorite artists</h1>
   </div>
 
   <div class="cards">
@@ -46,7 +50,7 @@
   </div>
 
   <div class="titler">
-    <h1>Discover the upcoming <span class="green-text">concerts</span> from you favorite creators</h1>
+    <h1>Upcoming <span class="green-text">concerts</span> from you favorite artists</h1>
   </div>
   <div class="cards ">
     <% @concerts.each do |concert| %>
@@ -75,3 +79,4 @@
       <% end %>
     <% end %>
   </div>
+</div>
