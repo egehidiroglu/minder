@@ -19,6 +19,5 @@ class BooksController < ApplicationController
   def favorite_book
     book = Book.find(params[:id])
     current_user.favorite(book)
-    redirect_to books_path
   end
 end

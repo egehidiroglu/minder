@@ -30,10 +30,10 @@ Rails.application.routes.draw do
 
   # -------Favorite Content -----
 
-  get '/favorite_movies/:id', to: 'movies#favorite_movie', as: :favorite_movie
-  get '/favorite_music/:id', to: 'musics#favorite_music', as: :favorite_music
-  get '/favorite_books/:id', to: 'books#favorite_book', as: :favorite_book
+  post '/favorite_movies/:id', to: 'movies#favorite_movie', as: :favorite_movie
+  post '/favorite_music/:id', to: 'musics#favorite_music', as: :favorite_music
+  post '/favorite_books/:id', to: 'books#favorite_book', as: :favorite_book
   get '/my_favorites', to: 'users#my_favorites', as: :user_favorites
   get '/favorite_content/:id', to: 'users#unfavorite', as: :unfavorite
-  get '/favorite_something/:id', to: 'users#custom_unfav', as: :custom_unfav
+  post '/favorite_something/:id', to: 'users#custom_unfav', as: :custom_unfav
 end

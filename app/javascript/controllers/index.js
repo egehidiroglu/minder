@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
+import BookIndexController from "./book_index_controller"
+application.register("book-index", BookIndexController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import MovieIndexController from "./movie_index_controller"
+application.register("movie-index", MovieIndexController)
 
 import TestController from "./test_controller"
 application.register("test", TestController)

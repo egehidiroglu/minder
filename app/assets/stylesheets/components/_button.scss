@@ -60,3 +60,15 @@
   color: black;
   background-color: #0DCDAA;
 }
+
+.btn-search {
+  color: #F4F4F4;
+  background-color: #0DCDAA;
+  border: none;
+  transition: color 0.5s ease;
+}
+
+.btn-search:hover {
+  background-color: #F4F4F4;
+  color: #0DCDAA;
+}
