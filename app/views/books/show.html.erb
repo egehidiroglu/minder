@@ -4,11 +4,17 @@
     <%= image_tag @book.poster_url %>
   </div>
   <div class="card content-details">
+
     <p class="card-text"> By <%= @book.creator.name %></p>
     <h1 class="card-title">
         <%= @book.name %>
     </h1>
     <p class="card-text">Upcoming release on <%= @book.release_date %></p>
+
+    <p class="card-text"><%= @book.creator.name %></p>
+    <p class="card-title"><%= @book.name %></p>
+    <p class="card-text">Released on: <%= @book.release_date %></p>
+
     <p class="card-text"><%= @book.description %></p>
   </div>
 </div>

@@ -1,7 +1,21 @@
 class MusicsController < ApplicationController
   def index
-    @albums = Album.all
-    @concerts = Concert.all
+    if params[:query].present?
+      sql_query = <<~SQL
+        albums.name ILIKE :query
+        OR creators.name ILIKE :query
+      SQL
+      @albums = Album.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+      sql_query = <<~SQL
+        concerts.name ILIKE :query
+        OR concerts.venue ILIKE :query
+        OR creators.name ILIKE :query
+      SQL
+      @concerts = Concert.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+    else
+      @albums = Album.all
+      @concerts = Concert.all
+    end
   end
 
   def show
