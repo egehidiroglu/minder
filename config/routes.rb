@@ -35,5 +35,5 @@ Rails.application.routes.draw do
   get '/favorite_books/:id', to: 'books#favorite_book', as: :favorite_book
   get '/my_favorites', to: 'users#my_favorites', as: :user_favorites
   get '/favorite_content/:id', to: 'users#unfavorite', as: :unfavorite
-  get '/favorite_something/:id', to: 'users#custom_unfav', as: :custom_unfav
+  post '/favorite_something/:id', to: 'users#custom_unfav', as: :custom_unfav
 end
