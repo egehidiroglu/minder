@@ -94,7 +94,6 @@ class CreatorsController < ApplicationController
   def destroy
     @creator = FollowedCreator.where(creator_id: params[:id], user_id: current_user.id).first
     @creator.destroy
-    redirect_to my_creators_path,status: :see_other
   end
 
   # ----------------First time user signs in - choose artists-------------------
