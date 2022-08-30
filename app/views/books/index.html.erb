@@ -35,12 +35,12 @@
             </div>
             <div data-controller="book-index">
               <% if current_user.favorited?(book) %>
-                <%= link_to custom_unfav_path(book) do %>
-                  <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->book-index-favorite"></i>
+                <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
                 <% end %>
               <% else %>
-                <%= link_to favorite_book_path(book) do %>
-                  <i class="fa-solid fa-heart" data-action="click-book-index-favorite"></i>
+                <%= link_to favorite_book_path(book), data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-heart" data-action="click->book-index#favorite"></i>
                 <% end %>
               <% end %>
             </div>
