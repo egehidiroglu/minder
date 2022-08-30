@@ -17,7 +17,7 @@
 <div class="container-creator-selection">
   <h1>Choose any creators you'd like to start following</h1>
   <div class="cards">
-    <% @unfollowed_creators.each do |author| %>
+    <% @creators.each do |author| %>
       <div class="card-trip">
         <img src="<%= author.poster_url %>" alt="Album poster"/>
         <div class="card-trip-infos">
