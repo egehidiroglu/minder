@@ -9,9 +9,29 @@
   text-decoration: none;
 }
 
+.btn-follow {
+  color: white;
+  background: #0DCDAA;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: large;
+  font-weight: bolder;
+  transition: color 0.3s ease;
+  border: none;
+  text-decoration: none;
+  position: absolute;
+  top: 4px;
+  left: 4px
+}
+
 .btn-ghost:hover {
   background-color: #0DCDAA;
   color: white;
   border: none;
+}
 
+.follow-artist {
+  color: black;
+  background-color: #0DCDAA;
 }

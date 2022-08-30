@@ -10,7 +10,7 @@
           <%= author.name %>
           <%= form_with url:create_followed_creator_path, method: :post do |f| %>
           <%= f.text_field :creator_id, type: :hidden, value: author.id %>
-          <%= f.submit %>
+            <%= f.submit '+', :class => 'btn-follow' %>
           <% end %>
           <% break if index == 7 %>
         </div>
