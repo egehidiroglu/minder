@@ -3,7 +3,7 @@
     <h1>Your followed <span class="green-text">creators</span></h1>
   </div>
   <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
-    <%= form_with url: musics_path, method: :get, class: "d-flex w-50 px-3" do %>
+    <%= form_with url: my_creators_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
