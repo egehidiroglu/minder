@@ -29,15 +29,17 @@
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
-          <% if current_user.favorited?(album) %>
-            <%= link_to custom_unfav_path(album) do %>
-              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+          <div data-controller="music-index">
+            <% if current_user.favorited?(album) %>
+              <%= link_to custom_unfav_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->music-index#favorite"></i>
+              <% end %>
+            <% else %>
+              <%= link_to favorite_music_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart" data-action="click->music-index#favorite"></i>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to favorite_music_path(album) do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
+          </div>
         </div>
       <% end %>
     <% end %>
