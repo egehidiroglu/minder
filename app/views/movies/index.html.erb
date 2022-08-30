@@ -28,7 +28,6 @@
                 <h2><strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></h2> <br>
                 <strong>Release Date: </strong><%= movie.release_date %> <br>
                 <strong>Director: </strong> <%= movie.creator.name %>
-              </div>
               <div data-controller="movie-index">
                 <% if current_user.favorited?(movie) %>
                   <%= link_to custom_unfav_path(movie), data: { turbo_method: :post } do %>
@@ -39,6 +38,7 @@
                     <i class="fa-solid fa-heart" data-action="click->movie-index#favorite"></i>
                   <% end %>
                 <% end %>
+              </div>
               </div>
             </div>
           <% end %>

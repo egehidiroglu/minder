@@ -23,22 +23,22 @@
     <% @albums.each do |album| %>
       <% if current_user.creators.ids.include? album.creator_id %>
         <div class="card-trip">
+          <img src= "<%= album.poster_url %>", alt="Book poster">
+          <div class="card-trip-infos">
+            <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
+            <strong>Release Date: </strong><%= album.release_date %> <br>
+            <strong>Artist: </strong> <%= album.creator.name %>
           <div data-controller="music-index">
             <% if current_user.favorited?(album) %>
               <%= link_to custom_unfav_path(album), data: { turbo_method: :post } do %>
                 <i class="fa-solid fa-heart" style="color:rgb(14, 205, 171);" data-action="click->music-index#favorite"></i>
               <% end %>
             <% else %>
-              <%= link_to favorite_music_path(album), data: { turbo_method: :post }  do %>
-                <i class="fa-solid fa-heart" style="color:white;"></i>
+              <%= link_to favorite_music_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart" data-action="click->music-index#favorite"></i>
               <% end %>
             <% end %>
           </div>
-          <img src= "<%= album.poster_url %>", alt="Book poster">
-          <div class="card-trip-infos">
-            <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
-            <strong>Release Date: </strong><%= album.release_date %> <br>
-            <strong>Artist: </strong> <%= album.creator.name %>
           </div>
         </div>
       <% end %>

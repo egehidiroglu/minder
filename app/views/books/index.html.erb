@@ -21,6 +21,16 @@
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
           <div class="card-trip">
+            <div data-controller="book-index">
+              <% if current_user.favorited?(book) %>
+                <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-heart " style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
+                <% end %>
+              <% else %>
+                <%= link_to favorite_book_path(book), data: { turbo_method: :post } do %>
+                  <i class="fa-solid fa-heart" data-action="click->book-index#favorite"></i>
+                <% end %>
+              <% end %>
             <%= link_to book_path(book) do %>
               <div class="img_contain">
                 <img class="img centered" src= "<%= book.poster_url %>", alt="Book poster">
@@ -31,16 +41,6 @@
               <strong>Author: </strong> <%= book.creator.name %>
               <strong>Release date: </strong> <%= book.release_date %>
             </div>
-            <div data-controller="book-index">
-              <% if current_user.favorited?(book) %>
-                <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>
-                  <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
-                <% end %>
-              <% else %>
-                <%= link_to favorite_book_path(book), data: { turbo_method: :post } do %>
-                  <i class="fa-solid fa-heart" data-action="click->book-index#favorite"></i>
-                <% end %>
-              <% end %>
             </div>
           </div>
         <% end %>
