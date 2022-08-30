@@ -29,8 +29,6 @@
   position: absolute;
   top: 4px;
   left: 4px;
-  display:block;
-  padding: 4px;
   color: white;
   font-size: 24px;
 }
@@ -38,16 +36,12 @@
   position: absolute;
   top: 4px;
   left: 4px;
-  display:block;
-  padding: 4px;
   color: #FE0970;
   font-size: 24px;
 }
 
 .btn-heart-unchecked:hover {
-  background-color: #0DCDAA;
   color: #FE0970;
-  border: none;
 }
 
 .btn-ghost:hover {
