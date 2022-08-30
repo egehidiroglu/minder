@@ -36,6 +36,7 @@
       <% end %>
     <% end %>
   </div>
+
   <div class="titler">
     <h1>Discover the upcoming <span class="green-text">concerts</span> from you favorite creators</h1>
   </div>
@@ -44,13 +45,14 @@
       <% if current_user.creators.ids.include? concert.creator_id %>
         <div class="card-trip">
           <img src= "<%= concert.poster_url %>", alt="Book poster">
-          <div class="card-trip-infos">
-            <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
-            <strong>Date: </strong><%= concert.date %>
-            <strong>Artist: </strong> <%= concert.creator.name %> <br>
-            <strong>Venue: </strong> <%= concert.venue %> <br>
-            <strong>Address: </strong> <%= concert.address %> <br>
-            <strong>Event URL: </strong> <%= concert.event_url %>
+
+        <div class="card-trip-infos">
+          <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
+          <strong>Date: </strong><%= concert.date %> <br>
+          <strong>Artist: </strong> <%= concert.creator.name %> <br>
+          <strong>Venue: </strong> <%= concert.venue %> <br>
+          <strong>Address: </strong> <%= concert.address %> <br>
+
           </div>
           <% if current_user.favorited?(concert) %>
             <%= link_to custom_unfav_path(concert) do %>
