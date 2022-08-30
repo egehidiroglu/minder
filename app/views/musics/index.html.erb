@@ -25,11 +25,11 @@
         <div class="card-trip">
           <div data-controller="music-index">
             <% if current_user.favorited?(album) %>
-              <%= link_to(custom_unfav_path(album), class:"btn-heart-checked") do %>
-                <i class="fa-solid fa-heart" style="color:#FE0970;"></i>
+              <%= link_to custom_unfav_path(album), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart" style="color:rgb(14, 205, 171);" data-action="click->music-index#favorite"></i>
               <% end %>
             <% else %>
-              <%= link_to(favorite_music_path(album), class:"btn-heart-unchecked") do %>
+              <%= link_to favorite_music_path(album), data: { turbo_method: :post }  do %>
                 <i class="fa-solid fa-heart" style="color:white;"></i>
               <% end %>
             <% end %>
