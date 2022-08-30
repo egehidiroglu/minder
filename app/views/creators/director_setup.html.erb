@@ -1,14 +1,21 @@
-<h1>Let's setup the <span class="green-text">directors</span> you'd like to follow! 🐱‍🏍</h1>
-
-<div class="cards">
-  <% @unfollowed_directors.each do |director| %>
-    <div>
-      <div><%= director.name %></div>
-      <img src="<%= director.poster_url %>" alt="Book poster"/>
-      <%= form_with url:create_followed_creator_path, method: :post do |f| %>
-        <%= f.text_field :creator_id, type: :hidden, value: director.id %>
-        <%= f.submit %>
-      <% end %>
-    </div>
-  <% end %>
+<div class="container-creator-selection">
+  <h1>Let's setup the <span class="green-text">directors</span> you'd like to follow! 🐱‍🏍</h1>
+  <div class="cards">
+    <% @unfollowed_directors.each_with_index do |director, index| %>
+      <div class="card-trip">
+        <img src="<%= director.poster_url %>" alt="Album poster"/>
+        <div class="card-trip-infos">
+          <%= director.name %>
+          <%= form_with url:create_followed_creator_path, method: :post do |f| %>
+          <%= f.text_field :creator_id, type: :hidden, value: director.id %>
+          <%= f.submit %>
+          <% end %>
+          <% break if index == 7 %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<div class="btn-ghost"> <%= link_to "Back", director_setup_path %> </div>
+<div class="btn-ghost"> <%= link_to "Next", artist_setup_path %> </div>

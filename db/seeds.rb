@@ -24,27 +24,41 @@ end
 
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
-artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
-  "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-  "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
-  "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
-  "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
-  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-  "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
+# artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
+#   "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+#   "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+#   "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+#   "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
+#   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+#   "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
+#   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
+#   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+#   "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+
+# Shortened list with only artist with Wikipedia
+
+artists = ["Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
+  "Ringo Starr", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+  "Young the Giant", "The Snuts", "Loyle Carner", "Kailee Morgue",
+  "Twenty One Pilots","ODESZA", "My Chemical Romance", "Backstreet Boys",
+  "The White Buffalo", "Knocked Loose",
+  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero",
+  "Ibrahim Maalouf", "The Killers", "RY X",
   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-  "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+  "Skullcrusher", "Alan Walker", "Stromae"]
 
-directors = ["Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
-    "Paul Fisher", "David Gordon Green", "Parker Finn", "Ol Parker", "Adamma Ebo", "Nicholas Stoller", "Carlota Pereda",
-    "Guillaume Lambert", "Nick Hamm", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
+directors = ["Steven Spielberg", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
+    "David Gordon Green", "Ol Parker", "Nicholas Stoller",
+    "Guillaume Lambert", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
 
-authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "Robert Galbraith", "Jamie Oliver",
-  "Jonathan Cahn", "Rupi Kaur", "Matthew Perry", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
-  "Christine Sinclair", "Bob Dylan", "Jerry Seinfeld"]
+authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "Jamie Oliver",
+  "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
+  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Zadie Smith"]
 
 p "Creating authors..."
 authors.each do |author|
+  p author
   creator = Creator.new
   creator.content_type = "Book"
   author.gsub!(" ", "_")
@@ -64,7 +78,6 @@ end
 p "Creating music creators..."
 artists.each do |artist|
   creator = Creator.new
-  creator.name = artist
   creator.content_type = "Music"
   artist.gsub!(" ", "_")
   url = "https://en.wikipedia.org/wiki/#{artist}"
@@ -75,6 +88,8 @@ artists.each do |artist|
     image = element.attributes["src"].value
   end
   creator.poster_url = image
+  artist.gsub!("_", " ")
+  creator.name = artist
   creator.save!
   path = ""
 end
@@ -114,12 +129,14 @@ p "Creating books"
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
-  p response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+  response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+  poster = response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"] unless response["items"][0]["volumeInfo"]["imageLinks"].nil?
+  poster = "https://cdn.elearningindustry.com/wp-content/uploads/2016/05/top-10-books-every-college-student-read-1024x640.jpeg" if poster.nil?
   Book.create!(
     name: response["items"][0]["volumeInfo"]["title"],
     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
     description: response["items"][0]["volumeInfo"]["description"],
-    poster_url:   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"],
+    poster_url:   poster,
     creator_id: Creator.where(name: author).first.id
   )
 end

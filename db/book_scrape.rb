@@ -76,33 +76,33 @@ require 'rest-client'
 #   end
 # end
 
-artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
-  "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-  "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
-  "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
-  "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
-  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-  "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
-  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
-  "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-  "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+# artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
+#   "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+#   "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+#   "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+#   "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
+#   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+#   "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
+#   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
+#   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+#   "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
 
 
-  artists.each do |artist|
-  begin
-    artist.gsub!(" ", "_")
-    url = "https://en.wikipedia.org/wiki/#{artist}"
-    p url
-    html_file = URI.open(url).read
-    html_doc = Nokogiri::HTML(html_file)
-    photo = ""
-    html_doc.search(".infobox-image img").each do |element|
-      photo = element.attributes["src"].value
-    end
-  rescue
-    p "=================================nothing"
-  end
-end
+#   artists.each do |artist|
+#   begin
+#     artist.gsub!(" ", "_")
+#     url = "https://en.wikipedia.org/wiki/#{artist}"
+#     p url
+#     html_file = URI.open(url).read
+#     html_doc = Nokogiri::HTML(html_file)
+#     photo = ""
+#     html_doc.search(".infobox-image img").each do |element|
+#       photo = element.attributes["src"].value
+#     end
+#   rescue
+#     p "=================================nothing"
+#   end
+# end
 
 # directors.each do |director|
 #   tmdb_api_upcoming_call = "https://api.tmdb.org/3/search/person?api_key=63759eccae824fa88e79218786680970&query=#{director}"
@@ -119,3 +119,41 @@ end
 #     p director
 #   end
 # end
+
+artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
+  "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+  "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+  "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+  "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
+  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+  "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
+  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
+  "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+  "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+
+artists.each do |artist|
+  artist.gsub!(" ", "_")
+  url = "https://en.wikipedia.org/wiki/#{artist}"
+  html_file = URI.open(url).read
+  html_doc = Nokogiri::HTML(html_file)
+  image = ""
+  html_doc.search(".infobox-image img").each do |element|
+    image = element.attributes["src"].value
+  end
+  if image == ""
+    puts artist
+    puts "backup plan!!---------------"
+    # url = "https://en.wikipedia.org/wiki/#{artist}_(band)"
+    # html_file = URI.open(url).read
+    # html_doc = Nokogiri::HTML(html_file)
+    # html_doc.search(".infobox-image img").each do |element|
+    #   image = element.attributes["src"].value
+    # end
+  end
+  puts artist
+  p "artist-----> #{image}"
+  puts ""
+  # creator.poster_url = image
+  # creator.save!
+  # path = ""
+end
