@@ -1,4 +1,4 @@
-<div class="contain">
+<div class="contain" data-controller="movie-index">
   <div class="titler">
     <h1>Discover the latest <span class="green-text">movies</span> from you favorite creators</h1>
   </div>
@@ -30,15 +30,17 @@
                 <strong>Release Date: </strong><%= movie.release_date %> <br>
                 <strong>Director: </strong> <%= movie.creator.name %>
               </div>
-              <% if current_user.favorited?(movie) %>
-                <%= link_to custom_unfav_path(movie) do %>
-                  <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+              <div>
+                <% if current_user.favorited?(movie) %>
+                  <%= link_to custom_unfav_path(movie) do %>
+                    <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->movie-index#unfavorite"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to favorite_movie_path(movie), data: { turbo_method: :post } do %>
+                    <i class="fa-solid fa-heart" data-action="click->movie-index#favorite"></i>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <%= link_to favorite_movie_path(movie) do %>
-                  <i class="fa-solid fa-heart"></i>
-                <% end %>
-              <% end %>
+              </div>
             </div>
           <% end %>
         <% end %>
