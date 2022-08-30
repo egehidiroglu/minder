@@ -42,26 +42,27 @@ a:hover {
 .cards {
   display: grid;
   grid-template-columns: repeat(1fr, 4);
-  grid-gap: 0;
+  grid-gap: 32px;
 }
 
 /*card-category*/
 .card-product {
   overflow: hidden;
-  height: 120px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  height: 150px;
+  background: rgb(255, 255, 255);
+  box-shadow: 0 0 1px rgba(0,0,0,0.2);
   display: flex;
-  width: 50%;
+  justify-content: space-between;
   align-items: center;
   border-radius: 30px;
-
+  width: 400px;
 }
 
 .card-product img {
-  height: 100%;
-  width: 120px;
+  height: 230%;
+  width: 160px;
   object-fit: cover;
+  border-radius: 30px;
 }
 
 .card-product h2 {
@@ -101,6 +102,25 @@ a:hover {
 
 .card-content-details {
   margin-left: 35px;
+}
+.carders {
+  display: grid;
+  grid-template-columns: repeat(1fr, 4);
+  grid-gap: 0 !important;
+}
+
+.carder-category {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-top: 45px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }

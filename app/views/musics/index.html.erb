@@ -2,6 +2,7 @@
   <div class="titler">
     <h1>Discover the latest <span class="green-text">music</span> from you favorite creators</h1>
   </div>
+
   <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-music" %>
@@ -11,6 +12,7 @@
     <h1>search</h1>
     <h2>genre</h2>
   </div>
+
   <div class="cards">
     <% @albums.each do |album| %>
       <% if current_user.creators.ids.include? album.creator_id %>
@@ -21,12 +23,19 @@
             <strong>Release Date: </strong><%= album.release_date %> <br>
             <strong>Artist: </strong> <%= album.creator.name %>
           </div>
+          <% if current_user.favorited?(album) %>
+            <%= link_to custom_unfav_path(album) do %>
+              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+            <% end %>
+          <% else %>
+            <%= link_to favorite_music_path(album) do %>
+              <i class="fa-solid fa-heart"></i>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
   </div>
-
-
   <div class="titler">
     <h1>Discover the upcoming <span class="green-text">concerts</span> from you favorite creators</h1>
   </div>
@@ -35,14 +44,23 @@
       <% if current_user.creators.ids.include? concert.creator_id %>
         <div class="card-trip">
           <img src= "<%= concert.poster_url %>", alt="Book poster">
-        <div class="card-trip-infos">
-          <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
-          <strong>Date: </strong><%= concert.date %>
-          <strong>Artist: </strong> <%= concert.creator.name %> <br>
-          <strong>Venue: </strong> <%= concert.venue %> <br>
-          <strong>Address: </strong> <%= concert.address %> <br>
-          <strong>Event URL: </strong> <%= concert.event_url %>
+          <div class="card-trip-infos">
+            <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
+            <strong>Date: </strong><%= concert.date %>
+            <strong>Artist: </strong> <%= concert.creator.name %> <br>
+            <strong>Venue: </strong> <%= concert.venue %> <br>
+            <strong>Address: </strong> <%= concert.address %> <br>
+            <strong>Event URL: </strong> <%= concert.event_url %>
           </div>
+          <% if current_user.favorited?(concert) %>
+            <%= link_to custom_unfav_path(concert) do %>
+              <i class="fa-solid fa-heart" style="color:#0ecdab;"></i>
+            <% end %>
+          <% else %>
+            <%= link_to favorite_music_path(concert) do %>
+              <i class="fa-solid fa-heart"></i>
+            <% end %>
+          <% end %>
         </div>
       <% end %>
     <% end %>
