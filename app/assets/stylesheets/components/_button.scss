@@ -55,7 +55,7 @@
 
 .btn-ghost:hover {
   background-color: #0DCDAA;
-  color: white;
+  color: white !important;
   border: none;
   transition: color 0.3s ease;
 }
@@ -81,4 +81,22 @@
   color: white;
   border: none;
 
+}
+
+.btn-ghoster {
+  color: black;
+  background-color: #0DCDAA;
+  padding: 16px 48px;
+  border-radius: 50px;
+  font-weight: lighter;
+  transition: color 0.3s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-ghoster:hover {
+  background-color: #0DCDAA;
+  color: white !important;
+  border: none;
+  transition: color 0.3s ease;
 }
