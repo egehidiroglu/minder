@@ -133,8 +133,9 @@ a:hover {
 }
 
 .img-wrapper {
-  width: 700px;
-  height: 400px;;
+  width: 550px;
+  aspect-ratio: auto 300 / 300;
+  height: 450px;
   margin: 2px;
   border: 1px solid rgb#212125;
   position: relative;
@@ -142,11 +143,11 @@ a:hover {
 }
 
 .img-size {
-  width: 100%;
-  height: auto;
+  width: 400px;
+  height: 400px;
   position: absolute;
   top: -50%;
-  left: -50%;
+  left: -118%;
   right: -50%;
   bottom: -50%;
   margin: auto;
@@ -198,4 +199,16 @@ a:hover {
 #content-title {
   font-size: 24px;
   font-weight: bold;
+}
+
+.cardtext-light {
+  font-weight: 100;
+  color: white;
+  font-size: 13px;
+  text-align: left;
+}
+
+.row {
+margin-top: auto;
+margin-bottom: auto;
 }
