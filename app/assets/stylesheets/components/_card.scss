@@ -159,15 +159,16 @@ a:hover {
 }
 
 .img-size {
-  width: 400px;
+  width: 600px;
   height: 400px;
-  position: absolute;
+  position: inherit;
   top: -50%;
   left: -118%;
   right: -50%;
   bottom: -50%;
   margin: auto;
 }
+
 
 // .fa-solid {
 //   color: #0dcdaa;

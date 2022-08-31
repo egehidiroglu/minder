@@ -1,4 +1,5 @@
 <% if @concert_music.nil? %>
+  <div class="show-align-vertical">
       <div class="content-details">
         <div class="show-container">
           <div class="music-img">
@@ -13,6 +14,7 @@
           </div>
         </div>
       </div>
+
       <% concerts = Concert.where(creator: @album_music.creator) %>
       <% unless concerts.empty? %>
       <div class="titler">
@@ -42,6 +44,7 @@
         </div>
       </div>
     <% end %>
+  </div>
   <% end %>
   <% if @album_music.nil? %>
     <div class="show-align-vertical">
