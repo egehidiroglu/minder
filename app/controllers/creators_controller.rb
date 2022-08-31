@@ -1,10 +1,15 @@
 class CreatorsController < ApplicationController
   def my_creators
     followed_creators = current_user.creators
-    filter_params = ["Music", "Book", "Movie"]
+    filter_params = ["All", "Music", "Book", "Movie"]
     if params[:query].present?
       if filter_params.include?(params[:query])
         case params[:query]
+        when "All"
+          @creators = []
+          followed_creators.each do |followed|
+            @creators.push(followed)
+          end
         when "Music"
           @creators = []
           followed_creators.each do |followed|
@@ -45,6 +50,11 @@ class CreatorsController < ApplicationController
     if params[:query].present?
       if filter_params.include?(params[:query])
         case params[:query]
+        when "All"
+          @creators = []
+          my_creators.each do |creator|
+            @creators.push(creator)
+          end
         when "Music"
           @creators = []
           unfollowed_creators.each do |creator|
