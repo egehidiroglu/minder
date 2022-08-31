@@ -1,6 +1,20 @@
 class UsersController < ApplicationController
   def spotify
-    @spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+    spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+    artists = spotify_user.following(type: "artist", limit: 20)
+    artists.each do |artist|
+      name = artist.name
+      photo = artist.images.second["url"]
+      creator = Creator.new
+      followed = FollowedCreator.new
+      creator.name = name
+      creator.poster_url = photo
+      creator.save
+      followed.user = current_user
+      followed.creator = creator
+      followed.save
+    end
+    redirect_to my_creators_path
   end
 
   def my_favorites

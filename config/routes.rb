@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post '/artist_setup', to: 'creators#create_followed_creator', as: :create_followed_creator
   post '/artist_setup_ajax', to: 'creators#create_followed_creator_ajax', as: :ajax_creator
 
-  get '/auth/spotify/callback', to: 'users#spotify'
+  get '/auth/spotify/callback', to: 'users#spotify', as: :spotify_auth
   # ^Going to get it through current_user and get creators using through user_creators- current_user.creators
 
   # -------Favorite Content -----
