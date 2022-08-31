@@ -10,9 +10,11 @@ class UsersController < ApplicationController
       creator.name = name
       creator.poster_url = photo
       creator.save
-      followed.user = current_user
-      followed.creator = creator
-      followed.save
+      unless creator.id.nil?
+        followed.user = current_user
+        followed.creator = creator
+        followed.save
+      end
     end
     redirect_to my_creators_path
   end
