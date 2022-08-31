@@ -25,7 +25,7 @@
     <% @creators.each do |creator| %>
       <div class="card-trip" data-controller="my-creator-index" data-my-creator-index-target="creator">
         <%= link_to delete_creator_path(creator), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-          <i class="fa-solid fa-trash" data-action="click->my-creator-index#delete"></i>
+          <i class="fa-solid fa-trash btn-trash" data-action="click->my-creator-index#delete"></i>
         <% end %>
         <img src= "<%= creator.poster_url %>", alt="Book poster">
         <div class="card-trip-infos">

@@ -22,7 +22,7 @@
     <div class="cards">
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
-          <div class="card-trip flex-grow-1">
+          <div class="card-trip">
             <div data-controller="book-index">
               <% if current_user.favorited?(book) %>
                 <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>

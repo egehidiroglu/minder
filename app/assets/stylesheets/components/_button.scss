@@ -60,6 +60,23 @@
   transition: color 0.3s ease;
 }
 
+.btn-trash {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  transition: color 0.3s ease;
+  font-size: 24px;
+  color: white;
+}
+
+.btn-trash:hover {
+  color: #0DCDAA;
+  border: none;
+  transition: color 0.3s ease;
+}
+
+
+
 .follow-artist {
   color: black;
   background-color: #0DCDAA;
