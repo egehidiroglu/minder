@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
-<%# ====================Search========================= %>
+  <%# ====================Search========================= %>
     <%= form_with url: movies_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
@@ -20,7 +20,7 @@
     <% end %>
   </div>
   <%# ===================Cards======================== %>
-    <div class="cardies ">
+    <div class="cardies">
       <% @movies.each do |movie| %>
         <% if current_user.creators.ids.include? movie.creator_id %>
           <%= content_tag :div, id: dom_id(movie) do %>
