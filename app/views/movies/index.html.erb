@@ -25,6 +25,16 @@
         <% if current_user.creators.ids.include? movie.creator_id %>
           <%= content_tag :div, id: dom_id(movie) do %>
             <div class="cardie-trip">
+              <div data-controller="movie-index">
+                <% if current_user.favorited?(movie) %>
+                  <%= link_to custom_unfav_path(movie), data: { turbo_method: :post } do %>
+                    <i class="fa-solid fa-heart btn-heart-checked" data-action="click->movie-index#favorite"></i>
+                  <% end %>
+                <% else %>
+                  <%= link_to favorite_movie_path(movie), data: { turbo_method: :post } do %>
+                    <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->movie-index#favorite"></i>
+                  <% end %>
+                <% end %>
               <img src= "<%= movie.poster_url %>", alt="Book poster">
               <div class="card-trip-infos">
                 <p id="content-title"><%=link_to movie.name, movie_path(movie) %></p>
@@ -33,16 +43,6 @@
                 <i class="fa-solid fa-calendar-day"></i>
                 <%= movie.release_date %> <br>
               </div>
-              <div data-controller="movie-index">
-                <% if current_user.favorited?(movie) %>
-                  <%= link_to custom_unfav_path(movie), data: { turbo_method: :post } do %>
-                    <i class="fa-solid fa-heart btn-heart-checked" style="color:#0ecdab;" data-action="click->movie-index#favorite"></i>
-                  <% end %>
-                <% else %>
-                  <%= link_to favorite_movie_path(movie), data: { turbo_method: :post } do %>
-                    <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->movie-index#favorite"></i>
-                  <% end %>
-                <% end %>
 
               </div>
             </div>

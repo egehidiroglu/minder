@@ -40,9 +40,9 @@
           <img src= "<%= album.poster_url %>", alt="Book poster">
           <div class="card-trip-infos">
           <div class="card-trip-infos">
-            <p id="content-title"><%= link_to album.name, music_path(album) %></p> <br>
-            <i class="fa-solid fa-pen-clip"></i>
-            <%= album.creator.name %> <br>
+            <p id="content-title"><%= link_to album.name, music_path(album) %></p>
+            By <%= album.creator.name %> <br>
+            <br>
             <i class="fa-solid fa-calendar-day"></i>
             <%= album.release_date %>
           </div>
@@ -63,11 +63,11 @@
           <img src= "<%= concert.poster_url %>", alt="Book poster">
 
         <div class="card-trip-infos">
-          <strong>Title: </strong><%= link_to concert.name, music_path(concert) %> <br>
-          <strong>Date: </strong><%= concert.date %> <br>
-          <strong>Artist: </strong> <%= concert.creator.name %> <br>
-          <strong>Venue: </strong> <%= concert.venue %> <br>
-          <strong>Address: </strong> <%= concert.address %> <br>
+            <p id="content-title"><%= link_to concert.name, music_path(concert) %></p>
+            By <%= concert.creator.name %> <br>
+            <br>
+            <i class="fa-solid fa-calendar-day"></i>
+            <%= concert.date %>
           </div>
         </div>
       <% end %>

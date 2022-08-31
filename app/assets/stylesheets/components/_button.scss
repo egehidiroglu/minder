@@ -32,28 +32,32 @@
 
 .btn-heart-unchecked {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  color: white;
-  font-size: 24px;
+  top: 16px;
+  left: 16px;
+  color: lightgray;
+  font-size: 32px;
+  border: black;
 }
 
 .btn-heart-checked {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 16px;
+  left: 16px;
   color: #FE0970;
-  font-size: 24px;
+  font-size: 32px;
+  transition: color 0.3s ease;
 }
 
 .btn-heart-unchecked:hover {
   color: #FE0970;
+  transition: color 0.3s ease;
 }
 
 .btn-ghost:hover {
   background-color: #0DCDAA;
   color: white;
   border: none;
+  transition: color 0.3s ease;
 }
 
 .follow-artist {
