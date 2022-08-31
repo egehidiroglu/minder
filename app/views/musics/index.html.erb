@@ -37,18 +37,16 @@
                 <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->music-index#favorite"></i>
               <% end %>
             <% end %>
-          <img src= "<%= album.poster_url %>", alt="Book poster">
-          <div class="card-trip-infos">
-          <div class="card-trip-infos">
-            <p id="content-title"><%= link_to album.name, music_path(album) %></p>
-            By <%= album.creator.name %> <br>
-            <br>
-            <i class="fa-solid fa-calendar-day"></i>
-            <%= album.release_date %>
+            <img src= "<%= album.poster_url %>", alt="Book poster">
+            <div class="card-trip-infos">
+              <p id="content-title"><%= link_to album.name, music_path(album) %></p>
+              By <%= album.creator.name %> <br>
+              <br>
+              <i class="fa-solid fa-calendar-day"></i>
+              <%= album.release_date %>
+            </div>
           </div>
         </div>
-        </div>
-      </div>
       <% end %>
     <% end %>
   </div>
@@ -60,14 +58,24 @@
     <% @concerts.each do |concert| %>
       <% if current_user.creators.ids.include? concert.creator_id %>
         <div class="card-trip">
-          <img src= "<%= concert.poster_url %>", alt="Book poster">
-
-        <div class="card-trip-infos">
-            <p id="content-title"><%= link_to concert.name, music_path(concert) %></p>
-            By <%= concert.creator.name %> <br>
-            <br>
-            <i class="fa-solid fa-calendar-day"></i>
-            <%= concert.date %>
+          <div data-controller="music-index">
+            <% if current_user.favorited?(concert) %>
+              <%= link_to custom_unfav_path(concert), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart btn-heart-checked" data-action="click->music-index#favorite"></i>
+              <% end %>
+            <% else %>
+              <%= link_to favorite_music_path(concert), data: { turbo_method: :post } do %>
+                <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->music-index#favorite"></i>
+              <% end %>
+            <% end %>
+            <img src= "<%= concert.poster_url %>", alt="Book poster">
+            <div class="card-trip-infos">
+              <p id="content-title"><%= link_to concert.name, music_path(concert) %></p>
+              By <%= concert.creator.name %> <br>
+              <br>
+              <i class="fa-solid fa-calendar-day"></i>
+              <%= concert.date %>
+            </div>
           </div>
         </div>
       <% end %>
