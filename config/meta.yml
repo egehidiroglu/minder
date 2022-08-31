@@ -1,5 +1,7 @@
 meta_product_name: "Minder"
 meta_title: "Minder - Never miss another movie, book, album or concert"
-meta_description: ""
-meta_image: "cover.png" # should exist in `app/assets/images/`
-twitter_account: "@product_twitter_account"   # required for Twitter Cards
+meta_description: "Minder will notify you of any upcoming movies, books/
+, albums or concerts from your favourite creators. Save content for later/
+ and get notified when there is a new release!"
+meta_image: "cover.jpg"
+twitter_account: "@minder931"
