@@ -169,9 +169,9 @@ authors.each do |author|
   p isbn
 end
 
-# authors.each do |author|
-#   author.gsub!(" ", "%20")
-#   results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10",
-#   headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
-#   p "#{author} ---> #{JSON.parse(results)["books"].first["image"]}"
-# end
+authors.each do |author|
+  author.gsub!(" ", "%20")
+  results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10",
+  headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
+  p "#{author} ---> #{JSON.parse(results)["books"].first["image"]}"
+end
