@@ -149,7 +149,6 @@ authors.each do |author|
   end
 end
 
-
 # =======================Getting upcoming albums for creators===============================
 p "Finding upcoming albums for creators..."
 for page in 1..11

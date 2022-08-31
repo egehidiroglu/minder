@@ -5,17 +5,21 @@ class UsersController < ApplicationController
     artists.each do |artist|
       name = artist.name
       photo = artist.images.second["url"]
-      creator = Creator.new
       followed = FollowedCreator.new
-      creator.name = name
-      creator.poster_url = photo
-      creator.content_type = "Music"
-      creator.save
-      unless creator.id.nil?
-        followed.user = current_user
+      if Creator.where(name: name).empty?
+        creator = Creator.new
+        creator.name = name
+        creator.poster_url = photo
+        creator.content_type = "Music"
+        creator.save
         followed.creator = creator
-        followed.save
+        followed.user = current_user
+      else
+        creator = Creator.where(name: name).first
+        followed.creator = creator
+        followed.user = current_user
       end
+      followed.save
     end
     redirect_to my_creators_path
   end
