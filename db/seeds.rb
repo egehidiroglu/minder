@@ -57,7 +57,6 @@ authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "
 
 p "Creating authors..."
 authors.each do |author|
-  p author
   creator = Creator.new
   creator.content_type = "Book"
   author.gsub!(" ", "_")

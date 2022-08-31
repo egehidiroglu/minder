@@ -2,6 +2,7 @@
   <div class="titler">
     <h1>Discover the latest <span class="green-text">books</span> from you favorite authors</h1>
   </div>
+  <%# ======================Carousel============================== %>
   <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-book" %>
@@ -17,6 +18,7 @@
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
   </div>
+  <%#=======================Cards================================= %>
     <div class="cards">
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
