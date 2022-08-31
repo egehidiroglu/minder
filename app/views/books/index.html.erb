@@ -2,6 +2,7 @@
   <div class="titler">
     <h1>Discover the latest <span class="green-text">books</span> from you favorite authors</h1>
   </div>
+  <%# ======================Carousel============================== %>
   <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-book" %>
@@ -17,6 +18,7 @@
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
   </div>
+  <%#=======================Cards================================= %>
     <div class="cards">
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
@@ -24,11 +26,11 @@
             <div data-controller="book-index">
               <% if current_user.favorited?(book) %>
                 <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>
-                  <i class="fa-solid fa-heart " style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
+                  <i class="fa-solid fa-heart btn-heart-checked" style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
                 <% end %>
               <% else %>
                 <%= link_to favorite_book_path(book), data: { turbo_method: :post } do %>
-                  <i class="fa-solid fa-heart" data-action="click->book-index#favorite"></i>
+                  <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->book-index#favorite"></i>
                 <% end %>
               <% end %>
             <%= link_to book_path(book) do %>
@@ -37,9 +39,11 @@
               </div>
             <% end %>
             <div class="card-trip-infos">
-              <h2><strong>Title: </strong><%= link_to book.name, book_path(book) %></h2> <br>
-              <strong>Author: </strong> <%= book.creator.name %>
-              <strong>Release date: </strong> <%= book.release_date %>
+              <p id="content-title"><%= link_to book.name, book_path(book) %></p>
+              by <%= book.creator.name %> <br>
+              <br>
+              <i class="fa-solid fa-calendar-day"></i>
+              <%= book.release_date %>
             </div>
             </div>
           </div>

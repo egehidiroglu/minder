@@ -7,14 +7,10 @@ export default class extends Controller {
   }
 
   favorite(event) {
-    console.log("fav")
-    var icon_color = event.target.style.color
-    console.log(icon_color)
-    if (icon_color === "rgb(14, 205, 171)") {
-      console.log(true)
-      event.target.style.color = ""
+    if (event.target.classList.contains('btn-heart-checked')) {
+      event.target.classList.replace('btn-heart-checked', 'btn-heart-unchecked')
     } else {
-      event.target.style.color = "rgb(14, 205, 171)"
+      event.target.classList.replace('btn-heart-unchecked', 'btn-heart-checked')
     }
   }
 }
