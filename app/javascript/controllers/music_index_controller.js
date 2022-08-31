@@ -13,5 +13,6 @@ export default class extends Controller {
     } else {
       event.target.classList.replace('btn-heart-unchecked', 'btn-heart-checked')
     }
+    
   }
 }
