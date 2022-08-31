@@ -20,7 +20,6 @@
 .img_contain > img {
   width: 100%;
   object-fit: cover;
-  height: 360px
 }
 
 .card-trip h2 {
@@ -62,8 +61,10 @@ a:hover {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(1fr, 4);
-  grid-gap: 32px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 80px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 /*card-category*/
@@ -175,10 +176,11 @@ a:hover {
 
 .cardies {
   display: grid;
-  grid-template-columns: repeat(1fr, 4);
-  grid-gap: 32px;
+  grid-template-columns: repeat(1fr, 3) !important;
+  grid-gap: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
-
 
 .cardie-trip {
   overflow: hidden;
@@ -189,10 +191,9 @@ a:hover {
   position: relative;
 }
 
-.cardie-trip > img {
+.cardie-trip img {
   width: 100%;
-  object-fit: cover;
-  height: 650px
+  object-position: center;
 }
 
 .cardie-trip h2 {
