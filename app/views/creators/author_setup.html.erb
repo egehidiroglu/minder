@@ -13,14 +13,17 @@
           <%= f.text_field :creator_id, type: :hidden, value: author.id %>
             <%= f.submit '+', :class => 'btn-follow' %>
           <% end %>
-          <% break if index == 7 %>
+
         </div>
       </div>
+    <% break if index == 7 %>
     <% end %>
   </div>
 </div>
-<div class=" my-5">
+
+<div class="buttoner d-flex justify-content-end">
+
   <div class="bis">
-    <%= link_to "Next", director_setup_path, class:"btn-ghost mx-3 my-3" %>
+    <%= link_to "Next", director_setup_path, class:"btn-ghoster mx-3 my-3" %>
   </div>
 </div>
