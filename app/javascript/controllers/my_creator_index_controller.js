@@ -8,6 +8,8 @@ export default class extends Controller {
   }
 
   delete() {
+    console.log(true)
+    console.log(this.creatorTarget)
     this.creatorTarget.remove()
   }
 }
