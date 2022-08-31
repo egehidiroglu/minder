@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def my_favorites
     user = current_user
     @favorites = user.all_favorited
-
     user_favorites = current_user.all_favorited
     if params[:query].present?
       case params[:query]
