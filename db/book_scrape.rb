@@ -162,16 +162,32 @@ authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "
   "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
   "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Zadie Smith"]
 
+
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
   isbn = response["items"][0]["volumeInfo"]["industryIdentifiers"][0]["identifier"]
   p isbn
+  begin
+    results = RestClient.get("https://api2.isbndb.com/book/#{isbn}", headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
+    p author
+    p JSON.parse(results)["book"]["image"]
+  rescue
+    p "Could not find #{author}"
+  end
 end
 
-authors.each do |author|
-  author.gsub!(" ", "%20")
-  results = RestClient.get("https://api2.isbndb.com/author/#{author}?page=30&pageSize=10",
-  headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
-  p "#{author} ---> #{JSON.parse(results)["books"].first["image"]}"
-end
+# authors.each do |author|
+#   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
+#   response = JSON.parse(search)
+#   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+#   poster = response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"] unless response["items"][0]["volumeInfo"]["imageLinks"].nil?
+#   poster = "https://cdn.elearningindustry.com/wp-content/uploads/2016/05/top-10-books-every-college-student-read-1024x640.jpeg" if poster.nil?
+#   Book.create!(
+#     name: response["items"][0]["volumeInfo"]["title"],
+#     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
+#     description: response["items"][0]["volumeInfo"]["description"],
+#     poster_url:   poster,
+#     creator_id: Creator.where(name: author).first.id
+#   )
+# end
