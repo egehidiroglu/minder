@@ -5,6 +5,7 @@
 
 .content-details {
   background-color:#212125;
+  box-shadow: 2px 2px 3px;
 }
 
 .card-text {
@@ -13,4 +14,10 @@
 
 .card-title {
   color: #0ba488;
+}
+
+.show-align-vertical {
+  position: absolute;
+  width: 100%;
+  top: 25%;
 }
