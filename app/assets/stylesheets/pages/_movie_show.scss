@@ -6,6 +6,9 @@
 .content-details {
   background-color:#212125;
   box-shadow: 2px 2px 3px;
+  padding-bottom: auto;
+
+
 }
 
 .card-text {
@@ -20,4 +23,5 @@
   position: absolute;
   width: 100%;
   top: 25%;
+  align-items: center;
 }
