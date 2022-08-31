@@ -39,9 +39,11 @@
               </div>
             <% end %>
             <div class="card-trip-infos">
-              <h2><strong>Title: </strong><%= link_to book.name, book_path(book) %></h2> <br>
-              <strong>Author: </strong> <%= book.creator.name %>
-              <strong>Release date: </strong> <%= book.release_date %>
+              <p id="content-title"><%= link_to book.name, book_path(book) %></p>
+              by <%= book.creator.name %> <br>
+              <br>
+              <i class="fa-solid fa-calendar-day"></i>
+              <%= book.release_date %>
             </div>
             </div>
           </div>

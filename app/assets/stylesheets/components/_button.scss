@@ -21,8 +21,13 @@
   border: none;
   text-decoration: none;
   position: absolute;
-  top: 4px;
-  left: 4px;
+  top: 8px;
+  right: 8px;
+}
+
+.btn-follow:hover {
+  background-color: #0dcdaab2;
+  transition: background-color 0.3s ease;
 }
 
 .btn-heart-unchecked {

@@ -2,13 +2,14 @@
   <div class="titler">
     <h1>Discover the latest <span class="green-text">movies</span> from you favorite creators</h1>
   </div>
+  <%# =================Carousel======================== %>
   <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-movie" %>
     </div>
   </div>
   <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
-
+<%# ====================Search========================= %>
     <%= form_with url: movies_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
@@ -18,6 +19,7 @@
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
   </div>
+  <%# ===================Cards======================== %>
     <div class="cardies ">
       <% @movies.each do |movie| %>
         <% if current_user.creators.ids.include? movie.creator_id %>
@@ -25,20 +27,23 @@
             <div class="cardie-trip">
               <img src= "<%= movie.poster_url %>", alt="Book poster">
               <div class="card-trip-infos">
-                <h2><strong>Title: </strong><%=link_to movie.name, movie_path(movie) %></h2> <br>
-                <strong>Release Date: </strong><%= movie.release_date %> <br>
-                <strong>Director: </strong> <%= movie.creator.name %>
+                <p id="content-title"><%=link_to movie.name, movie_path(movie) %></p>
+                By <%= movie.creator.name %> <br>
+                <br>
+                <i class="fa-solid fa-calendar-day"></i>
+                <%= movie.release_date %> <br>
+              </div>
               <div data-controller="movie-index">
                 <% if current_user.favorited?(movie) %>
                   <%= link_to custom_unfav_path(movie), data: { turbo_method: :post } do %>
-                    <i class="fa-solid fa-heart" style="color:#0ecdab;" data-action="click->movie-index#favorite"></i>
+                    <i class="fa-solid fa-heart btn-heart-checked" style="color:#0ecdab;" data-action="click->movie-index#favorite"></i>
                   <% end %>
                 <% else %>
                   <%= link_to favorite_movie_path(movie), data: { turbo_method: :post } do %>
-                    <i class="fa-solid fa-heart" data-action="click->movie-index#favorite"></i>
+                    <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->movie-index#favorite"></i>
                   <% end %>
                 <% end %>
-              </div>
+
               </div>
             </div>
           <% end %>

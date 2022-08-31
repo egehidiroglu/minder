@@ -39,9 +39,13 @@
             <% end %>
           <img src= "<%= album.poster_url %>", alt="Book poster">
           <div class="card-trip-infos">
-            <strong>Title: </strong><%= link_to album.name, music_path(album) %> <br>
-            <strong>Release Date: </strong><%= album.release_date %> <br>
-            <strong>Artist: </strong> <%= album.creator.name %>
+          <div class="card-trip-infos">
+            <p id="content-title"><%= link_to album.name, music_path(album) %></p> <br>
+            <i class="fa-solid fa-pen-clip"></i>
+            <%= album.creator.name %> <br>
+            <i class="fa-solid fa-calendar-day"></i>
+            <%= album.release_date %>
+          </div>
         </div>
         </div>
       </div>
