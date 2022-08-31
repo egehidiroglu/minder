@@ -22,11 +22,11 @@
     <div class="cards">
       <% @books.each do |book| %>
         <% if current_user.creators.ids.include? book.creator_id %>
-          <div class="card-trip">
+          <div class="card-trip flex-grow-1">
             <div data-controller="book-index">
               <% if current_user.favorited?(book) %>
                 <%= link_to custom_unfav_path(book), data: { turbo_method: :post } do %>
-                  <i class="fa-solid fa-heart btn-heart-checked" style="color:#0ecdab;" data-action="click->book-index#favorite"></i>
+                  <i class="fa-solid fa-heart btn-heart-checked" data-action="click->book-index#favorite"></i>
                 <% end %>
               <% else %>
                 <%= link_to favorite_book_path(book), data: { turbo_method: :post } do %>
@@ -39,11 +39,15 @@
               </div>
             <% end %>
             <div class="card-trip-infos">
-              <p id="content-title"><%= link_to book.name, book_path(book) %></p>
-              by <%= book.creator.name %> <br>
+              <div class="book-title-author">
+                <p id="content-title"><%= link_to book.name, book_path(book) %></p>
+                <p class="">by <%= book.creator.name %> </p>
+              </div>
               <br>
-              <i class="fa-solid fa-calendar-day"></i>
-              <%= book.release_date %>
+              <p>
+                <i class="fa-solid fa-calendar-day"></i>
+                <%= book.release_date %>
+              </p>
             </div>
             </div>
           </div>

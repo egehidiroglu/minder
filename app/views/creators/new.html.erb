@@ -28,13 +28,13 @@
   <div class="container-creator-selection">
     <div class="cards">
       <% @creators.each do |author| %>
-        <div class="card-trip">
+        <div id="<%= author.id %>" class="card-trip" data-controller="my-creator-new" data-my-creator-new-target="creator">
           <img src="<%= author.poster_url %>" alt="Album poster"/>
           <div class="card-trip-infos text-center">
             <%= author.name %>
-            <%= form_with url:create_followed_creator_path, method: :post do |f| %>
-            <%= f.text_field :creator_id, type: :hidden, value: author.id %>
-            <%= f.submit '+', :class => 'btn-follow' %>
+            <%= form_with url: ajax_creator_path, :html => {:"data-action" => 'click->my-creator-new#save'}, method: :post do |f| %>
+              <%= f.text_field :creator_id, type: :hidden, value: author.id %>
+              <%= f.submit '+', :class => 'btn-follow' %>
             <% end %>
           </div>
         </div>
