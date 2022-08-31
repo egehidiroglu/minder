@@ -52,7 +52,7 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 #CUSTOM
-gem 'rspotify'
+gem 'rspotify', "~> 2.11.1"
 gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
