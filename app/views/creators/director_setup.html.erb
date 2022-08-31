@@ -1,32 +1,39 @@
 <div class="container-creator-selection">
+
   <div class="titler d-flex justify-content-center">
     <h1>Let's choose the <span class="green-text">directors</span> you'd like to follow!</h1>
   </div>
+
   <div class="cards">
     <% @unfollowed_directors.each_with_index do |director, index| %>
       <div class="card-trip">
         <img src="<%= director.poster_url %>" alt="Album poster"/>
         <div class="card-trip-infos text-center">
           <%= director.name %> <br>
+
           <%= form_with url:create_followed_creator_path, method: :post do |f| %>
-          <%= f.text_field :creator_id, type: :hidden, value: director.id %>
+            <%= f.text_field :creator_id, type: :hidden, value: director.id %>
             <%= f.submit '+', :class => 'btn-follow' %>
           <% end %>
-          <% break if index == 7 %>
+
         </div>
       </div>
+    <% break if index == 7 %>
     <% end %>
   </div>
 </div>
 
-<div class="my-5">
-  <div class="bis">
-    <%= link_to "Back", author_setup_path, class:"btn-ghost" %>
+<div class="buttoner d-flex justify-content-between">
+  <div class="my-5">
+    <div class="bis">
+      <%= link_to "Back", author_setup_path, class:"btn-ghoster" %>
+    </div>
   </div>
-</div>
 
-<div class="my-5">
-  <div class="bis">
-    <%= link_to "Next", artist_setup_path, class:"btn-ghost" %>
+  <div class="my-5">
+    <div class="bis">
+      <%= link_to "Next", artist_setup_path, class:"btn-ghoster" %>
+    </div>
   </div>
+
 </div>
