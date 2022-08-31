@@ -45,11 +45,11 @@ class CreatorsController < ApplicationController
     if params[:query].present?
       if filter_params.include?(params[:query])
         case params[:query]
-        # when "All"
-        #   @creators = []
-        #   unfollowed_creators.each do |creator|
-        #     @creators.push(creator)
-        #   end
+        when "All"
+          @creators = []
+          my_creators.each do |creator|
+            @creators.push(creator)
+          end
         when "Music"
           @creators = []
           unfollowed_creators.each do |creator|
