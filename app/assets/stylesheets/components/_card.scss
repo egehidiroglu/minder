@@ -13,16 +13,6 @@
   height: 260px
 }
 
-.book-date {
-  flex-grow: 1;
-}
-
-.img_contain > img {
-  width: 100%;
-  object-fit: cover;
-  height: 360px
-}
-
 .card-trip h2 {
   font-size: 16px;
   margin: 0;
@@ -43,10 +33,6 @@
   height: 100px;
   width: 100%;
   object-fit: fill;
-}
-
-.book-title-author {
-  height: 60px;
 }
 
 a {
@@ -84,6 +70,7 @@ a:hover {
   width: 160px;
   object-fit: cover;
   border-radius: 30px;
+  align-items: right;
 }
 
 .card-product-concert h2 {
@@ -136,7 +123,7 @@ a:hover {
   height: 86vh;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   color: white;
   font-size: 24px;
@@ -144,7 +131,6 @@ a:hover {
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   border-radius: 0px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  flex-direction: column;
 }
 
 .img-wrapper {
@@ -158,11 +144,11 @@ a:hover {
 }
 
 .img-size {
-  width: 400px;
-  height: 400px;
-  position: absolute;
+  width: 600px;
+  height: 380px;
+  position: inherit;
   top: -50%;
-  left: -118%;
+  left: -123%;
   right: -50%;
   bottom: -50%;
   margin: auto;
@@ -212,7 +198,7 @@ a:hover {
 }
 
 #content-title {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
 }
 
