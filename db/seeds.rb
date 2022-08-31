@@ -24,18 +24,6 @@ end
 
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
-# artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
-#   "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-#   "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
-#   "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
-#   "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
-#   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-#   "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
-#   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
-#   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-#   "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
-
-# Shortened list with only artist with Wikipedia
 
 artists = ["Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
   "Ringo Starr", "Codeine", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
