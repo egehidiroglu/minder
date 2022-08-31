@@ -120,40 +120,74 @@ require 'rest-client'
 #   end
 # end
 
-artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
-  "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-  "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
-  "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
-  "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
-  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-  "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
-  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
-  "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-  "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
+# artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
+#   "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
+#   "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
+#   "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
+#   "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
+#   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
+#   "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
+#   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
+#   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
+#   "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
 
-artists.each do |artist|
-  artist.gsub!(" ", "_")
-  url = "https://en.wikipedia.org/wiki/#{artist}"
-  html_file = URI.open(url).read
-  html_doc = Nokogiri::HTML(html_file)
-  image = ""
-  html_doc.search(".infobox-image img").each do |element|
-    image = element.attributes["src"].value
+# artists.each do |artist|
+#   artist.gsub!(" ", "_")
+#   url = "https://en.wikipedia.org/wiki/#{artist}"
+#   html_file = URI.open(url).read
+#   html_doc = Nokogiri::HTML(html_file)
+#   image = ""
+#   html_doc.search(".infobox-image img").each do |element|
+#     image = element.attributes["src"].value
+#   end
+#   if image == ""
+#     puts artist
+#     puts "backup plan!!---------------"
+#     # url = "https://en.wikipedia.org/wiki/#{artist}_(band)"
+#     # html_file = URI.open(url).read
+#     # html_doc = Nokogiri::HTML(html_file)
+#     # html_doc.search(".infobox-image img").each do |element|
+#     #   image = element.attributes["src"].value
+#     # end
+#   end
+#   puts artist
+#   p "artist-----> #{image}"
+#   puts ""
+#   # creator.poster_url = image
+#   # creator.save!
+#   # path = ""
+# end
+
+authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "Jamie Oliver",
+  "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
+  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Zadie Smith"]
+
+
+authors.each do |author|
+  search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
+  response = JSON.parse(search)
+  isbn = response["items"][0]["volumeInfo"]["industryIdentifiers"][0]["identifier"]
+  p isbn
+  begin
+    results = RestClient.get("https://api2.isbndb.com/book/#{isbn}", headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
+    p author
+    p JSON.parse(results)["book"]["image"]
+  rescue
+    p "Could not find #{author}"
   end
-  if image == ""
-    puts artist
-    puts "backup plan!!---------------"
-    # url = "https://en.wikipedia.org/wiki/#{artist}_(band)"
-    # html_file = URI.open(url).read
-    # html_doc = Nokogiri::HTML(html_file)
-    # html_doc.search(".infobox-image img").each do |element|
-    #   image = element.attributes["src"].value
-    # end
-  end
-  puts artist
-  p "artist-----> #{image}"
-  puts ""
-  # creator.poster_url = image
-  # creator.save!
-  # path = ""
 end
+
+# authors.each do |author|
+#   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
+#   response = JSON.parse(search)
+#   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
+#   poster = response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"] unless response["items"][0]["volumeInfo"]["imageLinks"].nil?
+#   poster = "https://cdn.elearningindustry.com/wp-content/uploads/2016/05/top-10-books-every-college-student-read-1024x640.jpeg" if poster.nil?
+#   Book.create!(
+#     name: response["items"][0]["volumeInfo"]["title"],
+#     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
+#     description: response["items"][0]["volumeInfo"]["description"],
+#     poster_url:   poster,
+#     creator_id: Creator.where(name: author).first.id
+#   )
+# end
