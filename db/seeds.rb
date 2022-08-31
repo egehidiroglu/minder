@@ -24,18 +24,6 @@ end
 
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
-# artists = ["Muse", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Embrace", "Death Scythe", "Megadeth", "Ozzy Osbourne",
-#   "Beacon", "Inglorious", "Ringo Starr", "Clutch", "Codeine", "Nikki Lane", "Bjork", "Slipknot",
-#   "Kolb", "Young the Giant", "The Snuts", "Bill Callahan", "Loyle Carner", "Kailee Morgue",
-#   "Twenty One Pilots", "Elsiane", "Zimmer", "ODESZA", "My Chemical Romance", "Backstreet Boys",
-#   "Shame", "The White Buffalo", "Knocked Loose", "Jonas", "Aitch", "Regal",
-#   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Jungle",
-#   "Ibrahim Maalouf", "The Killers", "RY X", "Matt Lang", "Spencer Brown",
-#   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
-#   "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-#   "Skullcrusher", "Alan Walker", "The Smile", "Stromae"]
-
-# Shortened list with only artist with Wikipedia
 
 artists = ["Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
   "Ringo Starr", "Codeine", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
@@ -48,10 +36,9 @@ artists = ["Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth
   "Skullcrusher", "Alan Walker", "Stromae"]
 
 directors = ["Steven Spielberg", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
-    "David Gordon Green", "Ol Parker", "Nicholas Stoller",
-    "Guillaume Lambert", "James Cameron", "Mark Mylod", "Ryan Coogler", "Robert Zappia", "Jaume Collet-Serra"]
+    "David Gordon Green", "Ol Parker", "Nicholas Stoller", "James Cameron", "Mark Mylod", "Ryan Coogler", "Jaume Collet-Serra"]
 
-authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "J.K. Rowling", "Jamie Oliver",
+authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "Jamie Oliver",
   "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
   "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Zadie Smith"]
 
@@ -122,14 +109,23 @@ Creator.all.each do |creator|
   followed_creator.save
 end
 # # ================================= Books Start ==========================================
+# ---------------old way with photos from Google------------------
+p "Creating books"
 
+# -------------------New way with photos from ISBN DB----------------------
 p "Creating books"
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
   response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
-  poster = response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"] unless response["items"][0]["volumeInfo"]["imageLinks"].nil?
-  poster = "https://cdn.elearningindustry.com/wp-content/uploads/2016/05/top-10-books-every-college-student-read-1024x640.jpeg" if poster.nil?
+  isbn = response["items"][0]["volumeInfo"]["industryIdentifiers"][0]["identifier"]
+  poster = ""
+  begin
+    results = RestClient.get("https://api2.isbndb.com/book/#{isbn}", headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
+    poster = JSON.parse(results)["book"]["image"]
+  rescue
+    poster = "https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1376&q=80"
+  end
   Book.create!(
     name: response["items"][0]["volumeInfo"]["title"],
     release_date: response["items"][0]["volumeInfo"]["publishedDate"],
@@ -138,6 +134,21 @@ authors.each do |author|
     creator_id: Creator.where(name: author).first.id
   )
 end
+
+authors.each do |author|
+  search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
+  response = JSON.parse(search)
+  isbn = response["items"][0]["volumeInfo"]["industryIdentifiers"][0]["identifier"]
+  p isbn
+  begin
+    results = RestClient.get("https://api2.isbndb.com/book/#{isbn}", headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
+    p author
+    p JSON.parse(results)["book"]["image"]
+  rescue
+    p "Could not find #{author}"
+  end
+end
+
 
 # =======================Getting upcoming albums for creators===============================
 p "Finding upcoming albums for creators..."

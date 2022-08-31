@@ -131,9 +131,15 @@ class CreatorsController < ApplicationController
   end
 
   # -------------Follow someone new, filters based on selection---------------
-  def create_followed_creator
-    FollowedCreator.create(creator_id: params[:creator_id], user_id: current_user.id)
-    redirect_back(fallback_location: root_path)
+  def create_followed_creator_ajax
+    puts "params #{params}"
+    user = FollowedCreator.new(creator_id: params[:creator_id], user_id: current_user.id)
+    puts user
+    user.save
+    respond_to do |format|
+      format.html { user }
+      format.json { render json: user }
+    end
   end
 
   private
