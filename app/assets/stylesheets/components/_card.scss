@@ -82,10 +82,10 @@ a:hover {
 }
 
 .card-product-concert img {
-  height: 230%;
+
   width: 160px;
   object-fit: cover;
-  border-radius: 30px;
+
 }
 
 .card-product-concert h2 {
@@ -235,4 +235,21 @@ margin-bottom: auto;
   height: 500px;
   margin-left: 25px;
   width: 500px;
+}
+
+.book-img img {
+  height: 500px;
+  margin-left: 25px;
+
+}
+
+.cardtext-light {
+  font-size: 1.2rem;
+}
+
+
+.movie-img img {
+  height: 656px;
+  margin-left: 25px;
+
 }

@@ -1,7 +1,7 @@
 <% if @concert_music.nil? %>
   <div class="show-align-vertical">
       <div class="content-details">
-        <div class="show-container">
+        <div class="shower-container">
           <div class="music-img">
             <%= image_tag @album_music.poster_url %>
           </div>
@@ -10,7 +10,7 @@
             <h1 class="card-title">
                 <%= @album_music.name %>
             </h1>
-            <p class="card-text">Concert on <%= @album_music.release_date %></p>
+            <p class="card-text mt-4">Concert on <%= @album_music.release_date %></p>
           </div>
         </div>
       </div>
@@ -19,29 +19,22 @@
       <% unless concerts.empty? %>
       <div class="titler">
         <h3>Don’t miss out the upcoming <span class="green-text">concerts</span> by <span class="green-text"><%= @album_music.creator.name %></span></h3>
-        <div class="text-center">
           <div class="cards">
-            <div class="concerts">
+            <% concerts.each do |concert| %>
               <div class="card-product-concert">
-                <div class="card-product-concert-infos d-flex align-items-center justify-content-between">
-                  <i class="fa-solid fa-ticket"></i>
-                  <% concerts.each do |concert| %>
-                    <div>
-                      <h2><strong> <%= link_to "Details here", music_path(concert) %></strong></h2>
-                      <p class="black-text"><%= concert.date %></p>
-                      <p class="black-text"><%= concert.venue %></p>
-                      <p class="black-text"><%= concert.address %></p>
-                    </div>
-                    <div class="music-img">
-                      <%= image_tag @album_music.poster_url %>
-                    </div>
-                    </div>
-                  <% end %>
+                <i class="fa-solid fa-ticket"></i>
+                <div>
+                  <h2><strong> <%= link_to "Details here", music_path(concert) %></strong></h2>
+                  <p class="black-text"><%= concert.date %></p>
+                  <p class="black-text"><%= concert.venue %></p>
+                  <p class="black-text"><%= concert.address %></p>
+                </div>
+                <div class="music-imger">
+                  <%= image_tag @album_music.poster_url %>
                 </div>
               </div>
-            </div>
+            <% end %>
           </div>
-        </div>
       </div>
     <% end %>
   </div>
