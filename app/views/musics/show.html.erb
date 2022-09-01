@@ -24,7 +24,7 @@
               <div class="card-product-concert">
                 <i class="fa-solid fa-ticket px-3"></i>
                 <div>
-                  <h2><strong> <%= link_to "Buy a Ticket", concert.event_url %></strong></h2>
+                  <h2><strong> <%= link_to "Buy a Ticket", concert.event_url, target: "_blank" %></strong></h2>
                   <p class="black-text"><%= concert.date %></p>
                   <p class="black-text"><%= concert.venue %></p>
                   <p class="black-text"><%= concert.address %></p>
@@ -52,7 +52,7 @@
             <p class="card-text">Concert on <%= @concert_music.date %></p>
             <p class="card-text">Venue: <%= @concert_music.venue %></p>
             <p class="card-text">Address: <%= @concert_music.address %></p>
-            <%= link_to "Book a Ticket", @concert_music.event_url, class: "btn-ghost" %>
+            <%= link_to "Book a Ticket", @concert_music.event_url, target: "_blank", class: "btn-ghost" %>
           </div>
         </div>
       </div>
