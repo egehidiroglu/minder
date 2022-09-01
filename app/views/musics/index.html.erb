@@ -64,7 +64,9 @@
 
         <div class="card-trip-infos">
             <p id="content-title"><%= link_to concert.name, music_path(concert) %></p>
-            By <%= concert.creator.name %> <br>
+             <br>
+            <i class="fa-solid fa-location-dot"></i>
+            <%= concert.venue %>
             <br>
             <i class="fa-solid fa-calendar-day"></i>
             <%= concert.date %>
