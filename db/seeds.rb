@@ -28,7 +28,8 @@ end
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
 
-artists = ["Gorillaz", "Lou Reed",
+artists = ["Gorillaz", "Lou Reed", "Taylor Swift", "The 1975", "Yeah Yeah Yeahs", "Megadeth", "Horace Andy",
+  "Arctic Monkeys", "ODESZA", "The Killers", "Cigarettes After Sex", "Flaming Lips",
   "Backstreet Boys",
   "DJ Khaled", "Ozzy Osbourne",
   "Ringo Starr", "Bjork",
