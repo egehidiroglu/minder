@@ -44,8 +44,10 @@
                 <p id="content-title"><%=link_to movie.name, movie_path(movie) %></p>
                 By <%= movie.creator.name %> <br>
                 <br>
-                <i class="fa-solid fa-calendar-day"></i>
-                <%= movie.release_date %> <br>
+                <p>
+                  <i class="fa-solid fa-calendar-day"></i>
+                  <%= movie.release_date %> <br>
+                </p>
               </div>
 
               </div>

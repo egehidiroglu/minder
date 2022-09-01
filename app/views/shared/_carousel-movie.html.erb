@@ -11,21 +11,24 @@
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active" data-bs-interval= "2000">
+    <div class="carousel-item active" data-bs-interval= "3000">
       <%# <img src="https://wallpaperset.com/w/full/6/4/8/366206.jpg" class="d-block w-100" alt="..."> %>
       <%= link_to movie_path(@pictures[0]) do %>
+      <h2 class="card-texter"><em><%=  @pictures[0].name %></em></h2>
         <%= image_tag @pictures[0].poster_url, class: "d-block w-100" %>
       <% end %>
     </div>
-    <div class="carousel-item" data-bs-interval= "2000">
+    <div class="carousel-item" data-bs-interval= "3000">
       <%# <img src="https://wallpapers-hub.art/wallpaper-images/645141.jpg" class="d-block w-100" alt="..."> %>
       <%= link_to movie_path(@pictures[1]) do %>
+        <h2 class="card-texter"><em><%=  @pictures[1].name %></em></h2>
         <%= image_tag @pictures[1].poster_url, class: "d-block w-100" %>
       <% end %>
     </div>
-    <div class="carousel-item " data-bs-interval= "2000">
+    <div class="carousel-item " data-bs-interval= "3000">
       <%# <img src="https://c4.wallpaperflare.com/wallpaper/799/191/755/godzilla-movies-digital-art-movie-poster-wallpaper-preview.jpg" class="d-block w-100" alt="..."> %>
       <%= link_to movie_path(@pictures[2]) do %>
+        <h2 class="card-texter"><em><%=  @pictures[2].name %></em></h2>
         <%= image_tag @pictures[2].poster_url, class: "d-block w-100" %>
       <% end %>
     </div>
