@@ -109,10 +109,7 @@ Creator.all.each do |creator|
   followed_creator.save
 end
 # # ================================= Books Start ==========================================
-# ---------------old way with photos from Google------------------
-p "Creating books"
 
-# -------------------New way with photos from ISBN DB----------------------
 p "Creating books"
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
@@ -151,6 +148,8 @@ end
 
 # =======================Getting upcoming albums for creators===============================
 p "Finding upcoming albums for creators..."
+
+
 for page in 1..11
   i = 1
   doc = Nokogiri::HTML(URI.open("https://www.albumoftheyear.org/upcoming/#{page}/"))
@@ -242,12 +241,11 @@ for i in 1..10
   end
 end
 
-# ===========================manual adds=======================================
 album = Album.new
 album.poster_url = "https://imusic.b-cdn.net/images/item/original/996/4050538830996.jpg?backstreet-boys-2022-a-very-backstreet-christmas-lp&class=scaled"
-album.release_date = 2022-10-14
+album.release_date = "2022-10-14"
 album.name = "A Very Backstreet Christmas"
-album.creator = Creator.where(name: "Backstreet Boys")
+album.creator = Creator.where(name: "Backstreet Boys")[0]
 album.save!
 
 album = Album.first
