@@ -22,5 +22,8 @@ application.register("my-creator-index", MyCreatorIndexController)
 import MyCreatorNewController from "./my_creator_new_controller"
 application.register("my-creator-new", MyCreatorNewController)
 
+import MyFavoritesIndexController from "./my_favorites_index_controller"
+application.register("my-favorites-index", MyFavoritesIndexController)
+
 import TestController from "./test_controller"
 application.register("test", TestController)
