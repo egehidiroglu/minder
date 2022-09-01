@@ -28,19 +28,22 @@ end
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
 
-artists = ["Horace Andy", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
+artists = ["The 1975", "Arctic Monkeys", "Horace Andy", "Gorillaz", "Lou Reed", "Taylor Swift", "Yeah Yeah Yeahs",
+  "Megadeth", "Backstreet Boys", "ODESZA", "The Killers", "Cigarettes After Sex", "Rainbow Kitten Surprise",
+  "Flaming Lips", "The Sheepdogs",
+  "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Ozzy Osbourne",
   "Ringo Starr", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
-  "Twenty One Pilots","ODESZA", "My Chemical Romance", "Backstreet Boys", "The White Buffalo", "Knocked Loose",
-  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Ibrahim Maalouf", "The Killers", "RY X",
-  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Demi Lovato", "The Smashing Pumpkins",
+  "Twenty One Pilots", "My Chemical Romance", "The White Buffalo", "Knocked Loose",
+  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Ibrahim Maalouf",  "RY X",
+  "Trentemoller", "Novo Amor", "Julien Clerc", "Demi Lovato", "The Smashing Pumpkins",
   "Tommy Cash", "Peach Tree Rascals", "Tchami", "Alan Walker", "Stromae"]
 
-directors = ["Jordan Peele", "Bong Joon-ho" "Kevin Smith", "Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
-    "David Gordon Green", "Ol Parker", "Nicholas Stoller", "Mark Mylod", "Ryan Coogler", "Jaume Collet-Serra"]
+directors = ["Ryan Coogler",  "Kevin Smith", "George Miller", "Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger",  "Castille Landon",
+    "David Gordon Green", "Ol Parker", "Bong Joon-ho", "Nicholas Stoller", "Mark Mylod", "Jordan Peele", "Jaume Collet-Serra"]
 
-authors = ["Malcolm Gladwell", "Zadie Smith", "Stephen King", "Ryan Holiday", "Dav Pilkey", "Jamie Oliver",
-  "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
-  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Philip Rosenthal"]
+authors = ["Malcolm Gladwell", "Zadie Smith", "Christine Sinclair", "Stephen King", "Ryan Holiday",
+  "Dav Pilkey", "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
+  "Kate Reid", "Gabor Mate", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Philip Rosenthal"]
 
 p "Creating authors..."
 authors.each do |author|
@@ -62,6 +65,7 @@ end
 
 p "Creating music creators..."
 artists.each do |artist|
+  p artist
   creator = Creator.new
   creator.content_type = "Music"
   artist.gsub!(" ", "_")
