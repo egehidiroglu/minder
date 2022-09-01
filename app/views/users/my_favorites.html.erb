@@ -1,6 +1,29 @@
 <div class="contain">
   <div class="titler">
     <h1>Your Favorites</h1>
+<<<<<<< HEAD
+=======
+  </div>
+  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
+    <%= form_with url: user_favorites_path, method: :get, class: "d-flex" do |f| %>
+      <%= f.select :query, ["Music", "Movie", "Book"],
+        class: "form-control",
+        placeholder: "Filter"
+      %>
+      <%= submit_tag "Filter", class: "btn-search" %>
+    <% end %>
+    <%= form_with url: user_favorites_path, method: :get, class: "d-flex w-50 px-3" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Search favorites"
+      %>
+      <%= submit_tag "Search", class: "btn-search" %>
+    <% end %>
+  </div>
+
+
+>>>>>>> master
   <div class="cards">
     <% @favorites.each do |favorite| %>
       <div class="card-trip m-3" data-controller="my-favorites-index" data-my-favorites-index-target="favorite">

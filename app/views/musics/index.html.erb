@@ -43,9 +43,8 @@
                 </div>
               <% end %>
             <div class="card-trip-infos">
-              <p id="content-title"><%= link_to album.name, music_path(album) %></p>
-              By <%= album.creator.name %> <br>
-              <br>
+              <p class="mb-2" id="content-title"><%= link_to album.name, music_path(album) %></p> <br>
+              <p>By <%= album.creator.name %></p>  <br>
               <p>
                 <i class="fa-solid fa-calendar-day"></i>
                 <%= album.release_date %>

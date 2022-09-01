@@ -10,7 +10,7 @@
 .card-trip > img {
   width: 100%;
   object-fit: cover;
-  height: 260px
+  height: 260px;
 }
 
 .book-date {
@@ -63,7 +63,7 @@ a:hover {
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 80px;
+  grid-gap: 35px !important;
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -179,7 +179,7 @@ a:hover {
 .cardies {
   display: grid;
   grid-template-columns: repeat(1fr, 3) !important;
-  grid-gap: 50px;
+  grid-gap: 35px;
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -215,7 +215,7 @@ a:hover {
 }
 
 #content-title {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 
@@ -245,11 +245,4 @@ margin-bottom: auto;
 
 .cardtext-light {
   font-size: 1.2rem;
-}
-
-
-.movie-img img {
-  height: 656px;
-  margin-left: 25px;
-
 }
