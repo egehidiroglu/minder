@@ -2,7 +2,7 @@
   <div class="titler">
     <h1>Your Favorites</h1>
   </div>
-  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-">
+  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
     <%= form_with url: user_favorites_path, method: :get, class: "d-flex" do |f| %>
       <%= f.select :query, ["Music", "Movie", "Book"],
         class: "form-control",
