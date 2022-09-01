@@ -1,7 +1,9 @@
 <div class="container-creator-selection">
   <div class="titler d-flex" id="spotify-title">
-    <h1>Let's choose the <span class="green-text">artists</span> you'd like to follow!</h1>
-    <%= link_to 'Sign in with Spotify', '/auth/spotify', method: :post, id: 'spotify-button' %>
+    <h1 id="spotify-h1">Let's choose the  <span class="green-text"> artists </span>  you'd like to follow!</h1>
+    <%= link_to '/auth/spotify', method: :post, id: 'spotify-button' do %>
+      Sign in with Spotify <i class="fa-brands fa-spotify mx-2"></i>
+    <% end %>
   </div>
   <div class="cards">
     <% @unfollowed_artists.each_with_index do |artist, index| %>
