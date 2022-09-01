@@ -1,14 +1,14 @@
 .show-container {
   display: flex;
   align-items: center;
+  height: 400px;
+  margin-bottom: 100px;
 }
 
 .content-details {
   background-color:#212125;
   box-shadow: 2px 2px 3px;
   padding-bottom: auto;
-
-
 }
 
 .card-text {
@@ -20,7 +20,17 @@
 }
 
 .show-align-vertical {
-  position: absolute;
-  width: 100%;
-  top: 25%;
+  margin-top: 100px;
+}
+
+.shower-align-vertical {
+  margin-top: 200px;
+}
+
+
+.shower-container {
+  display: flex;
+  align-items: center;
+  height: 460px;
+  margin-bottom: 100px;
 }

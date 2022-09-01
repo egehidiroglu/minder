@@ -1,17 +1,17 @@
-<div class="show-align-vertical">
-<div class="content-details">
-<div class="show-container">
-  <div class="book-img">
-    <%= image_tag @book.poster_url %>
+<div class="shower-align-vertical">
+  <div class="content-details">
+    <div class="show-container">
+      <div class="movie-img">
+        <%= image_tag @book.poster_url %>
+      </div>
+      <div class="mx-5">
+        <h1 class="card-title my-4"><%= @book.name %> </h1>
+        <h3 class="card-text">
+          By <%= @book.creator.name %>
+        </h3>
+        <p class="card-text">Released on <%= @book.release_date %></p>
+        <p class="cardtext-light"><%= @book.description.first(300) %>...</p>
+      </div>
+    </div>
   </div>
-<div class="flex-grow-1">
-  <p class="card-text"> By <%= @book.creator.name %></p>
-  <h1 class="card-title">
-      <%= @book.name %>
-  </h1>
-  <p class="card-text">Released on <%= @book.release_date %></p>
-  <p class="cardtext-light"><%= @book.description %></p>
-</div>
-</div>
-</div>
 </div>
