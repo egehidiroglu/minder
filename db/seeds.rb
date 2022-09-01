@@ -29,13 +29,12 @@ end
 p "Creating creators..."
 
 artists = ["Gorillaz", "Lou Reed",
-  "Backstreet Boys", 
-  "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Ozzy Osbourne",
-  "Ringo Starr", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
-  "Twenty One Pilots", "My Chemical Romance", "The White Buffalo", "Knocked Loose",
-  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Ibrahim Maalouf",  "RY X",
-  "Trentemoller", "Novo Amor", "Julien Clerc", "Demi Lovato", "The Smashing Pumpkins",
-  "Tommy Cash", "Peach Tree Rascals", "Tchami", "Alan Walker", "Stromae"]
+  "Backstreet Boys",
+  "DJ Khaled", "Ozzy Osbourne",
+  "Ringo Starr", "Bjork",
+  "Twenty One Pilots",
+  "Ibrahim Maalouf",  "RY X",
+  "Novo Amor", "The Smashing Pumpkins", "Stromae"]
 
 directors = ["Ryan Coogler",  "Kevin Smith", "George Miller", "Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger",  "Castille Landon",
     "David Gordon Green", "Ol Parker", "Bong Joon-ho", "Nicholas Stoller", "Mark Mylod", "Jordan Peele", "Jaume Collet-Serra"]
