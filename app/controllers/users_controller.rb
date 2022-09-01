@@ -25,25 +25,54 @@ class UsersController < ApplicationController
   end
 
   def my_favorites
-    user = current_user
-    @favorites = user.all_favorited
     user_favorites = current_user.all_favorited
+    filter_params = ["Music", "Movie", "Book"]
     if params[:query].present?
-      case params[:query]
-      when "Music"
-        @favorites = []
-        user_favorites.each do |followed|
-          @favorites.push(followed) if followed.instance_of?(Album) || followed.instance_of?(Concert)
+      if filter_params.include?(params[:query])
+        case params[:query]
+        when "Music"
+          @favorites = []
+          user_favorites.each do |followed|
+            @favorites.push(followed) if followed.instance_of?(Album) || followed.instance_of?(Concert)
+          end
+        when "Movie"
+          @favorites = []
+          user_favorites.each do |followed|
+            @favorites.push(followed) if followed.instance_of?(Movie.new.class)
+          end
+        when "Book"
+          @favorites = []
+          user_favorites.each do |followed|
+            @favorites.push(followed) if followed.instance_of?(Book.new.class)
+          end
         end
-      when "Movie"
-        @favorites = []
-        user_favorites.each do |followed|
-          @favorites.push(followed) if followed.instance_of?(Movie.new.class)
-        end
-      when "Book"
-        @favorites = []
-        user_favorites.each do |followed|
-          @favorites.push(followed) if followed.instance_of?(Book.new.class)
+      else
+        sql_query = <<~SQL
+          books.name ILIKE :query
+          OR books.description ILIKE :query
+          OR creators.name ILIKE :query
+        SQL
+        books = Book.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+        sql_query = <<~SQL
+          albums.name ILIKE :query
+          OR creators.name ILIKE :query
+        SQL
+        albums = Album.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+        sql_query = <<~SQL
+          concerts.name ILIKE :query
+          OR concerts.venue ILIKE :query
+          OR creators.name ILIKE :query
+        SQL
+        concerts = Concert.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+        sql_query = <<~SQL
+          movies.name ILIKE :query
+          OR movies.description ILIKE :query
+          OR creators.name ILIKE :query
+        SQL
+        music = Movie.joins(:creator).where(sql_query, query: "%#{params[:query]}%")
+        results = [books, albums, concerts, music]
+        results.each do |result|
+          @favorites = result unless result.empty?
         end
       end
     else

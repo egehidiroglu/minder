@@ -10,6 +10,14 @@
       %>
       <%= submit_tag "Filter", class: "btn-search" %>
     <% end %>
+    <%= form_with url: user_favorites_path, method: :get, class: "d-flex w-50 px-3" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Search favorites"
+      %>
+      <%= submit_tag "Search", class: "btn-search" %>
+    <% end %>
   </div>
 
 
