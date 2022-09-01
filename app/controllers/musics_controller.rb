@@ -16,6 +16,7 @@ class MusicsController < ApplicationController
       @albums = Album.all
       @concerts = Concert.all
     end
+    @pictures = Album.all.sample(2) + Concert.all.sample(1)
   end
 
   def show
