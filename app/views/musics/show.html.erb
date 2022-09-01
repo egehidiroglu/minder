@@ -6,10 +6,10 @@
             <%= image_tag @album_music.poster_url %>
           </div>
           <div class="card-content-details">
-            <p class="card-text"> By <%= @album_music.creator.name %></p>
-            <h1 class="card-title">
-                <%= @album_music.name %>
-            </h1>
+            <h1 class="card-title my-3"> <%= @album_music.name %> </h1>
+            <h3 class="card-text my-3">
+                By <%= @album_music.creator.name %>
+            </h3>
             <p class="card-text mt-4">Concert on <%= @album_music.release_date %></p>
           </div>
         </div>
@@ -48,7 +48,7 @@
           </div>
           <div class="mx-5">
             <h1 class="card-title"><%= @concert_music.name %></h1>
-            <p class="card-text"><%= @concert_music.creator.name %></p>
+            <p class="card-text my-4"><%= @concert_music.creator.name %></p>
             <p class="card-text">Concert on <%= @concert_music.date %></p>
             <p class="card-text">Venue: <%= @concert_music.venue %></p>
             <p class="card-text">Address: <%= @concert_music.address %></p>

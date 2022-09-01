@@ -5,10 +5,10 @@
         <%= image_tag @book.poster_url %>
       </div>
       <div class="mx-5">
-        <p class="card-text"> By <%= @book.creator.name %></p>
-        <h1 class="card-title">
-          <%= @book.name %>
-        </h1>
+        <h1 class="card-title my-4"><%= @book.name %> </h1>
+        <h3 class="card-text">
+          By <%= @book.creator.name %>
+        </h3>
         <p class="card-text">Released on <%= @book.release_date %></p>
         <p class="cardtext-light"><%= @book.description.first(300) %>...</p>
       </div>
