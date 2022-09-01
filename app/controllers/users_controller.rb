@@ -87,7 +87,6 @@ class UsersController < ApplicationController
       to_unfav = fav if fav.id == params[:id].to_i
     end
     current_user.unfavorite(to_unfav)
-    redirect_to user_favorites_path
   end
 
   def custom_unfav
