@@ -14,9 +14,10 @@
     <% end %>
 
     <%= form_with url: my_creators_new_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.select :query, ["Music", "Movie", "Book"],
+      <%= f.select :query, ["All", "Music", "Movie", "Book"],
         class: "form-control",
-        placeholder: "Filter"
+        placeholder: "Filter",
+        selected: params[:query]
       %>
       <%= submit_tag "Filter", class: "btn-search" %>
     <% end %>

@@ -25,6 +25,12 @@
   right: 8px;
 }
 
+#btn-add-new {
+  position: absolute !important;
+  right: -48px;
+  top: 12px;
+}
+
 .btn-follow:hover {
   background-color: #0dcdaab2;
   transition: background-color 0.3s ease;
@@ -33,7 +39,7 @@
 .btn-heart-unchecked {
   position: absolute;
   top: 16px;
-  left: 16px;
+  right: 16px;
   color: lightgray;
   font-size: 32px;
   border: black;
@@ -42,7 +48,7 @@
 .btn-heart-checked {
   position: absolute;
   top: 16px;
-  left: 16px;
+  right: 16px;
   color: #FE0970;
   font-size: 32px;
   transition: color 0.3s ease;
@@ -63,7 +69,7 @@
 .btn-trash {
   position: absolute;
   top: 16px;
-  left: 16px;
+  right: 16px;
   transition: color 0.3s ease;
   font-size: 24px;
   color: white;
