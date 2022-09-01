@@ -26,11 +26,17 @@
       <div class="card-trip m-3 py-3" data-controller="my-favorites-index" data-my-favorites-index-target="favorite">
         <img src="<%= favorite.poster_url %>" alt="Books poster">
         <div class="card-trip-infos d-flex justify-content-center">
-        <h2><%= favorite.name %></h2>
-          <%= link_to unfavorite_path(favorite), data: { turbo_method: :delete } do %>
-            <i class="fa-solid fa-trash" data-action="click->my-favorites-index#delete"></i>
-        </div>
+        <% if favorite.class == Album || favorite.class == Concert %>
+          <h2><%= link_to favorite.name, music_path(favorite) %></h2>
+        <% elsif favorite.class == Movie %>
+          <h2><%= link_to favorite.name, movie_path(favorite) %></h2>
+        <% elsif favorite.class == Book %>
+          <h2><%= link_to favorite.name, book_path(favorite) %></h2>
         <% end %>
+        <%= link_to unfavorite_path(favorite), data: { turbo_method: :delete } do %>
+          <i class="fa-solid fa-trash" data-action="click->my-favorites-index#delete"></i>
+        <% end %>
+        </div>
       </div>
     <% end %>
   </div>
