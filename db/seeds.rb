@@ -245,12 +245,10 @@ end
 # ===========================manual adds=======================================
 album = Album.new
 album.poster_url = "https://imusic.b-cdn.net/images/item/original/996/4050538830996.jpg?backstreet-boys-2022-a-very-backstreet-christmas-lp&class=scaled"
-album.release_date = "2022-10-14"
+album.release_date = 2022-10-14
 album.name = "A Very Backstreet Christmas"
-album.creator = Creator.where("Backstreet Boys")
+album.creator = Creator.where(name: "Backstreet Boys")
 album.save!
-
-
 
 album = Album.first
 creator = album.creator
