@@ -28,9 +28,8 @@ end
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
 
-artists = ["The 1975", "Arctic Monkeys", "Horace Andy", "Gorillaz", "Lou Reed", "Taylor Swift", "Yeah Yeah Yeahs",
-  "Megadeth", "Backstreet Boys", "ODESZA", "The Killers", "Cigarettes After Sex", "Rainbow Kitten Surprise",
-  "Flaming Lips", "The Sheepdogs",
+artists = ["Gorillaz", "Lou Reed",
+  "Backstreet Boys", 
   "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Ozzy Osbourne",
   "Ringo Starr", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
   "Twenty One Pilots", "My Chemical Romance", "The White Buffalo", "Knocked Loose",
