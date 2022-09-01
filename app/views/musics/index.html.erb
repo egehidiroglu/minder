@@ -37,7 +37,11 @@
                 <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->music-index#favorite"></i>
               <% end %>
             <% end %>
-            <img src= "<%= album.poster_url %>", alt="Book poster">
+            <%= link_to music_path(album) do %>
+                <div class="img-contain">
+                  <img class="img centered" src= "<%= album.poster_url %>", alt="Book poster">
+                </div>
+              <% end %>
             <div class="card-trip-infos">
               <p id="content-title"><%= link_to album.name, music_path(album) %></p>
               By <%= album.creator.name %> <br>
@@ -67,7 +71,11 @@
               <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->music-index#favorite"></i>
             <% end %>
           <% end %>
-          <img src= "<%= concert.poster_url %>", alt="Book poster">
+          <%= link_to music_path(concert) do %>
+            <div class="img_contain">
+              <img class="" src= "<%= concert.poster_url %>", alt="Book poster">
+            </div>
+          <% end %>
           <div class="card-trip-infos">
             <p id="content-title"><%= link_to concert.name, music_path(concert) %></p>
              <br>
