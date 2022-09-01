@@ -41,8 +41,9 @@
                   </div>
                 <% end %>
               <div class="card-trip-infos">
-                <p id="content-title"><%=link_to movie.name, movie_path(movie) %></p>
-                By <%= movie.creator.name %> <br>
+                <p class="mb-2" id="content-title"><%=link_to movie.name, movie_path(movie) %></p>
+
+                <p>By <%= movie.creator.name %> </p> <br>
                 <br>
                 <p>
                   <i class="fa-solid fa-calendar-day"></i>
