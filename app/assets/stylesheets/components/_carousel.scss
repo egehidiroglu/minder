@@ -5,6 +5,7 @@
 }
 .carousel-item {
   overflow: hidden;
+  position: relative;
 }
 
 .carousel-item active {
@@ -15,4 +16,14 @@
   width: 75%  ;
   object-fit:cover;
   object-position: center;
+}
+
+.card-texter {
+  color: white;
+  position: absolute;
+  top: 400px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  box-shadow: 1px 1px 5px black;
 }

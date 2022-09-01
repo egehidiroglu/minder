@@ -14,18 +14,21 @@
     <div class="carousel-item active" data-bs-interval= "2000">
       <%# <img src="https://c4.wallpaperflare.com/wallpaper/616/28/36/neuromancer-drawing-book-cover-cyberpunk-wires-hd-wallpaper-preview.jpg" class="d-block w-100" alt="..."> %>
       <%= link_to book_path(@pictures[0]) do %>
+      <h2 class="card-texter"><em><%=  @pictures[0].name %></em></h2>
         <%= image_tag @pictures[0].poster_url, class: "d-block w-100" %>
       <% end %>
     </div>
     <div class="carousel-item" data-bs-interval= "2000">
       <%# <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4Zro_RoHdeOIrb4B_HYiAUze1j6yeCV6cJQ&usqp=CAU" class="d-block w-100" alt="..."> %>
       <%= link_to book_path(@pictures[1]) do %>
+      <h2 class="card-texter"><em><%=  @pictures[1].name %></em></h2>
         <%= image_tag @pictures[1].poster_url, class: "d-block w-100" %>
       <% end %>
     </div>
     <div class="carousel-item " data-bs-interval= "2000">
       <%# <img src="https://c4.wallpaperflare.com/wallpaper/921/904/937/dandd-dungeons-and-dragons-book-cover-basic-set-wallpaper-preview.jpg" class="d-block w-100" alt="..."> %>
       <%= link_to book_path(@pictures[2]) do %>
+      <h2 class="card-texter"><em><%=  @pictures[2].name %></em></h2>
         <%= image_tag @pictures[2].poster_url, class: "d-block w-100" %>
       <% end %>
     </div>
