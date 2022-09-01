@@ -118,7 +118,6 @@ p "Creating books"
 authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
-  response["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"]
   isbn = response["items"][0]["volumeInfo"]["industryIdentifiers"][0]["identifier"]
   poster = ""
   begin
