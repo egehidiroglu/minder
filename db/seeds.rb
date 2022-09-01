@@ -33,14 +33,14 @@ artists = ["Horace Andy", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Pri
   "Twenty One Pilots","ODESZA", "My Chemical Romance", "Backstreet Boys", "The White Buffalo", "Knocked Loose",
   "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Ibrahim Maalouf", "The Killers", "RY X",
   "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Demi Lovato", "The Smashing Pumpkins",
-  "Tommy Cash", "Peach Tree Rascals", "Tchami", "Skullcrusher", "Alan Walker", "Stromae"]
+  "Tommy Cash", "Peach Tree Rascals", "Tchami", "Alan Walker", "Stromae"]
 
-directors = ["Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
+directors = ["Jordan Peele", "Bong Joon-ho" "Kevin Smith", "Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
     "David Gordon Green", "Ol Parker", "Nicholas Stoller", "Mark Mylod", "Ryan Coogler", "Jaume Collet-Serra"]
 
-authors = ["Malcolm Gladwell", "Zadie Smith", "Stephen King", "Ryan Holiday", "Jamie Oliver",
+authors = ["Malcolm Gladwell", "Zadie Smith", "Stephen King", "Ryan Holiday", "Dav Pilkey", "Jamie Oliver",
   "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
-  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood"]
+  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Philip Rosenthal"]
 
 p "Creating authors..."
 authors.each do |author|
@@ -241,6 +241,14 @@ for i in 1..10
     end
   end
 end
+
+# ===========================manual adds=======================================
+album = Album.new
+album.poster_url = "https://imusic.b-cdn.net/images/item/original/996/4050538830996.jpg?backstreet-boys-2022-a-very-backstreet-christmas-lp&class=scaled"
+album.release_date = 2022-10-14
+album.name = "A Very Backstreet Christmas"
+album.creator = Creator.where(name: "Backstreet Boys")
+album.save!
 
 album = Album.first
 creator = album.creator
