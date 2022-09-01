@@ -22,9 +22,9 @@
           <div class="cards">
             <% concerts.each do |concert| %>
               <div class="card-product-concert">
-                <i class="fa-solid fa-ticket"></i>
+                <i class="fa-solid fa-ticket px-3"></i>
                 <div>
-                  <h2><strong> <%= link_to "Details here", music_path(concert) %></strong></h2>
+                  <h2><strong> <%= link_to "Buy a Ticket", concert.event_url %></strong></h2>
                   <p class="black-text"><%= concert.date %></p>
                   <p class="black-text"><%= concert.venue %></p>
                   <p class="black-text"><%= concert.address %></p>
