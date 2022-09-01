@@ -1,6 +1,6 @@
 <div class="container-creator-selection mx-0">
   <div class="titler d-flex justify-content-center">
-    <h1>Choose any <span class="green-text">creators</span> you would like to start following</h1>
+    <h1>Add more <span class="green-text">creators</span> to follow</h1>
   </div>
   <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
 
@@ -14,9 +14,10 @@
     <% end %>
 
     <%= form_with url: my_creators_new_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.select :query, ["Music", "Movie", "Book"],
+      <%= f.select :query, ["All", "Music", "Movie", "Book"],
         class: "form-control",
-        placeholder: "Filter"
+        placeholder: "Filter",
+        selected: params[:query]
       %>
       <%= submit_tag "Filter", class: "btn-search" %>
     <% end %>

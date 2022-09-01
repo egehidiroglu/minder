@@ -54,7 +54,7 @@
   </div>
 
   <div class="titler">
-    <h1>Upcoming <span class="green-text">concerts</span> from you favorite artists</h1>
+    <h1>Upcoming <span class="green-text">concerts</span> happening near you</h1>
   </div>
   <div class="cards ">
     <% @concerts.each do |concert| %>
@@ -64,7 +64,9 @@
 
         <div class="card-trip-infos">
             <p id="content-title"><%= link_to concert.name, music_path(concert) %></p>
-            By <%= concert.creator.name %> <br>
+             <br>
+            <i class="fa-solid fa-location-dot"></i>
+            <%= concert.venue %>
             <br>
             <i class="fa-solid fa-calendar-day"></i>
             <%= concert.date %>

@@ -10,7 +10,7 @@
             <h1 class="card-title">
                 <%= @album_music.name %>
             </h1>
-            <p class="card-text">Will be released on  <%= @album_music.release_date %></p>
+            <p class="card-text">Concert on <%= @album_music.release_date %></p>
           </div>
         </div>
       </div>
@@ -55,8 +55,8 @@
           </div>
           <div class="">
             <h1 class="card-title"><%= @concert_music.name %></h1>
-            <p class="card-text"> By <%= @concert_music.creator.name %></p>
-            <p class="card-text">Upcoming release on <%= @concert_music.date %></p>
+            <p class="card-text"><%= @concert_music.creator.name %></p>
+            <p class="card-text">Concert on <%= @concert_music.date %></p>
             <p class="card-text">Venue: <%= @concert_music.venue %></p>
             <p class="card-text">Address: <%= @concert_music.address %></p>
             <%= link_to "Book a Ticket", @concert_music.event_url, class: "btn-ghost" %>

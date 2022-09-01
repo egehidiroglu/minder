@@ -46,7 +46,7 @@ class CreatorsController < ApplicationController
     all_creators = Creator.all
     my_creators = current_user.creators
     unfollowed_creators = all_creators - my_creators
-    filter_params = ["Music", "Book", "Movie"]
+    filter_params = ["All", "Music", "Book", "Movie"]
     if params[:query].present?
       if filter_params.include?(params[:query])
         case params[:query]
