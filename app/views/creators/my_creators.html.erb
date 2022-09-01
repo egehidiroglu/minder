@@ -3,7 +3,17 @@
     <h1>Your followed <span class="green-text">creators</span></h1>
     <div  id="btn-add-new"><%= link_to "Follow someone new +", my_creators_new_path, class:"btn-ghost mx-5" %></div>
   </div>
-  <div class="green-div w-100 h-20 mb-5 py-5 mr-16 d-flex justify-content-between">
+  <div class="green-div w-100 h-20 mb-5 py-5 mr-16 d-flex justify-content-center">
+
+    <%= form_with url: my_creators_path, method: :get, class: "d-flex px-3" do |f| %>
+      <%= f.select :query, ["All", "Music", "Movie", "Book"],
+        class: "form-control",
+        placeholder: "Filter",
+        selected: params[:query]
+      %>
+      <%= submit_tag "Filter", class: "btn-search" %>
+    <% end %>
+
     <%= form_with url: my_creators_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
         params[:query],
@@ -12,14 +22,7 @@
       %>
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
-    <%= form_with url: my_creators_path, method: :get, class: "d-flex px-3" do |f| %>
-      <%= f.select :query, ["All", "Music", "Movie", "Book"],
-        class: "form-control",
-        placeholder: "Filter",
-        selected: params[:query]
-      %>
-      <%= submit_tag "Filter", class: "btn-search" %>
-  <% end %>
+
   </div>
 
   <div class="cards">
