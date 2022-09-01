@@ -40,13 +40,13 @@
   </div>
   <% end %>
   <% if @album_music.nil? %>
-    <div class="show-align-vertical">
+    <div class="shower-align-vertical">
       <div class="content-details">
-        <div class="show-container">
-          <div class="flex-grow">
+        <div class="shower-container">
+          <div class="book-img">
             <%= image_tag @concert_music.poster_url, class: "img-size"%>
           </div>
-          <div class="">
+          <div class="mx-5">
             <h1 class="card-title"><%= @concert_music.name %></h1>
             <p class="card-text"><%= @concert_music.creator.name %></p>
             <p class="card-text">Concert on <%= @concert_music.date %></p>
