@@ -23,8 +23,10 @@
 
   <div class="cards">
     <% @favorites.each do |favorite| %>
-      <div class="card-trip m-3 py-3" data-controller="my-favorites-index" data-my-favorites-index-target="favorite">
-        <img src="<%= favorite.poster_url %>" alt="Books poster">
+      <div class="card-trip m-3" data-controller="my-favorites-index" data-my-favorites-index-target="favorite">
+        <div class="img_contain">
+          <img src="<%= favorite.poster_url %>" alt="Books poster">
+        </div>
         <div class="card-trip-infos d-flex justify-content-center">
         <% if favorite.class == Album || favorite.class == Concert %>
           <h2><%= link_to favorite.name, music_path(favorite) %></h2>
@@ -34,7 +36,7 @@
           <h2><%= link_to favorite.name, book_path(favorite) %></h2>
         <% end %>
         <%= link_to unfavorite_path(favorite), data: { turbo_method: :delete } do %>
-          <i class="fa-solid fa-trash" data-action="click->my-favorites-index#delete"></i>
+          <i class="fa-solid fa-trash btn-trash" data-action="click->my-favorites-index#delete"></i>
         <% end %>
         </div>
       </div>
