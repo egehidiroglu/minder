@@ -1,3 +1,6 @@
+# Comment this out when done final seed:
+# return if Rails.env.production?
+
 require 'rspotify'
 require 'open-uri'
 require 'json'
@@ -25,22 +28,19 @@ end
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
 
-artists = ["Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
-  "Ringo Starr", "Codeine", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
-  "Twenty One Pilots","ODESZA", "My Chemical Romance", "Backstreet Boys",
-  "The White Buffalo", "Knocked Loose",
-  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero",
-  "Ibrahim Maalouf", "The Killers", "RY X",
-  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz",
-  "Demi Lovato", "The Smashing Pumpkins", "Tommy Cash", "Peach Tree Rascals", "Tchami",
-  "Skullcrusher", "Alan Walker", "Stromae"]
+artists = ["Horace Andy", "Lou Reed", "DJ Khaled", "Ezra Furman", "Pantha Du Prince", "Megadeth", "Ozzy Osbourne",
+  "Ringo Starr", "Nikki Lane", "Bjork", "Slipknot", "The Snuts", "Loyle Carner", "Kailee Morgue",
+  "Twenty One Pilots","ODESZA", "My Chemical Romance", "Backstreet Boys", "The White Buffalo", "Knocked Loose",
+  "Porcupine Tree", "Lynda Lemay", "Stick To Your Guns", "Zucchero", "Ibrahim Maalouf", "The Killers", "RY X",
+  "Trentemoller", "Novo Amor", "Cigarettes After Sex", "Julien Clerc", "Gorillaz", "Demi Lovato", "The Smashing Pumpkins",
+  "Tommy Cash", "Peach Tree Rascals", "Tchami", "Skullcrusher", "Alan Walker", "Stromae"]
 
-directors = ["Steven Spielberg", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
-    "David Gordon Green", "Ol Parker", "Nicholas Stoller", "James Cameron", "Mark Mylod", "Ryan Coogler", "Jaume Collet-Serra"]
+directors = ["Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger", "George Miller", "Castille Landon",
+    "David Gordon Green", "Ol Parker", "Nicholas Stoller", "Mark Mylod", "Ryan Coogler", "Jaume Collet-Serra"]
 
-authors = ["Malcolm Gladwell", "Stephen King", "Ryan Holiday", "Jamie Oliver",
+authors = ["Malcolm Gladwell", "Zadie Smith", "Stephen King", "Ryan Holiday", "Jamie Oliver",
   "Jonathan Cahn", "Rupi Kaur", "Randall Munroe", "Kate Reid", "Gabor Mate", "Michelle Obama",
-  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Zadie Smith"]
+  "Christine Sinclair", "Imani Perry", "Chuck Klosterman", "Margaret Atwood"]
 
 p "Creating authors..."
 authors.each do |author|
@@ -139,11 +139,11 @@ authors.each do |author|
   search = URI.open("https://www.googleapis.com/books/v1/volumes?q=inauthor:#{author}&orderBy=newest&num=1&langRestrict=en&key=#{ENV["GOOGLE_KEY"]}").read
   response = JSON.parse(search)
   isbn = response["items"][0]["volumeInfo"]["industryIdentifiers"][0]["identifier"]
-  p isbn
+  isbn
   begin
     results = RestClient.get("https://api2.isbndb.com/book/#{isbn}", headers={"Authorization" => "48314_72662961febf77ecb4b86a768b7ca6dc"})
-    p author
-    p JSON.parse(results)["book"]["image"]
+    author
+    JSON.parse(results)["book"]["image"]
   rescue
     p "Could not find #{author}"
   end
@@ -181,7 +181,7 @@ end
 # # =======================Getting upcoming concerts for creators===============================
 p "Finding concerts for creators..."
 Creator.all.each do |artist|
-
+  artist
   buffer = URI.open("https://app.ticketmaster.com/discovery/v2/events.json?size=10&apikey=#{ENV["TICKETMASTER_API_KEY"]}&city=Montreal&keyword=#{artist.name}").read
 
   response = JSON.parse(buffer)["_embedded"]
