@@ -1,0 +1,22 @@
+#spotify-button {
+  color: black;
+  background-color: #1DB954;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-weight: lighter;
+  transition: color 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+#spotify-title {
+  justify-content: space-around;
+}
+
+#spotify-h1 {
+  display: inline-block;
+  align-items: center;
+  margin: 0;
+}

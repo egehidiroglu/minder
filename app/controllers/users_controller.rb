@@ -21,7 +21,7 @@ class UsersController < ApplicationController
       end
       followed.save
     end
-    redirect_to my_creators_path
+    redirect_to artist_setup_path
   end
 
   def my_favorites
