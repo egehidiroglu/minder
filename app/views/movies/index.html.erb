@@ -35,7 +35,11 @@
                     <i class="fa-solid fa-heart btn-heart-unchecked" data-action="click->movie-index#favorite"></i>
                   <% end %>
                 <% end %>
-              <img src= "<%= movie.poster_url %>", alt="Book poster">
+                <%= link_to movie_path(movie) do %>
+                  <div class="img-contain">
+                    <img class="img centered" src= "<%= movie.poster_url %>", alt="Book poster">
+                  </div>
+                <% end %>
               <div class="card-trip-infos">
                 <p id="content-title"><%=link_to movie.name, movie_path(movie) %></p>
                 By <%= movie.creator.name %> <br>
