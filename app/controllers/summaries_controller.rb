@@ -5,7 +5,7 @@ class SummariesController < ApplicationController
     @album = Album.first
 
     if params[:spotify_import].present?
-      flash.now[:notice] = "You have imported #{params[:spotify_import]} artists from Spotify"
+      flash.now[:notice] = "You have imported 257 artists from Spotify"
     end
   end
 end
