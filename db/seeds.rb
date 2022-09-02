@@ -27,7 +27,6 @@ end
 
 # # ================================= Creators Start ==========================================
 p "Creating creators..."
-
 artists = ["Gorillaz", "Lou Reed", "Taylor Swift", "The 1975", "Yeah Yeah Yeahs", "Megadeth", "Horace Andy",
   "Arctic Monkeys", "ODESZA", "The Killers", "Cigarettes After Sex", "Flaming Lips",
   "Backstreet Boys",
@@ -37,11 +36,11 @@ artists = ["Gorillaz", "Lou Reed", "Taylor Swift", "The 1975", "Yeah Yeah Yeahs"
   "Ibrahim Maalouf",  "RY X",
   "Novo Amor", "The Smashing Pumpkins", "Stromae"]
 
-directors = ["Ryan Coogler",  "Kevin Smith", "George Miller", "Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger",  "Castille Landon",
+directors = ["Ryan Coogler", "George Miller", "Steven Spielberg", "James Cameron", "Jon Watts", "Gina Prince-Bythewood", "Zach Cregger",  "Castille Landon",
     "David Gordon Green", "Ol Parker", "Bong Joon-ho", "Nicholas Stoller", "Mark Mylod", "Jordan Peele", "Jaume Collet-Serra"]
 
 authors = ["Malcolm Gladwell", "Zadie Smith", "Christine Sinclair", "Stephen King", "Ryan Holiday",
-  "Dav Pilkey", "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
+  "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
   "Kate Reid", "Gabor Mate", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Philip Rosenthal"]
 
 p "Creating authors..."
@@ -64,20 +63,13 @@ end
 
 p "Creating music creators..."
 artists.each do |artist|
+  art = RSpotify::Artist.search(artist).first
+  poster = art.images[0]["url"]
   p artist
   creator = Creator.new
   creator.content_type = "Music"
-  artist.gsub!(" ", "_")
-  url = "https://en.wikipedia.org/wiki/#{artist}"
-  html_file = URI.open(url).read
-  html_doc = Nokogiri::HTML(html_file)
-  image = ""
-  html_doc.search(".infobox-image img").each do |element|
-    image = element.attributes["src"].value
-  end
-  creator.poster_url = image
-  artist.gsub!("_", " ")
   creator.name = artist
+  creator.poster_url = poster
   creator.save!
   path = ""
 end
@@ -249,9 +241,3 @@ album.release_date = "2022-10-14"
 album.name = "A Very Backstreet Christmas"
 album.creator = Creator.where(name: "Backstreet Boys")[0]
 album.save!
-
-album = Album.first
-creator = album.creator
-concert = Concert.new(name: "Kim Concert", date: "2022-09-22", venue: "Centre Bell", address: "Centre Bell")
-concert.creator = creator
-concert.save
