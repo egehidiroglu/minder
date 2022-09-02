@@ -14,7 +14,7 @@
             <i class="fa-solid fa-headphones"></i>
           <% elsif favorite.class == Movie %>
             <h2> <strong><%= link_to favorite.name, music_path(favorite) %></strong></h2>
-             by<%= Creator.find(favorite.creator_id).name %>
+             by <%= Creator.find(favorite.creator_id).name %>
             <i class="fa-solid fa-film"></i>
           <% elsif favorite.class == Book %>
             <h2> <strong><%= link_to favorite.name, music_path(favorite) %></strong></h2>
