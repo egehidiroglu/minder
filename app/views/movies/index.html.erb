@@ -3,12 +3,12 @@
     <h1>Discover the latest <span class="green-text">movies</span> from you favorite creators</h1>
   </div>
   <%# =================Carousel======================== %>
-  <div class="center-carousel mh-25 w-100 mb-5" >
+  <%# <div class="center-carousel mh-25 w-100 mb-5" >
     <div class="carousel-img mh-25 mb-5">
       <%= render "shared/carousel-movie" %>
-    </div>
-  </div>
-  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
+    <%# </div> %>
+  <%# </div> %>
+  <%# <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center"> %> %>
   <%# ====================Search========================= %>
     <%= form_with url: movies_path, method: :get, class: "d-flex w-50 px-3" do %>
       <%= text_field_tag :query,
