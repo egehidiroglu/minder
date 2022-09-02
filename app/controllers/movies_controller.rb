@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.all
     end
-    @pictures = @movies.sample(3)
+    @pictures = Movie.all.sample(3)
   end
 
   def show

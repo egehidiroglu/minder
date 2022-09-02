@@ -10,7 +10,7 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
-    @pictures = @books.sample(3)
+    @pictures = Book.all.sample(3)
   end
 
   def show
