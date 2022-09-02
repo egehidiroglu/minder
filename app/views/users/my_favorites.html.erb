@@ -1,45 +1,28 @@
 <div class="contain">
   <div class="titler">
     <h1>Your Favorites</h1>
-<<<<<<< HEAD
-=======
-  </div>
-  <div class="green-div w-100 h-20 mb-5 py-5 d-flex justify-content-center">
-    <%= form_with url: user_favorites_path, method: :get, class: "d-flex" do |f| %>
-      <%= f.select :query, ["Music", "Movie", "Book"],
-        class: "form-control",
-        placeholder: "Filter"
-      %>
-      <%= submit_tag "Filter", class: "btn-search" %>
-    <% end %>
-    <%= form_with url: user_favorites_path, method: :get, class: "d-flex w-50 px-3" do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Search favorites"
-      %>
-      <%= submit_tag "Search", class: "btn-search" %>
-    <% end %>
-  </div>
-
-
->>>>>>> master
   <div class="cards">
     <% @favorites.each do |favorite| %>
       <div class="card-trip m-3" data-controller="my-favorites-index" data-my-favorites-index-target="favorite">
         <div class="img_contain">
           <img src="<%= favorite.poster_url %>" alt="Books poster">
         </div>
-        <div class="card-trip-infos d-flex justify-content-center">
-        <% if favorite.class == Album || favorite.class == Concert %>
-          <h2><%= link_to favorite.name, music_path(favorite) %></h2>
-        <% elsif favorite.class == Movie %>
-          <h2><%= link_to favorite.name, movie_path(favorite) %></h2>
-        <% elsif favorite.class == Book %>
-          <h2><%= link_to favorite.name, book_path(favorite) %></h2>
-        <% end %>
-        <%= link_to unfavorite_path(favorite), data: { turbo_method: :delete } do %>
-          <i class="fa-solid fa-trash btn-trash" data-action="click->my-favorites-index#delete"></i>
+        <div class="card-fav-info">
+          <% if favorite.class == Album || favorite.class == Concert %>
+            <h2> <strong><%= link_to favorite.name, music_path(favorite) %></strong></h2>
+             by <%= Creator.find(favorite.creator_id).name %>
+            <i class="fa-solid fa-headphones"></i>
+          <% elsif favorite.class == Movie %>
+            <h2> <strong><%= link_to favorite.name, music_path(favorite) %></strong></h2>
+             by<%= Creator.find(favorite.creator_id).name %>
+            <i class="fa-solid fa-film"></i>
+          <% elsif favorite.class == Book %>
+            <h2> <strong><%= link_to favorite.name, music_path(favorite) %></strong></h2>
+            by <%= Creator.find(favorite.creator_id).name %>
+            <i class="fa-solid fa-book-open"></i>
+          <% end %>
+        <%= link_to unfavorite_path(favorite), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this favourited content?" } do %>
+          <i class="fa-solid fa-heart btn-heart-checked" data-action="click->my-favorites-index#delete"></i>
         <% end %>
         </div>
       </div>

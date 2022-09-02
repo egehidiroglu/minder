@@ -41,7 +41,7 @@ directors = ["Ryan Coogler",  "Kevin Smith", "George Miller", "Steven Spielberg"
     "David Gordon Green", "Ol Parker", "Bong Joon-ho", "Nicholas Stoller", "Mark Mylod", "Jordan Peele", "Jaume Collet-Serra"]
 
 authors = ["Malcolm Gladwell", "Zadie Smith", "Christine Sinclair", "Stephen King", "Ryan Holiday",
-  "Dav Pilkey", "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
+  "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
   "Kate Reid", "Gabor Mate", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Philip Rosenthal"]
 
 p "Creating authors..."
