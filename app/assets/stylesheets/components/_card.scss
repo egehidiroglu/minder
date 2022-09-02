@@ -22,6 +22,11 @@
   object-fit: cover;
   height: 360px
 }
+.img-centered-album {
+  width: 100%;
+  object-fit: cover;
+  height: 360px
+}
 
 .card-trip h2 {
   font-size: 16px;
@@ -37,6 +42,11 @@
 .card-trip .card-trip-infos {
   padding: 16px;
   text-align: left;
+}
+
+.card-fav-info {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .creator-image {
@@ -89,7 +99,7 @@ a:hover {
 }
 
 .card-product-concert h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0;
 }
@@ -199,7 +209,7 @@ a:hover {
 }
 
 .cardie-trip h2 {
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
 }
 
@@ -215,7 +225,7 @@ a:hover {
 }
 
 #content-title {
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -240,7 +250,6 @@ margin-bottom: auto;
 .book-img img {
   height: 500px;
   margin-left: 25px;
-
 }
 
 .cardtext-light {

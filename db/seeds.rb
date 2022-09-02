@@ -19,7 +19,7 @@ Book.destroy_all
 # # =================================User Start=============================================
 
 p "Creating some users..."
-emails = %w[egehdrgl@gmail.com ege@minder.quest casey@minder.quest hugo@minder.quest adou@minder.quest]
+emails = %w[egehdrgl@gmail.com ege@minder.quest casey@minder.quest hugo@minder.quest adou@minder.quest garrett@minder.quest]
 password = "123456"
 emails.each do |email|
   User.create(email: email, password: password)
@@ -41,7 +41,7 @@ directors = ["Ryan Coogler",  "Kevin Smith", "George Miller", "Steven Spielberg"
     "David Gordon Green", "Ol Parker", "Bong Joon-ho", "Nicholas Stoller", "Mark Mylod", "Jordan Peele", "Jaume Collet-Serra"]
 
 authors = ["Malcolm Gladwell", "Zadie Smith", "Christine Sinclair", "Stephen King", "Ryan Holiday",
-  "Dav Pilkey", "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
+  "Jamie Oliver", "Michelle Obama", "Jonathan Cahn", "Rupi Kaur", "Randall Munroe",
   "Kate Reid", "Gabor Mate", "Imani Perry", "Chuck Klosterman", "Margaret Atwood", "Philip Rosenthal"]
 
 p "Creating authors..."
@@ -244,7 +244,7 @@ for i in 1..10
 end
 
 album = Album.new
-album.poster_url = "https://imusic.b-cdn.net/images/item/original/996/4050538830996.jpg?backstreet-boys-2022-a-very-backstreet-christmas-lp&class=scaled"
+album.poster_url = "https://linkstorage.linkfire.com/medialinks/images/e49e54ff-49b3-4277-b412-4fa029323ebc/artwork-440x440.jpg"
 album.release_date = "2022-10-14"
 album.name = "A Very Backstreet Christmas"
 album.creator = Creator.where(name: "Backstreet Boys")[0]

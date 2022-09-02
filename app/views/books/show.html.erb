@@ -9,7 +9,8 @@
         <h3 class="card-text">
           By <%= @book.creator.name %>
         </h3>
-        <p class="card-text">Released on <%= @book.release_date %></p>
+        <%# <p class="card-text">Released date: <%= (@book.release_date).strftime(%A, %B %e, %Y) %><
+        <p class="card-text">Released date: <%= @book.release_date%></p>
         <p class="cardtext-light"><%= @book.description.first(300) %>...</p>
       </div>
     </div>

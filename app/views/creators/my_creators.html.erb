@@ -18,7 +18,7 @@
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
-        placeholder: "Search a creator"
+        placeholder: "Search your creators"
       %>
       <%= submit_tag "Search", class: "btn-search" %>
     <% end %>
@@ -33,7 +33,7 @@
         <% end %>
         <img src= "<%= creator.poster_url %>", alt="Book poster">
         <div class="card-trip-infos">
-          <strong><%= creator.content_type %></strong> <br>
+          <%# <strong><%= creator.content_type %>
           <%= creator.name %>
         </div>
       </div>
