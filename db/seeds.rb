@@ -236,7 +236,7 @@ for i in 1..10
 end
 
 album = Album.new
-album.poster_url = "https://linkstorage.linkfire.com/medialinks/images/e49e54ff-49b3-4277-b412-4fa029323ebc/artwork-440x440.jpg"
+album.poster_url = ActionController::Base.helpers.image_path('back-img.png')
 album.release_date = "2022-10-14"
 album.name = "A Very Backstreet Christmas"
 album.creator = Creator.where(name: "Backstreet Boys")[0]
