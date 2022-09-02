@@ -17,7 +17,7 @@
 
       <% concerts = Concert.where(creator: @album_music.creator) %>
       <% unless concerts.empty? %>
-      <div class="titler">
+      <div class="titlero">
         <h3>Don’t miss this upcoming <span class="green-text">concert</span> by <span class="green-text"><%= @album_music.creator.name %></span></h3>
           <div class="cards">
             <% concerts.each do |concert| %>
